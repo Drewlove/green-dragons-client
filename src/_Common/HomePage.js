@@ -4,7 +4,7 @@ const HomePage = () => {
     return(
         <>
         <header>
-            <h1 className='home-page-header'>Green Dragons Dashboard</h1>
+            <h1 className='home-page-header'>UPDATED Green Dragons Dashboard</h1>
         </header>
         <main className='home-page-main'>
             <p>The Green Dragons Dashboard allows administrators to:</p>
