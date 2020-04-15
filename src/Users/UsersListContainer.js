@@ -11,7 +11,10 @@ class UsersListContainer extends Component{
         const url = `${config.API_ENDPOINT}/test`
         const options = {
             method: 'GET',
-            headers: config.HEADERS
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": config.API_KEY
+            }
         }
         console.log(options)
         fetch(url, options)
