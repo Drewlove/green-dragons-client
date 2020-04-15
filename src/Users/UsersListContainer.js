@@ -16,8 +16,7 @@ class UsersListContainer extends Component{
                 "Authorization": config.API_KEY
             }
         }
-        console.log('new')
-        console.log(`config.API_KEY: ${config.API_KEY},  process.env.API_KEY: ${process.env.REACT_APP_API_KEY}`)
+        
         fetch(url, options)
         .then(res => res.json())
         .then(resJSON => console.log(resJSON))
