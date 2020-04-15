@@ -17,7 +17,7 @@ class Nav extends Component{
         return(
             <nav>
                 <div className='nav-wrapper'>
-                <NavLink activeClassName='active' to='/home'>Home</NavLink>
+                <NavLink activeClassName='active' to='/home'>NEW THINGS!</NavLink>
                 <NavLink activeClassName='active' to='/challenges'>Challenges</NavLink>
                 <NavLink activeClassName='active' to='/communities'>Communities</NavLink>
                 <NavLink activeClassName='active' to='/users'>Users</NavLink>
