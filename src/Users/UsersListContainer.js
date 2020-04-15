@@ -13,7 +13,7 @@ class UsersListContainer extends Component{
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": config.API_KEY
+                "Authorization": 'Bearer 716a0d72-c299-4476-b629-1c7d569c3aee'
             }
         }
         console.log(options)
