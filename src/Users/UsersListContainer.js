@@ -8,11 +8,12 @@ import config from '../config'
 class UsersListContainer extends Component{
 
     componentDidMount(){
-        const url = `${config.API_ENDPOINT}/users`
+        const url = `${config.API_ENDPOINT}/test`
         const options = {
             method: 'GET',
             headers: config.HEADERS
         }
+        console.log(options)
         fetch(url, options)
         .then(res => res.json())
         .then(resJSON => console.log(resJSON))
