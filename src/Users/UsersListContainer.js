@@ -13,10 +13,11 @@ class UsersListContainer extends Component{
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": 'Bearer 716a0d72-c299-4476-b629-1c7d569c3aee'
+                "Authorization": config.API_KEY
             }
         }
         console.log(options)
+        console.log(config, process.env)
         fetch(url, options)
         .then(res => res.json())
         .then(resJSON => console.log(resJSON))
