@@ -8,7 +8,7 @@ import config from '../config'
 class UsersListContainer extends Component{
 
     componentDidMount(){
-        const url = `${config.API_ENDPOINT}/test`
+        const url = `${config.API_ENDPOINT}/api/students`
         const options = {
             method: 'GET',
             headers: {
