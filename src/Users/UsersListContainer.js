@@ -16,7 +16,6 @@ class UsersListContainer extends Component{
                 "Authorization": config.API_KEY
             }
         }
-        console.log('testing')
 
         fetch(url, options)
         .then(res => res.json())
