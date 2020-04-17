@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {BrowserRouter} from 'react-router-dom'
-import UsersRouting from './UsersRouting'
+import StudentsRouting from './StudentsRouting'
 
-describe('Users Routing', () => {
+describe('Students Routing', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div')
         ReactDOM.render(
             <BrowserRouter>
-                <UsersRouting/>
+                <StudentsRouting/>
             </BrowserRouter>, 
             div
         )

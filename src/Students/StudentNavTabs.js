@@ -1,11 +1,11 @@
 import React from 'react'
 import {NavLink, withRouter} from 'react-router-dom'
 
-const UserNavTabs = (props) => {
-    const rootPath= `/users/${props.match.params.user_id}`
+const StudentNavTabs = (props) => {
+    const rootPath= `/students/${props.match.params.student_id}`
 
         return(
-            <section className='user-nav-tabs'>
+            <section className='student-nav-tabs'>
                 <NavLink activeClassName='active' to={`${rootPath}/profile`}>Profile</NavLink>
                 <NavLink activeClassName='active' to={`${rootPath}/communities`}>Communities</NavLink>
                 <NavLink activeClassName='active' to={`${rootPath}/challenges`}>Challenges</NavLink>
@@ -14,4 +14,4 @@ const UserNavTabs = (props) => {
         )
 }
 
-export default withRouter(UserNavTabs)
+export default withRouter(StudentNavTabs)

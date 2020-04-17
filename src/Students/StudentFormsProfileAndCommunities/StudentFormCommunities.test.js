@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import UserFormCommunities from './UserFormCommunities'
+import studentFormCommunities from './StudentFormCommunities'
 
-describe('User Form Communities', () => {
+describe('student Form Communities', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div')
         ReactDOM.render(
-            <UserFormCommunities/>, 
+            <studentFormCommunities/>, 
             div
         )
         ReactDOM.unmountComponentAtNode(div)

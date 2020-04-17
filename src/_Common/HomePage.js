@@ -12,7 +12,7 @@ const HomePage = () => {
                 <li>Create, edit, and delete communities</li>
                 <li>Create, edit, and delete subcommunities</li>
                 <li>Create, edit, and delete challenges</li>
-                <li>Create, edit, and delete users, and perform similar actions for user:</li>
+                <li>Create, edit, and delete students, and perform similar actions for student:</li>
                     <ul>
                         <li>Profiles</li>
                         <li>Communities</li>

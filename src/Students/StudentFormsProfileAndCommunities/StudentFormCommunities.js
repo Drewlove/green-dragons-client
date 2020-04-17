@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UserFormCommunities = () => {
+const StudentFormCommunities = () => {
 
     const communities = [
         { 
@@ -24,7 +24,7 @@ const UserFormCommunities = () => {
     const renderCommunities = () => {
         return communities.map(community=> {
             return(
-            <section className='user-form-communities-wrapper' key={community.id}>
+            <section className='student-form-communities-wrapper' key={community.id}>
                 <h3>{community.name}</h3>
                 {renderSubcommunities(community.subcommunities)}
             </section>
@@ -35,9 +35,9 @@ const UserFormCommunities = () => {
     const renderSubcommunities = (subcommunities) => {
         return subcommunities.map(subcommunity => {
             return (
-                <div className='user-form-communities-subcommunity-wrapper' key={subcommunity.id}>                
-                    <input className='user-form-communities-subcommunity-wrapper-input' type='checkbox' name='subcommunities' id={subcommunity.name} value={subcommunity.id} />
-                    <label className='user-form-communities-subcommunity-wrapper-label'>{subcommunity.name}</label>
+                <div className='student-form-communities-subcommunity-wrapper' key={subcommunity.id}>                
+                    <input className='student-form-communities-subcommunity-wrapper-input' type='checkbox' name='subcommunities' id={subcommunity.name} value={subcommunity.id} />
+                    <label className='student-form-communities-subcommunity-wrapper-label'>{subcommunity.name}</label>
                 </div>
             )
         })
@@ -45,7 +45,7 @@ const UserFormCommunities = () => {
 
     return(
         <main>
-            <form className='user-form-communities'>
+            <form className='student-form-communities'>
                 <fieldset>
                 <legend>
                     <h2>Communities</h2>
@@ -60,4 +60,4 @@ const UserFormCommunities = () => {
     )
 }
 
-export default UserFormCommunities
+export default StudentFormCommunities

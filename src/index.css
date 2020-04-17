@@ -145,19 +145,19 @@ form input, textarea, select{
   width: 150px; 
 }
 
-form .user-form-communities-wrapper{
+form .student-form-communities-wrapper{
   margin-top: 10px; 
 }
 
-form .user-form-communities-subcommunity-wrapper{
+form .student-form-communities-subcommunity-wrapper{
   padding: 5px; 
 }
 
-form .user-form-communities-subcommunity-wrapper-input{
+form .student-form-communities-subcommunity-wrapper-input{
   width: auto; 
 }
 
-form .user-form-communities-subcommunity-wrapper-label{
+form .student-form-communities-subcommunity-wrapper-label{
   width: auto; 
 }
 
@@ -289,7 +289,7 @@ nav .active{
   cursor: pointer; 
 }
 
-.user-challenge-entries-challenge-title{
+.student-challenge-entries-challenge-title{
   position: sticky;
   z-index: 0; 
   top: 50px;
@@ -298,7 +298,7 @@ nav .active{
   text-align: center;
 }
 
-.users-list-item{
+.students-list-item{
   display: flex;
   align-items: center;
   max-width: 750px;
@@ -308,7 +308,7 @@ nav .active{
   border-radius: 5px;
 }
 
-.users-list-item-links-wrapper{
+.students-list-item-links-wrapper{
   display: flex;
   align-items: center; 
   justify-content: space-around;
@@ -316,26 +316,26 @@ nav .active{
   margin-top: 10px;
 }
 
-.users-list-item-link:hover .users-list-item-link-tooltip{
+.students-list-item-link:hover .students-list-item-link-tooltip{
   visibility: initial; 
 }
 
-.users-list-item-link-transactions:hover .users-list-item-link-tooltip{
+.students-list-item-link-transactions:hover .students-list-item-link-tooltip{
   visibility: initial; 
 }
 
-.users-list-item-link-icon{
+.students-list-item-link-icon{
   display: block;
   height: 40px;
   margin: auto;
 }
 
-.users-list-item-link-transactions{
+.students-list-item-link-transactions{
   margin-top: 20px;
   text-align: center;
 }
 
-.users-list-item-link-tooltip{
+.students-list-item-link-tooltip{
   visibility: hidden; 
   background-color: green;
   color: white;
@@ -345,13 +345,13 @@ nav .active{
   border-radius: 5px;
 }
 
-.users-list-item-name{
+.students-list-item-name{
   margin-left: 10px;
   width: 100%;
   min-width: 75px;
 }
 
-/* .user-nav-tabs{
+/* .student-nav-tabs{
   width: 400px;
   display: flex;
   justify-content: space-around;
@@ -359,13 +359,13 @@ nav .active{
   margin: 25px auto;
 }
 
-.user-nav-tabs>a{
+.student-nav-tabs>a{
   border: 1px solid black;
   border-radius: 5px;
   padding: 5px;
 }
 
-.user-nav-tabs .active{
+.student-nav-tabs .active{
   background-color: lightgrey;
   color: white;
 } */

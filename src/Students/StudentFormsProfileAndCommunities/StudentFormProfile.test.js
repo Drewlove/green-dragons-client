@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import UserFormProfile from './UserFormProfile'
+import StudentFormProfile from './StudentFormProfile'
 
-describe('User Form Profile', () => {
+describe('Student Form Profile', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div')
         ReactDOM.render(
-            <UserFormProfile/>,
+            <StudentFormProfile/>,
             div 
         )
         ReactDOM.unmountComponentAtNode(div)

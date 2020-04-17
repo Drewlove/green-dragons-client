@@ -1,12 +1,12 @@
 import React from 'react'
 
-const UserFormProfile = () => {
+const studentFormProfile = () => {
     return(
     <main>
-        <form className='user-form-profile'>
+        <form className='student-form-profile'>
             <fieldset>
                 <legend>
-                    <h2>User</h2>
+                    <h2>student</h2>
                 </legend>
                 <div className='input-wrapper'>
                     <label>First Name</label>
@@ -30,4 +30,4 @@ const UserFormProfile = () => {
     )
 }
 
-export default UserFormProfile
+export default studentFormProfile

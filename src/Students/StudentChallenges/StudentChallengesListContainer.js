@@ -2,11 +2,11 @@ import React from 'react'
 import {withRouter} from 'react-router-dom'
 import ListMainWrapper from '../../_Common/ListMainWrapper'
 
-const UserChallengesListContainer = (props) => {
+const StudentChallengesListContainer = (props) => {
 
-    const {users_id} = props.match.params
+    const {student_id} = props.match.params
 
-    const userChallengesList = [
+    const studentChallengesList = [
         {name: 'Challenge 1', challenges_id: 1}, 
         {name: 'Challenge 2', challenges_id: 2},
         {name: 'Challenge 3', challenges_id: 3},
@@ -16,14 +16,14 @@ const UserChallengesListContainer = (props) => {
     return(
         <main>
             <ListMainWrapper 
-            rootPath={`/users/${users_id}/challenges`}
+            rootPath={`/students/${student_id}/challenges`}
             tableName='challenges'
-            listData={userChallengesList}
+            listData={studentChallengesList}
             propertiesToDisplay={['name']} 
-            listClassName='user-challenges-list'
+            listClassName='student-challenges-list'
             />
         </main>
         )
 }
 
-export default withRouter(UserChallengesListContainer)
+export default withRouter(StudentChallengesListContainer)

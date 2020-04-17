@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {BrowserRouter} from 'react-router-dom'
-import UserDragonBucksListContainer from './UserDragonBucksListContainer'
+import StudentChallengeEntriesListContainer from './StudentChallengeEntriesListContainer'
 
-describe('User Dragon Bucks List Container', () => {
+describe('Student Challenge Entries List Container', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div')
         ReactDOM.render(
             <BrowserRouter>
-                <UserDragonBucksListContainer />
+                <StudentChallengeEntriesListContainer />
             </BrowserRouter>,
             div
         )

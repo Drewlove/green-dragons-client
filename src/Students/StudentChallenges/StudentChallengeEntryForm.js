@@ -1,19 +1,19 @@
 import React from 'react'
 
-const UserChallengeEntryForm = () => {
+const StudentChallengeEntryForm = () => {
     return(
     <main>
-        <form className='user-form-challenge-entry'>
+        <form className='student-form-challenge-entry'>
             <fieldset>
                 <legend>
                     <h2>Challenge Entry</h2>
                 </legend>
                 <div className='input-wrapper'>
-                    <label>User</label>
+                    <label>Student</label>
                     <select>
-                        <option value='user-1'>User 1</option>  
-                        <option value='user-2'>User 2</option>  
-                        <option value='user-3'>User 3</option>  
+                        <option value='student-1'>student 1</option>  
+                        <option value='student-2'>student 2</option>  
+                        <option value='student-3'>student 3</option>  
                     </select>
                 </div>
                 <div className='input-wrapper'>
@@ -46,4 +46,4 @@ const UserChallengeEntryForm = () => {
     )
 }
 
-export default UserChallengeEntryForm
+export default StudentChallengeEntryForm

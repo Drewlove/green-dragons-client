@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import UserChallengeEntryForm from './UserChallengeEntryForm'
+import StudentDragonBucksForm from './StudentDragonBucksForm'
 
-describe('User Challenge Entries List wrapper', () => {
+describe('Dragon Busk Form', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div')
         ReactDOM.render(
-            <UserChallengeEntryForm />,
+            <StudentDragonBucksForm />, 
             div
         )
         ReactDOM.unmountComponentAtNode(div)

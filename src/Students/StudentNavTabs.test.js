@@ -1,16 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {BrowserRouter} from 'react-router-dom'
-import UserChallengeEntriesListContainer from './UserChallengeEntriesListContainer'
+import StudentNavTabs from './StudentNavTabs'
 
-describe('User Challenge Entries List Container', () => {
+describe('Student Nav Tabs', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div')
         ReactDOM.render(
             <BrowserRouter>
-                <UserChallengeEntriesListContainer />
+                <StudentNavTabs />
             </BrowserRouter>,
-            div
+            div 
         )
         ReactDOM.unmountComponentAtNode(div)
     })

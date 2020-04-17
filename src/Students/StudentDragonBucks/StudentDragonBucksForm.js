@@ -1,19 +1,19 @@
 import React from 'react'
 
-const DragonBucksForm = () => {
+const StudentDragonBucksForm = () => {
     return(
     <main>
-        <form className='dragon-bucks-form'>
+        <form className='student-dragon-bucks-form'>
             <fieldset>
                 <legend>
                     <h2>Dragon Bucks</h2>
                 </legend>
                 <div className='input-wrapper'>
-                    <label>User</label>
+                    <label>Student</label>
                     <select>
-                        <option value='user-1'>User 1</option>  
-                        <option value='user-2'>User 2</option>  
-                        <option value='user-3'>User 3</option>  
+                        <option value='student-1'>student 1</option>  
+                        <option value='student-2'>student 2</option>  
+                        <option value='student-3'>student 3</option>  
                     </select>
                 </div>
                 <div className='input-wrapper'>
@@ -38,4 +38,4 @@ const DragonBucksForm = () => {
     )
 }
 
-export default DragonBucksForm
+export default StudentDragonBucksForm
