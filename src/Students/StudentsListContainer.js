@@ -33,11 +33,10 @@ class StudentsListContainer extends Component{
         
     }
 
-
     renderStudentsList(){
         return this.state.students.map(student => {
             return(
-                <StudentsListItem student={student}/>
+                <StudentsListItem student={student} key={student.student_id}/>
             )
         })
     }

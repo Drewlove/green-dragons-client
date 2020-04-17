@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
 const StudentsListItem = (props) => {
     const {first_name, last_name, student_id} = props.student
     return(
-        <li key={student_id} className='students-list-item'>
+        <li className='students-list-item'>
         <div className='students-list-item-name'>
             <p>{first_name} {last_name}</p>
         </div>
