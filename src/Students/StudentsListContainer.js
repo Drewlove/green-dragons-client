@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
-import config from '../config'
 import StudentsListItem from './StudentsListItem'
+import {FETCH_DATA} from '../Utilities/UtilityFunctions'
 
 class StudentsListContainer extends Component{
 
     state = {
         students: [], 
-        error: ''
+        errorMessage: ''
     }
 
     componentDidMount(){
@@ -14,23 +14,13 @@ class StudentsListContainer extends Component{
     }
 
     async fetchStudents(){
-        const url = `${config.API_ENDPOINT}/api/students` 
-        const options = {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": config.API_KEY
-            }
-        }
-        
         try{
-            let response = await fetch(url, options)
-            let students = await response.json()
+            let result = await FETCH_DATA('students')
+            let students = await result.json()
             this.setState({students})
         } catch(error){
-            this.setState({error: 'Failed to load'})            
+            this.setState({errorMessage: 'Failed to Load'})
         }
-        
     }
 
     renderStudentsList(){
