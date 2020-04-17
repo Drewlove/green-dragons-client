@@ -27,38 +27,39 @@ class StudentsListContainer extends Component{
 
         fetch(url, options)
         .then(res => res.json())
-        .then(students => this.setState({students}))
+        .then(students => console.log(students))
+        // .then(students => this.setState({students}))
         //if fail, then convert to async
     }
 
 
-    renderstudentsList(){
-        const studentsList = [
-        {name: 'Kaitlin Keleher', id: 1}, 
-        {name: 'Mike Cermak', id: 2}, 
-        {name: 'Ale Cabrera-Mondragon', id: 3}
-        ]
+    renderStudentsList(){
+        // const studentsList = [
+        // {name: 'Kaitlin Keleher', id: 1}, 
+        // {name: 'Mike Cermak', id: 2}, 
+        // {name: 'Ale Cabrera-Mondragon', id: 3}
+        // ]
 
-        return studentsList.map(key => {
+        return this.state.students.map(key => {
             return(
-                <li key={key.id} className='students-list-item'>
+                <li key={key.student_id} className='students-list-item'>
                     <div className='students-list-item-name'>
-                        <p>{key.name}</p>
+                        <p>{key.first_name} {key.last_name}</p>
                     </div>
                     <div className='students-list-item-links-wrapper'>
-                        <Link className='students-list-item-link' to={`/students/${key.id}/profile`}>
+                        <Link className='students-list-item-link' to={`/students/${key.student_id}/profile`}>
                             <img className='students-list-item-link-icon' alt='student icon' src={studentIcon}/>
                             <p className='students-list-item-link-tooltip'>Profile</p>
                         </Link>
-                        <Link className='students-list-item-link' to={`/students/${key.id}/communities`}>
+                        <Link className='students-list-item-link' to={`/students/${key.student_id}/communities`}>
                             <img className='students-list-item-link-icon' alt='communities icon' src={CommunitiesIcon}/>
                             <p className='students-list-item-link-tooltip'>Communities</p>                     
                         </Link>
-                        <Link className='students-list-item-link' to={`/students/${key.id}/challenges`}>
+                        <Link className='students-list-item-link' to={`/students/${key.student_id}/challenges`}>
                             <img className='students-list-item-link-icon' alt='challenges icon' src={ChallengesIcon}/>
                             <p className='students-list-item-link-tooltip'>Challenges</p>
                         </Link>
-                        <Link className='students-list-item-link-transactions' to={`/students/${key.id}/dragon-bucks`}>
+                        <Link className='students-list-item-link-transactions' to={`/students/${key.student_id}/dragon-bucks`}>
                             <div >$100.00</div>
                             <p className='students-list-item-link-tooltip'>Transactions</p>
                         </Link>
@@ -72,7 +73,7 @@ class StudentsListContainer extends Component{
         return(
             <main>
                 <ul className='list-main-wrapper'>
-                    {this.renderstudentsList()}
+                    {this.renderStudentsList()}
                 </ul>
             </main>
         )
