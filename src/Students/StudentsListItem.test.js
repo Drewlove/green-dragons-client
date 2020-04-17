@@ -8,5 +8,5 @@ it('StudentsListItem renders without crashing', () => {
         <StudentsListItem />, 
         div
     )
-    ReactDOM.unmountComponentAtNode('div')
+    ReactDOM.unmountComponentAtNode(div)
 })
