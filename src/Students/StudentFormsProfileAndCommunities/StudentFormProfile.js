@@ -66,7 +66,7 @@ class StudentFormProfile extends Component{
                 "Content-Type": "application/json", 
             }
         }
-        const url = `${config.DEV_API_ENDPOINT}/students`
+        const url = `${config.API_ENDPOINT}/students`
         fetch(url, options)
         .then(res => console.log(res))
     }
