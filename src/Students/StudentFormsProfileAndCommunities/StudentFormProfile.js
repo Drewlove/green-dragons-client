@@ -11,7 +11,6 @@ class StudentFormProfile extends Component{
             last_name: '', 
             birth_date: ''
         }, 
-
     } 
 
     componentDidMount(){
