@@ -59,13 +59,14 @@ class StudentFormProfile extends Component{
         e.preventDefault()
 
         const options = {
-            method: "POST", 
+            method: "POST",
+            body: JSON.stringify(this.state.student), 
             headers: {
                 "Authorization" : config.API_KEY, 
-                "Content-Type": "application/json"
+                "Content-Type": "application/json", 
             }
         }
-        const url = `${config.API_ENDPOINT}/students`
+        const url = `${config.DEV_API_ENDPOINT}/students`
         fetch(url, options)
         .then(res => console.log(res))
     }
