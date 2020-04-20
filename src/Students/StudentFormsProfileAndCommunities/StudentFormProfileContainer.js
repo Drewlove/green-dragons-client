@@ -98,7 +98,7 @@ class StudentFormProfileContainer extends Component{
             <>
             {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl}/> : null}
             {this.state.modalMessage.length > 0 ? this.renderModal() : this.renderStudentFormProfile()}         
-            }
+
             </>
         )
     }
