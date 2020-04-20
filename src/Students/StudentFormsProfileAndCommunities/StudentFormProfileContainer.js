@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import StudentFormProfile from './StudentFormProfile'
 import Modal from '../../_Common/Modal'
-import {getDataFromEndpoint, postDataToEndpoint} from '../../Utilities/UtilityFunctions'
+import {getDataFromEndpoint, submitDataToEndpoint} from '../../Utilities/UtilityFunctions'
 import {withRouter, Redirect} from 'react-router-dom'
-import config from '../../config'
 import "react-datepicker/dist/react-datepicker.css";
 
 class StudentFormProfileContainer extends Component{
@@ -18,7 +17,7 @@ class StudentFormProfileContainer extends Component{
     } 
 
     componentDidMount(){
-        this.isPatchOrPost()
+        return this.isPostOrPatch() === 'POST' ? null : this.fetchStudent() 
     }
 
     componentDidUpdate(prevProps){
@@ -34,8 +33,8 @@ class StudentFormProfileContainer extends Component{
         this.setState({student})
     }
 
-    isPatchOrPost(){
-        return this.props.match.params.student_id !== "0" ? this.fetchStudent() : null 
+    isPostOrPatch(){
+        return this.props.match.params.student_id === "0" ? 'POST' : 'PATCH' 
     }
 
     async fetchStudent(){
@@ -57,15 +56,23 @@ class StudentFormProfileContainer extends Component{
         this.setState({student})
     }
 
-    async handleSubmit(e){
+    handleSubmit(e){
         e.preventDefault()
-        const endpoint = `${config.API_ENDPOINT}/students`
-        let modalMessage = ''
+        this.isPostOrPatch() === "POST" ? 
+        this.submitForm('students', 'POST') 
+        : this.submitForm(`students/${this.props.match.params.student_id}`, 'PATCH')
+    }
+    
+    async submitForm(urlSuffix, method){
+        let modalMessage
+
+        let student = {...this.state.student, birth_date: new Date(this.state.student.birth_date)}
+
         try{
-            const result = await postDataToEndpoint(this.state.student, endpoint)
+            const result = await submitDataToEndpoint(student, urlSuffix, method)
             result.ok ? modalMessage = 'Success!' : modalMessage = "Failed to submit"
             return this.setState({modalMessage})
-        }catch(error){
+        } catch(error){
             modalMessage = "Failed so submit. Please try again"
             this.setState({modalMessage})
         }
@@ -98,7 +105,6 @@ class StudentFormProfileContainer extends Component{
             <>
             {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl}/> : null}
             {this.state.modalMessage.length > 0 ? this.renderModal() : this.renderStudentFormProfile()}         
-
             </>
         )
     }

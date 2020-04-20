@@ -1,7 +1,7 @@
 import config from '../config'
 
-export const getDataFromEndpoint = async function(urlEndpoint){
-    const url = `${config.API_ENDPOINT}/${urlEndpoint}`
+export const getDataFromEndpoint = async function(urlSuffix){
+    const url = `${config.API_ENDPOINT}/${urlSuffix}`
     const options = {
         method: "GET", 
         headers: config.HEADERS
@@ -20,16 +20,16 @@ export const getDataFromEndpoint = async function(urlEndpoint){
     }
 }
 
-
-
-export const postDataToEndpoint = async function(data, endpoint){
+export const submitDataToEndpoint = async function(data, urlSuffix, method){
     const options = {
-        method: "POST",
+        method: method,
         body: JSON.stringify(data), 
         headers: {
             "Authorization" : config.API_KEY, 
             "Content-Type": "application/json", 
         }
     }
-    return await fetch(endpoint, options)
+    const url = `${config.API_ENDPOINT}/${urlSuffix}`
+    return await fetch(url, options)
 }
+
