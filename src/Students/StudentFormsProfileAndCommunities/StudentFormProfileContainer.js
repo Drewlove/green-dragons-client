@@ -40,7 +40,7 @@ class StudentFormProfileContainer extends Component{
 
     async fetchStudent(){
         try{
-            let result = await getDataFromEndpoint(`student/${this.props.match.params.student_id}`)
+            let result = await getDataFromEndpoint(`students/${this.props.match.params.student_id}`)
             return result.ok ? this.setState({student: result.data}) : this.setState({modalMessage: "Failed to load"})
         } catch(error){
             this.setState({modalrMessage: 'Failed to Load'})
