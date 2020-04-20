@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
 import StudentsListContainer from './StudentsListContainer'
-import StudentFormProfile from './StudentFormsProfileAndCommunities/StudentFormProfile'
+import StudentFormProfileContainer from './StudentFormsProfileAndCommunities/StudentFormProfileContainer'
 import StudentFormCommunities from './StudentFormsProfileAndCommunities/StudentFormCommunities'
 import StudentChallengesListContainer from './StudentChallenges/StudentChallengesListContainer'
 import StudentChallengeEntriesListContainer from './StudentChallenges/StudentChallengeEntriesListContainer'
@@ -15,7 +15,7 @@ const StudentsRouting = (props) => {
     return(
     <>
         <Route exact path='/students/' component={StudentsListContainer} />
-        <Route path={`${rootPath}/profile`} component={StudentFormProfile}/>
+        <Route path={`${rootPath}/profile`} component={StudentFormProfileContainer}/>
         <Route path={`${rootPath}/communities`} component={StudentFormCommunities}/>
         <Route exact path={`${rootPath}/challenges/`} component={StudentChallengesListContainer}/>
         <Route path={`${rootPath}/challenges/:challenges_id`} component={StudentChallengeEntriesListContainer}/>

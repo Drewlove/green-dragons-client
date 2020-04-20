@@ -6,7 +6,7 @@ describe('Student Form Communities', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div')
         ReactDOM.render(
-            <StudentFormCommunities/>, 
+            <StudentFormCommunities />, 
             div
         )
         ReactDOM.unmountComponentAtNode(div)

@@ -1,12 +1,15 @@
 import React, {Component} from 'react'
 import StudentsListItem from './StudentsListItem'
-import {FETCH_DATA} from '../Utilities/UtilityFunctions'
+import Modal from '../_Common/Modal'
+import {Redirect} from 'react-router-dom'
+import {getDataFromEndpoint} from '../Utilities/UtilityFunctions'
 
 class StudentsListContainer extends Component{
 
     state = {
         students: [], 
-        errorMessage: ''
+        modalMessage: '',
+        redirectUrl: ''
     }
 
     componentDidMount(){
@@ -15,12 +18,33 @@ class StudentsListContainer extends Component{
 
     async fetchStudents(){
         try{
-            let result = await FETCH_DATA('students')
-            let students = await result.json()
-            this.setState({students})
+            const result = await getDataFromEndpoint('students')
+            result.ok ? this.setState({students: result.data}) : this.setState({modalMessage: "Failed to load"})
         } catch(error){
             this.setState({errorMessage: 'Failed to Load'})
         }
+    }
+
+    toggleModalDisplay(){
+        this.setState({redirectUrl: '/'})
+    }
+
+    renderModal(){
+        return(
+            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
+                <p>{this.state.modalMessage}</p>
+            </Modal>
+        )
+    }
+
+    renderPage(){
+        return(
+            <main>
+                <ul className='list-main-wrapper'>
+                    {this.renderStudentsList()}
+                </ul>
+            </main>
+        )
     }
 
     renderStudentsList(){
@@ -33,11 +57,10 @@ class StudentsListContainer extends Component{
     
     render(){
         return(
-            <main>
-                <ul className='list-main-wrapper'>
-                    {this.renderStudentsList()}
-                </ul>
-            </main>
+            <>
+                {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl} /> : null}
+                {this.state.modalMessage.length > 0 ? this.renderModal() : this.renderPage()}
+            </>
         )
     }
 }

@@ -2,13 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import StudentFormProfile from './StudentFormProfile'
 
-describe('Student Form Profile', () => {
-    it('renders without crashing', () => {
-        const div = document.createElement('div')
-        ReactDOM.render(
-            <StudentFormProfile/>,
-            div 
-        )
-        ReactDOM.unmountComponentAtNode(div)
-    })
+const student = {
+    first_name: 'Jon', 
+    last_name: 'Doe',
+    birthdate: '09-09-9999'
+}
+
+it('Student Form Profile renders without crashing', () => {
+    const div = document.createElement('div')
+    ReactDOM.render(
+        <StudentFormProfile student={student}/>, div
+    )
+    ReactDOM.unmountComponentAtNode(div)
 })
+
