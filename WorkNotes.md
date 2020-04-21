@@ -15,11 +15,6 @@ Push changes to zeit
 
 Next: 
 Finish User endpoints and Client Side Functionality 
--POST
---> Redirect to students if successful
-
--PATCH
-
 -DELETE
 
 --> Form validation and error handling
