@@ -2,10 +2,9 @@ import React, {Component} from 'react'
 import StudentsListItem from './StudentsListItem'
 import Modal from '../_Common/Modal'
 import {Redirect} from 'react-router-dom'
-import {getDataFromEndpoint} from '../Utilities/UtilityFunctions'
+import {HTTP_METHODS} from '../Utilities/HttpMethods'
 
 class StudentsListContainer extends Component{
-
     state = {
         students: [], 
         modalMessage: '',
@@ -18,7 +17,7 @@ class StudentsListContainer extends Component{
 
     async fetchStudents(){
         try{
-            const result = await getDataFromEndpoint('students')
+            const result = await HTTP_METHODS.getData('students')
             result.ok ? this.setState({students: result.data}) : this.setState({modalMessage: "Failed to load"})
         } catch(error){
             this.setState({errorMessage: 'Failed to Load'})

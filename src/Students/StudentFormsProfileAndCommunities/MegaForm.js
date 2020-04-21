@@ -7,7 +7,7 @@ import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
 
 import "react-datepicker/dist/react-datepicker.css";
 
-class StudentFormProfileContainer extends Component{
+class MegaForm extends Component{
     state = {
         student: {
             first_name: '', 
@@ -125,4 +125,4 @@ class StudentFormProfileContainer extends Component{
     }
 }
 
-export default withRouter(StudentFormProfileContainer)
+export default withRouter(MegaForm)

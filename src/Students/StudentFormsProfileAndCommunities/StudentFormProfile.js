@@ -5,7 +5,7 @@ const StudentFormProfile = (props) => {
     const {first_name, last_name, birth_date} = props.student
     return(
         <main>
-        <form className='student-form-profile' onSubmit={e=>props.handleSubmit(e)} >
+        <form className='student-form-profile'>
             <fieldset>
                 <legend>
                     <h2>Student</h2>
@@ -34,8 +34,8 @@ const StudentFormProfile = (props) => {
                     />
                 </div>
                 <section className='button-wrapper'>
-                    <button>Delete</button>
-                    <button>Save</button>
+                    <button onClick={(e) => props.handleDelete(e)}>Delete</button>
+                    <button onClick={e => props.handleSave(e)}>Save</button>
                 </section>
             </fieldset>
         </form>
