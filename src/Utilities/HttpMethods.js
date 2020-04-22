@@ -49,7 +49,6 @@ const deleteData = async function(urlSuffix){
         }
     }
     const url = `${config.API_ENDPOINT}/${urlSuffix}`
-    console.log(url, options)
     return await fetch(url, options)
 }
 

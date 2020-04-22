@@ -9,17 +9,27 @@ import StudentChallengeEntryForm from './StudentChallenges/StudentChallengeEntry
 import StudentDragonBucksList from './StudentDragonBucks/StudentDragonBucksListContainer'
 import StudentDragonBucksForm from './StudentDragonBucks/StudentDragonBucksForm'
 
-const StudentsRouting = (props) => {
+import FormContainer from './StudentFormsProfileAndCommunities/FormContainer'
 
-    const rootPath = `/students/:student_id`
+const StudentsRouting = (props) => {
+    const rootPath = `/students/:row_id`
     return(
     <>
         <Route exact path='/students/' component={StudentsListContainer} />
-        <Route path={`${rootPath}/profile`} component={StudentFormProfileContainer}/>
+
+        <Route 
+        path={`${rootPath}/profile`} 
+        render={props => <FormContainer {...props} tableName = 'students'/>}
+        />
+
+
+
+
+
         <Route path={`${rootPath}/communities`} component={StudentFormCommunities}/>
         <Route exact path={`${rootPath}/challenges/`} component={StudentChallengesListContainer}/>
         <Route path={`${rootPath}/challenges/:challenges_id`} component={StudentChallengeEntriesListContainer}/>
-        <Route path={`${rootPath}/student-challenges/:Student_challenges_id`} component={StudentChallengeEntryForm}/>
+        <Route path={`${rootPath}/student-challenges/:student_challenges_id`} component={StudentChallengeEntryForm}/>
         <Route exact path={`${rootPath}/dragon-bucks/`} component={StudentDragonBucksList}/>
         <Route path={`${rootPath}/student-dragon-bucks/:dragon_bucks_id`} component={StudentDragonBucksForm}/>
     </> 
