@@ -1,8 +1,10 @@
 import React from 'react'
 import DatePicker from "react-datepicker";
+import {GET_DATE_WITH_TIMEZONE_OFFSET} from '../../Utilities/UtilityFunctions'
 
 const StudentFormProfile = (props) => {
     const {first_name, last_name, birth_date} = props.student
+    
     return(
         <main>
         <form className='student-form-profile'>
@@ -29,7 +31,7 @@ const StudentFormProfile = (props) => {
                 <div className='input-wrapper'>
                     <label>Date Picker</label>
                     <DatePicker 
-                    selected={birth_date ? new Date(birth_date) : null}
+                    selected={birth_date ? GET_DATE_WITH_TIMEZONE_OFFSET(birth_date.toString()) : null}
                     onChange={date => props.handleBirthdateChange(date)}
                     />
                 </div>

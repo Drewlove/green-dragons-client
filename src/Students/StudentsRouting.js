@@ -12,7 +12,7 @@ import StudentDragonBucksForm from './StudentDragonBucks/StudentDragonBucksForm'
 import FormContainer from './StudentFormsProfileAndCommunities/FormContainer'
 
 const StudentsRouting = (props) => {
-    const rootPath = `/students/:row_id`
+    const rootPath = `/students/:rowId`
     return(
     <>
         <Route exact path='/students/' component={StudentsListContainer} />

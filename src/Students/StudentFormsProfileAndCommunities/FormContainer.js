@@ -12,7 +12,7 @@ class FormContainer extends Component{
         redirectUrl: ''
     } 
  
-    currentRowId = this.props.match.params.row_id
+    currentRowId = this.props.match.params.rowId
     tableName = this.props.tableName
 
     isPostOrPatch(){
@@ -22,6 +22,7 @@ class FormContainer extends Component{
     async fetchRowFromTable(){
         try{
             let result = await HTTP_METHODS.getData(`${this.tableName}/${this.currentRowId}`)
+            console.log(result.data)
             return result.ok ? result.data : this.setState({modalMessage: MODAL_MESSAGES.getFail})
         } catch(error){
             this.setState({modalMessage: 'Failed to Load'})
@@ -37,9 +38,8 @@ class FormContainer extends Component{
     //HERE, the date must be correctly set on the studentFormProfileContainer
     async submitForm(urlSuffix, method, formObj){
         let modalMessage
-        let formObjCopy = {...formObj, birth_date: new Date(formObj.birth_date)}
         try{
-            const result = await HTTP_METHODS.postOrPatchData(formObjCopy, urlSuffix, method)
+            const result = await HTTP_METHODS.postOrPatchData(formObj, urlSuffix, method)
             result.ok ? modalMessage = MODAL_MESSAGES.saveSuccessful : modalMessage = MODAL_MESSAGES.saveFail
             return this.setState({modalMessage})
         } catch(error){

@@ -13,11 +13,11 @@ class StudentFormProfileContainer extends Component{
     } 
 
     async componentDidMount(){
-        return this.props.isPostOrPatch() === 'POST' ? null : this.setState({student: await this.props.fetchRowFromTable()})
+        return this.props.isPostOrPatch() === 'POST' ? null : this.setState({student: await this.props.fetchRowFromTable()}) 
     }
 
     componentDidUpdate(prevProps){
-        return prevProps.match.params.row_id !== this.props.match.params.row_id ? this.resetForm() : null
+        return prevProps.match.params.rowId !== this.props.match.params.rowId ? this.resetForm() : null
     }
 
     resetForm(){
@@ -39,6 +39,7 @@ class StudentFormProfileContainer extends Component{
     }
 
     handleChange(e){
+        console.log(e)
         const student = {...this.state.student, [e.target.name]: e.target.value}
         this.setState({student})
     }
