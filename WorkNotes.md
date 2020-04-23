@@ -12,12 +12,11 @@ Make sure the remotely hosted API endpoint can be correctly accessed by the clie
 Once working, push changes to git
 Push changes to zeit
 
-
 Next: 
-Finish User endpoints and Client Side Functionality 
--DELETE
-
 --> Form validation and error handling
 
-If possible, abstract these HTTP methods into utility functions that can be more easily used for remaining client manipulation of data (Challenges, Communities, Subcommunities, Student Challenges, Student Dragon Bucks)
+THEN, go table by table (Challenges, Community, Subcommunity) implement getting lists, and forms with 
+HTTP methods for forms, using user profile as a template
+
+THEN, work with user related data, user challenges and user transactions
 

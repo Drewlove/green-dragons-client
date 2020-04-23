@@ -1,4 +1,4 @@
-export const GET_DATE_WITH_TIMEZONE_OFFSET = (originalDateString) => {     
+export const GET_UTCDATE_WITH_TIMEZONE_OFFSET = (originalDateString) => {     
     const dateArray = originalDateString.split(' ')
     
     const year = dateArray[3]
