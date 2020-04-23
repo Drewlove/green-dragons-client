@@ -6,6 +6,8 @@ import {HTTP_METHODS} from '../../Utilities/HttpMethods'
 import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
 import "react-datepicker/dist/react-datepicker.css";
 
+
+import config from '../../config'
 class FormContainer extends Component{
     state = {
         modalMessage: '',
@@ -15,8 +17,12 @@ class FormContainer extends Component{
     currentRowId = this.props.match.params.rowId
     tableName = this.props.tableName
 
-    isPostOrPatch(){
+    getHttpMethod(){
         return this.currentRowId === "0" ? 'POST' : 'PATCH' 
+    }
+
+    getEndpointSuffix(endpointSuffix){
+        return endpointSuffix === "POST" ? `${this.tableName}` : `${this.tableName}/${this.currentRowId}`
     }
 
     async fetchRowFromTable(){
@@ -29,17 +35,12 @@ class FormContainer extends Component{
         }
     }
 
-    getSubmitFormOptions(formObj){
-        this.isPostOrPatch() === "POST" ? 
-        this.submitForm(this.tableName, 'POST', formObj) 
-        : this.submitForm(`${this.tableName}/${this.currentRowId}`, 'PATCH', formObj)
-    }
-
-    //HERE, the date must be correctly set on the studentFormProfileContainer
-    async submitForm(urlSuffix, method, formObj){
+    async submitForm(formObj){
         let modalMessage
+        const httpMethod = this.getHttpMethod()
+        const endpointSuffix = this.getEndpointSuffix(httpMethod)
         try{
-            const result = await HTTP_METHODS.postOrPatchData(formObj, urlSuffix, method)
+            const result = await HTTP_METHODS.submitData(formObj, endpointSuffix, httpMethod)
             result.ok ? modalMessage = MODAL_MESSAGES.saveSuccessful : modalMessage = MODAL_MESSAGES.saveFail
             return this.setState({modalMessage})
         } catch(error){
@@ -78,8 +79,7 @@ class FormContainer extends Component{
         return(
             <StudentFormProfileContainer 
             fetchRowFromTable = {() => this.fetchRowFromTable()}
-            isPostOrPatch = {() => this.isPostOrPatch()}
-            getSubmitFormOptions = {formObj => this.getSubmitFormOptions(formObj)}
+            submitForm = {formObj => this.submitForm(formObj)}
             handleDelete = {(e) => this.handleDelete(e) } 
             />    
         )

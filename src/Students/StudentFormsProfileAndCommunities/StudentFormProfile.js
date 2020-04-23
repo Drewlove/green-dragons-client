@@ -4,7 +4,6 @@ import {GET_UTCDATE_WITH_TIMEZONE_OFFSET} from '../../Utilities/UtilityFunctions
 
 const StudentFormProfile = (props) => {
     const {first_name, last_name, birth_date} = props.student
-    
     return(
         <main>
         <form className='student-form-profile'>

@@ -14,6 +14,8 @@ Push changes to zeit
 
 Next: 
 --> Form validation and error handling
+Any other items for the form?
+Move onto API tests
 
 THEN, go table by table (Challenges, Community, Subcommunity) implement getting lists, and forms with 
 HTTP methods for forms, using user profile as a template

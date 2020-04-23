@@ -13,7 +13,7 @@ class StudentFormProfileContainer extends Component{
     } 
 
     async componentDidMount(){
-        return this.props.isPostOrPatch() === 'POST' ? null : this.setState({student: await this.props.fetchRowFromTable()}) 
+        return this.props.match.params.rowId === "0" ? null : this.setState({student: await this.props.fetchRowFromTable()}) 
     }
 
     componentDidUpdate(prevProps){
@@ -31,15 +31,23 @@ class StudentFormProfileContainer extends Component{
 
     handleSave(e){
         e.preventDefault()
-        this.props.getSubmitFormOptions(this.state.student)
+        this.props.submitForm(this.state.student)
+
+       
+        // this.isFormValid() === true ? this.props.getSubmitFormOptions(this.state.student) : warnInvalidForm()
     }
+
+    // validateForm(){
+    //     for(let [key, value] of Object.entries(obj)){
+    //         value === '' ? 
+    //     }
+    // }
 
     handleDelete(e){
         this.props.handleDelete(e)
     }
 
     handleChange(e){
-        console.log(e)
         const student = {...this.state.student, [e.target.name]: e.target.value}
         this.setState({student})
     }

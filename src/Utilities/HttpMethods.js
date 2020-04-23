@@ -1,14 +1,14 @@
 import config from '../config'
 
 export const HTTP_METHODS = {
-    getData: urlSuffix => getData(urlSuffix),
-    postOrPatchData: (data, urlSuffix, method) => postOrPatchData(data, urlSuffix, method), 
+    getData: endpointSuffix => getData(endpointSuffix),
+    submitData: (data, endpointSuffix, method) => submitData(data, endpointSuffix, method), 
     deleteData: urlSuffix => deleteData(urlSuffix)   
 }
 
 
-const getData = async function(urlSuffix){
-    const url = `${config.API_ENDPOINT}/${urlSuffix}`
+const getData = async function(endpointSuffix){
+    const url = `${config.API_ENDPOINT}/${endpointSuffix}`
     const options = {
         method: "GET", 
         headers: config.HEADERS
@@ -27,7 +27,7 @@ const getData = async function(urlSuffix){
     }
 }
 
-const postOrPatchData = async function(data, urlSuffix, method){
+const submitData = async function(data, endpointSuffix, method){
     const options = {
         method: method,
         body: JSON.stringify(data), 
@@ -36,11 +36,11 @@ const postOrPatchData = async function(data, urlSuffix, method){
             "Content-Type": "application/json", 
         }
     }
-    const url = `${config.API_ENDPOINT}/${urlSuffix}`
+    const url = `${config.API_ENDPOINT}/${endpointSuffix}`
     return await fetch(url, options)
 }
 
-const deleteData = async function(urlSuffix){
+const deleteData = async function(endpointSuffix){
     const options = {
         method: "DELETE", 
         headers: {
@@ -48,7 +48,7 @@ const deleteData = async function(urlSuffix){
             "content-type": "application/json"
         }
     }
-    const url = `${config.API_ENDPOINT}/${urlSuffix}`
+    const url = `${config.API_ENDPOINT}/${endpointSuffix}`
     return await fetch(url, options)
 }
 
