@@ -9,7 +9,7 @@ import StudentChallengeEntryForm from './StudentChallenges/StudentChallengeEntry
 import StudentDragonBucksList from './StudentDragonBucks/StudentDragonBucksListContainer'
 import StudentDragonBucksForm from './StudentDragonBucks/StudentDragonBucksForm'
 
-import FormContainer from './StudentFormsProfileAndCommunities/FormContainer'
+import FormContainer from '../_Common/FormContainer'
 
 const StudentsRouting = (props) => {
     const rootPath = `/students/:rowId`

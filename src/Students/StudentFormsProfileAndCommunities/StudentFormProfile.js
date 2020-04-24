@@ -17,6 +17,7 @@ const StudentFormProfile = (props) => {
                     name='first_name'
                     type='text' 
                     value={first_name} 
+                    required
                     onChange={e => props.handleChange(e)}/>
                 </div>
                 <div className='input-wrapper'>
@@ -30,7 +31,7 @@ const StudentFormProfile = (props) => {
                 <div className='input-wrapper'>
                     <label>Date Picker</label>
                     <DatePicker 
-                    selected={birth_date ? GET_UTCDATE_WITH_TIMEZONE_OFFSET(birth_date.toString()) : null}
+                    selected={birth_date ? birth_date : null}
                     onChange={date => props.handleBirthdateChange(date)}
                     />
                 </div>

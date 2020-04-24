@@ -1,19 +1,30 @@
 import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import StudentFormProfile from './StudentFormProfile'
+import {GET_UTCDATE_WITH_TIMEZONE_OFFSET} from '../../Utilities/UtilityFunctions'
+import {GET_INVALID_INPUTS} from '../../Utilities/FormValidation'
 import "react-datepicker/dist/react-datepicker.css";
+
 
 class StudentFormProfileContainer extends Component{
     state = {
         student: {
             first_name: '', 
             last_name: '', 
-            birth_date: ''
-        }
+            birth_date:  null
+        },
+        invalidInputs: [],
+        loading: true
     } 
 
     async componentDidMount(){
-        return this.props.match.params.rowId === "0" ? null : this.setState({student: await this.props.fetchRowFromTable()}) 
+        return this.props.match.params.rowId === "0" ? this.setState({loading: false}) : this.setState({student: await this.props.fetchRowFromTable()}, 
+        () => this.castStringToDateObject(this.state.student.birth_date))
+    }
+
+    castStringToDateObject(dateString){
+        const student = {...this.state.student, birth_date: GET_UTCDATE_WITH_TIMEZONE_OFFSET(dateString)}
+        this.setState({student}, () => this.setState({loading: false}))
     }
 
     componentDidUpdate(prevProps){
@@ -31,25 +42,41 @@ class StudentFormProfileContainer extends Component{
 
     handleSave(e){
         e.preventDefault()
-        this.props.submitForm(this.state.student)
-
-       
-        // this.isFormValid() === true ? this.props.getSubmitFormOptions(this.state.student) : warnInvalidForm()
+        this.props.isFormValid(this.state.student)
     }
-
-    // validateForm(){
-    //     for(let [key, value] of Object.entries(obj)){
-    //         value === '' ? 
-    //     }
-    // }
 
     handleDelete(e){
         this.props.handleDelete(e)
     }
 
     handleChange(e){
-        const student = {...this.state.student, [e.target.name]: e.target.value}
+        const {name, value} = e.target
+        this.updateInvalidInputs(name, value)
+        const student = {...this.state.student, [name]: value}
         this.setState({student})
+    }
+
+    updateInvalidInputs(inputName, inputValue){
+        const inputReqs = this.getInputReqs(inputName)
+        const inputActual = {name: inputName, value: inputValue}
+        const invalidInputs = GET_INVALID_INPUTS(inputActual, inputReqs, this.state.invalidInputs)
+        this.setState({invalidInputs})
+    }
+
+    getInputReqs(inputName){
+        const inputRequirements = {
+            first_name: {
+                length: 2,
+                pattern: /^[a-zA-Z]*[A-Z]+[a-zA-Z]*$/g
+            },
+            last_name: {
+                length: 2
+            },
+            birth_date:{
+                length: 2
+            }
+        }   
+        return inputRequirements[inputName]
     }
 
     handleBirthdateChange(date){
@@ -71,7 +98,7 @@ class StudentFormProfileContainer extends Component{
     render(){
         return(
             <>
-                {this.renderStudentFormProfile()}         
+            {this.state.loading ? <h1>Loading</h1> : this.renderStudentFormProfile()}
             </>
         )
     }

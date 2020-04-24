@@ -1,13 +1,11 @@
 import React, {Component} from 'react'
 import {withRouter, Redirect} from 'react-router-dom'
-import StudentFormProfileContainer from './StudentFormProfileContainer'
-import Modal from '../../_Common/Modal'
-import {HTTP_METHODS} from '../../Utilities/HttpMethods'
-import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
+import StudentFormProfileContainer from '../Students/StudentFormsProfileAndCommunities/StudentFormProfileContainer'
+import Modal from './Modal'
+import {HTTP_METHODS} from '../Utilities/HttpMethods'
+import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
 import "react-datepicker/dist/react-datepicker.css";
 
-
-import config from '../../config'
 class FormContainer extends Component{
     state = {
         modalMessage: '',
@@ -28,7 +26,6 @@ class FormContainer extends Component{
     async fetchRowFromTable(){
         try{
             let result = await HTTP_METHODS.getData(`${this.tableName}/${this.currentRowId}`)
-            console.log(result.data)
             return result.ok ? result.data : this.setState({modalMessage: MODAL_MESSAGES.getFail})
         } catch(error){
             this.setState({modalMessage: 'Failed to Load'})
