@@ -20,7 +20,7 @@ const SubcommunityForm = () => {
                     <label>Name</label>
                     <input type='text'/>
                 </div>
-                <section className='button-wrapper'>
+                <section className='button-section'>
                     <button>Delete</button>
                     <button>Save</button>
                 </section>

@@ -15,7 +15,11 @@ const validateInputAgainstReq = {
         return actualInputValue.length >= reqInputValue ? true : false
     },
     pattern: function(actualInputValue, reqInputValue){
-        return actualInputValue.match(reqInputValue) ? true : false
+        const actualInputValueStripPunctuation = actualInputValue.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"");
+        return actualInputValueStripPunctuation.match(reqInputValue) ? true : false
+    }, 
+    dataType: function(actualInputValue, reqInputValue){
+        return typeof actualInputValue === reqInputValue && actualInputValue !== null ? true : false
     }
 }
 

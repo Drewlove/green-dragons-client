@@ -1,5 +1,9 @@
 /* color: #2F9400 */
 
+.hidden{
+  visibility: hidden; 
+}
+
 *{
   margin: 0px; 
 }
@@ -96,14 +100,18 @@ button:focus{
 }
 
 form{
-  max-width: 350px;
-  margin: 0px auto; 
-  border-radius: 5px; 
-  margin-top: 25px; 
-  padding: 10px; 
+  max-width: 600px;
+  margin: 0px auto;
+  border-radius: 5px;
+  margin-top: 25px;
+  padding: 10px;
 }
 
-form .button-wrapper{
+form input, label{
+  font-size: 18px; 
+}
+
+form .button-section{
   display: flex; 
   justify-content: space-between;
   margin-top: 25px;
@@ -122,42 +130,65 @@ form button:hover{
   cursor: pointer;
 }
 
+form label{
+  text-align: right;
+}
+
+form .inputs-section{
+  display: grid;
+  grid-template-columns: 100px auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 15px;
+}
+
+form .invalid-input-message{
+  color: red; 
+}
+
+form input, textarea, select{
+  border: 1px solid black;
+}
+
+
+/* 
 form .input-wrapper{
-  margin-top: 10px; 
-  display: flex; 
+  display: flex;
+  flex-direction: column;
 }
 
 form label{
-  width: 100px; 
+  width: 125px;
+  text-align: right;
+  margin-right: 10px;
 }
 
 form .radio{
   width: 25px;
-}
+} */
 
-form .radio-wrapper{
+/* form .radio-wrapper{
   display: flex; 
   align-items: center; 
-}
+} */
 
-form input, textarea, select{
-  border: 1px solid black; 
-  width: 150px; 
-}
+/* form section{
+  display: flex;
+  margin: 10px 0px;
+} */
 
-form .student-form-communities-wrapper{
+form .student-form-communities-section{
   margin-top: 10px; 
 }
 
-form .student-form-communities-subcommunity-wrapper{
+form .student-form-communities-subcommunity-section{
   padding: 5px; 
 }
 
-form .student-form-communities-subcommunity-wrapper-input{
+form .student-form-communities-subcommunity-section-input{
   width: auto; 
 }
 
-form .student-form-communities-subcommunity-wrapper-label{
+form .student-form-communities-subcommunity-section-label{
   width: auto; 
 }
 
@@ -214,7 +245,7 @@ form .student-form-communities-subcommunity-wrapper-label{
   margin: 0px 20px; 
 }
 
-.modal-wrapper{
+.modal-section{
   position: fixed;
   background-color: rgba(0,0,0,0.4);
   z-index: 1;

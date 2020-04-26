@@ -34,7 +34,7 @@ const ChallengeTypeForm = () => {
                 <option value='lowest'>Lowest</option>  
                 </select>
             </div>
-            <section className='button-wrapper'>
+            <section className='button-section'>
                 <button>Delete</button>
                 <button>Save</button>
             </section>

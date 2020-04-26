@@ -24,7 +24,7 @@ const StudentFormCommunities = () => {
     const renderCommunities = () => {
         return communities.map(community=> {
             return(
-            <section className='student-form-communities-wrapper' key={community.id}>
+            <section className='student-form-communities-section' key={community.id}>
                 <h3>{community.name}</h3>
                 {renderSubcommunities(community.subcommunities)}
             </section>
@@ -51,7 +51,7 @@ const StudentFormCommunities = () => {
                     <h2>Communities</h2>
                 </legend>
                 {renderCommunities()}          
-                <section className='button-wrapper'>
+                <section className='button-section'>
                     <button className='button-save'>Save</button>
                 </section>
             </fieldset>

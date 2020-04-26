@@ -5,7 +5,7 @@ const StudentNavTabs = (props) => {
     const rootPath= `/students/${props.match.params.student_id}`
 
         return(
-            <section className='student-nav-tabs'>
+            <section className='student-nav-tabs-section'>
                 <NavLink activeClassName='active' to={`${rootPath}/profile`}>Profile</NavLink>
                 <NavLink activeClassName='active' to={`${rootPath}/communities`}>Communities</NavLink>
                 <NavLink activeClassName='active' to={`${rootPath}/challenges`}>Challenges</NavLink>

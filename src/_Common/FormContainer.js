@@ -60,8 +60,13 @@ class FormContainer extends Component{
         }
     }
 
+    setModalMessage(modalMessage){
+        this.setState({modalMessage})
+    }
+
     toggleModalDisplay(){
-        this.setState({redirectUrl: `/${this.tableName}`})
+        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
+        this.setState({redirectUrl: `/${this.tableName}`}) : this.setState({modalMessage: ''})
     }
 
     renderModal(){
@@ -72,12 +77,30 @@ class FormContainer extends Component{
         )
     }
 
+    renderForm(){
+        switch(this.tableName){
+            case 'students':
+            return (
+                <StudentFormProfileContainer 
+                fetchRowFromTable = {() => this.fetchRowFromTable()}
+                submitForm = {formObj => this.submitForm(formObj)}
+                handleDelete = {e => this.handleDelete(e)}
+                setModalMessage = {modalMessage => this.setModalMessage(modalMessage)}
+                />)
+            break;
+            
+            default: 
+            return <h1>Error</h1>
+        }
+    }
+
     renderStudentFormProfile(){
         return(
             <StudentFormProfileContainer 
             fetchRowFromTable = {() => this.fetchRowFromTable()}
             submitForm = {formObj => this.submitForm(formObj)}
-            handleDelete = {(e) => this.handleDelete(e) } 
+            handleDelete = {e => this.handleDelete(e)}
+            setModalMessage = {modalMessage => this.setModalMessage(modalMessage)}
             />    
         )
     }
@@ -86,7 +109,8 @@ class FormContainer extends Component{
         return(
             <>
             {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl}/> : null}
-            {this.state.modalMessage.length > 0 ? this.renderModal() : this.renderStudentFormProfile()}         
+            {this.state.modalMessage.length > 0 ? this.renderModal() : null}
+            {this.renderForm()}       
             </>
         )
     }

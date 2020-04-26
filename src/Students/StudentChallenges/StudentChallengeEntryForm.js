@@ -36,7 +36,7 @@ const StudentChallengeEntryForm = () => {
                     <label>Notes</label>
                     <textarea rows='5'></textarea>
                 </div>
-                <section className='button-wrapper'>
+                <section className='button-section'>
                     <button>Delete</button>
                     <button>Save</button>
                 </section>
