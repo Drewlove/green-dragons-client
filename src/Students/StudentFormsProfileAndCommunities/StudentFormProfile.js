@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import FormInvalidInputMessage from '../../_Common/FormInvalidInputMessage'
 
 const StudentFormProfile = (props) => {
-    const {first_name, last_name, birth_date} = props.student
+    const {first_name, last_name, birth_date, student_id} = props.student
 
     const isInputValid = (inputName, message) => {
         return props.invalidInputs.indexOf(inputName) >= 0 ? 
@@ -63,8 +63,8 @@ const StudentFormProfile = (props) => {
                     </div>
                 </section>
                 <section className='button-section'>
-                    <button onClick={(e) => props.handleDelete(e)}>Delete</button>
-                    <button onClick={e => props.handleSave(e)}>Save</button>
+                    {student_id ? <button onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
+                    <button className='save-button' onClick={e => props.handleSave(e)}>Save</button>
                 </section>
             </fieldset>
         </form>

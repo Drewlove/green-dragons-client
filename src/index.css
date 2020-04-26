@@ -149,6 +149,10 @@ form input, textarea, select{
   border: 1px solid black;
 }
 
+form .save-button{
+  margin-left: auto; 
+}
+
 
 /* 
 form .input-wrapper{
