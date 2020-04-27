@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
-import {withRouter} from 'react-router-dom'
+import {Redirect, withRouter } from 'react-router-dom'
 import StudentFormProfile from './StudentFormProfile'
 import {GET_UTCDATE_WITH_TIMEZONE_OFFSET} from '../../Utilities/UtilityFunctions'
 import {GET_INVALID_INPUTS} from '../../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
+import {HTTP_METHODS} from '../../Utilities/HttpMethods'
+import Modal from '../../_Common/Modal'
 import "react-datepicker/dist/react-datepicker.css";
 
 class StudentFormProfileContainer extends Component{
@@ -14,17 +16,41 @@ class StudentFormProfileContainer extends Component{
             birth_date:  null
         },
         invalidInputs: [],
-        isLoaded: false
+        isLoaded: false, 
+        modalMessage: '', 
+        redirectUrl: ''
     } 
 
     async componentDidMount(){
-        return this.props.match.params.rowId === "0" ? this.setState({isLoaded: true}) : this.setState({student: await this.props.fetchRowFromTable()}, 
-        () => this.castStringToDateObject(this.state.student.birth_date))
+        return this.props.match.params.rowId === "0" ? this.setState({isLoaded: true}) : this.getStudent()
     }
 
-    castStringToDateObject(dateString){
-        const student = {...this.state.student, birth_date: GET_UTCDATE_WITH_TIMEZONE_OFFSET(dateString)}
-        this.setState({student}, () => this.setState({isLoaded: true}))
+    async getStudent(){
+        const endpoint = `students/${this.props.match.params.rowId}`
+        const response = await HTTP_METHODS.getData(endpoint)
+        response.ok ? this.updateStudent(response.data) : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+    }  
+    
+    updateStudent(data){
+        const student = {...data, birth_date: GET_UTCDATE_WITH_TIMEZONE_OFFSET(data.birth_date)}
+        this.setState({student}, () => this.setState({isLoaded: true})) 
+    }
+
+    setModalMessage(modalMessage){
+        this.setState({modalMessage})
+    }
+
+    toggleModalDisplay(){
+        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
+        this.setState({redirectUrl: `/students`}) : this.setState({modalMessage: ''})
+    }
+
+    renderModal(){
+        return(
+            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
+                <p>{this.state.modalMessage}</p>
+            </Modal>
+        )
     }
 
     componentDidUpdate(prevProps){
@@ -38,18 +64,26 @@ class StudentFormProfileContainer extends Component{
             birth_date: ''
          }
         this.setState({student})
+        this.setState({invalidInputs: []})
     }
-    
-    //NEXT
-    //FormContainer specifically renders StudentProfileFormContainer, how to render dynamically?
-    //API endpoint tests
-    //walk, exercise, call Noah? Liam?
-
 
     handleSave(e){
         e.preventDefault()
         this.validateAllInputs()
-        return this.isFormValid() ? this.props.submitForm(this.state.student) :  this.props.setModalMessage(MODAL_MESSAGES.saveFailInputsInvalid)
+        return this.isFormValid() ? this.saveStudentRecord(): this.setState({modalMessage:MODAL_MESSAGES.saveFailInputsInvalid})
+    }
+
+    async saveStudentRecord(){
+        const saveResponse = await HTTP_METHODS.submitData(this.state.student, this.getEndpointSuffix(), this.isPatchOrPost()) 
+        saveResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.saveSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.saveFail})
+    }
+
+    isPatchOrPost(){
+        return this.props.match.params.rowId === "0" ? 'POST' : 'PATCH'
+    }
+
+    getEndpointSuffix(){
+        return this.isPatchOrPost() === 'POST' ? `students` : `students/${this.props.match.params.rowId}`
     }
 
     validateAllInputs(){
@@ -64,8 +98,10 @@ class StudentFormProfileContainer extends Component{
         return this.state.invalidInputs.length > 0 ? false : true 
     }
 
-    handleDelete(e){
-        this.props.handleDelete(e)
+    async handleDelete(e){
+        e.preventDefault()
+        const deleteResponse = await HTTP_METHODS.deleteData(`students/${this.props.match.params.rowId}`)
+        deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
     }
 
     handleChange(e){
@@ -114,7 +150,7 @@ class StudentFormProfileContainer extends Component{
             handleChange = {e=> this.handleChange(e)}
             handleBirthdateChange = {e=> this.handleBirthdateChange(e)}
             handleSave = {e => this.handleSave(e)}
-            handleDelete = {e => this.props.handleDelete(e)}
+            handleDelete = {e => this.handleDelete(e)}
             />    
         )
     }
@@ -122,6 +158,8 @@ class StudentFormProfileContainer extends Component{
     render(){
         return(
             <>
+            {this.state.modalMessage.length > 0 ? this.renderModal() : null}
+            {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl}/> : null}
             {this.state.isLoaded ? this.renderStudentFormProfile() : <h1>Loading</h1>}
             </>
         )

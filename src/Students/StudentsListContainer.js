@@ -3,12 +3,14 @@ import StudentsListItem from './StudentsListItem'
 import Modal from '../_Common/Modal'
 import {Redirect} from 'react-router-dom'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
+import MODAL_MESSAGES from '../_Common/Modal'
 
 class StudentsListContainer extends Component{
     state = {
         students: [], 
         modalMessage: '',
-        redirectUrl: ''
+        redirectUrl: '', 
+        isLoaded: false, 
     }
 
     componentDidMount(){
@@ -16,12 +18,11 @@ class StudentsListContainer extends Component{
     }
 
     async fetchStudents(){
-        try{
-            const result = await HTTP_METHODS.getData('students')
-            result.ok ? this.setState({students: result.data}) : this.setState({modalMessage: "Failed to load"})
-        } catch(error){
-            this.setState({errorMessage: 'Failed to Load'})
-        }
+        const endpointSuffix = `students`
+        const response = await HTTP_METHODS.getData(endpointSuffix)
+        response.ok ? 
+        this.setState({students: response.data}, () => this.setState({isLoaded: true})) 
+        : this.setState({modalMessage: MODAL_MESSAGES.getFail})
     }
 
     toggleModalDisplay(){
@@ -57,8 +58,9 @@ class StudentsListContainer extends Component{
     render(){
         return(
             <>
+                {this.state.isLoaded ? this.renderPage() : <h1>Loading...</h1>}
+                {this.state.modalMessage.length > 0 ? this.renderModal() : null}
                 {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl} /> : null}
-                {this.state.modalMessage.length > 0 ? this.renderModal() : this.renderPage()}
             </>
         )
     }

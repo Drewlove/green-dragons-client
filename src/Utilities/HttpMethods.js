@@ -6,24 +6,24 @@ export const HTTP_METHODS = {
     deleteData: urlSuffix => deleteData(urlSuffix)   
 }
 
-
 const getData = async function(endpointSuffix){
     const url = `${config.API_ENDPOINT}/${endpointSuffix}`
     const options = {
         method: "GET", 
         headers: config.HEADERS
     }
-    const response = await fetch(url, options)
+
     let result = {
         ok: false, 
+        error: '',
         data: {}
     }
-    if(response.ok){
-        result.ok = true
-        result.data = await response.json()
-        return result 
-    } else {
-        return result
+
+    try{
+        const response = await fetch(url, options)
+        return response.ok ? result = {...result, ok: true, data: await response.json()} : result = {...result, ok: false, error: `${response.statusText}`}
+    } catch(error){
+        return result = {ok: false, error: 'Error. Could not retrieve record'}   
     }
 }
 
@@ -37,7 +37,12 @@ const submitData = async function(data, endpointSuffix, method){
         }
     }
     const url = `${config.API_ENDPOINT}/${endpointSuffix}`
-    return await fetch(url, options)
+    try{
+        const result = await fetch(url, options)
+        return result 
+    } catch(error){
+        return error 
+    }
 }
 
 const deleteData = async function(endpointSuffix){
@@ -49,6 +54,24 @@ const deleteData = async function(endpointSuffix){
         }
     }
     const url = `${config.API_ENDPOINT}/${endpointSuffix}`
-    return await fetch(url, options)
+    try {
+        const result = await fetch(url, options)
+        return result 
+    } catch(error){
+        return error 
+    }
 }
 
+
+
+// e.preventDefault()
+// let modalMessage
+// const urlSuffix = `${this.tableName}/${this.currentRowId}`
+// try {
+//     const result = await HTTP_METHODS.deleteData(urlSuffix)
+//     result.ok ? modalMessage = MODAL_MESSAGES.deleteSuccessful : modalMessage = MODAL_MESSAGES.deleteFail
+//     return this.setState({modalMessage})
+// } catch{
+//     modalMessage = MODAL_MESSAGES.deleteFail
+//     this.setState({modalMessage})   
+// }

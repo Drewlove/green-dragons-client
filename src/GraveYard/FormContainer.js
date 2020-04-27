@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {withRouter, Redirect} from 'react-router-dom'
 import StudentFormProfileContainer from '../Students/StudentFormsProfileAndCommunities/StudentFormProfileContainer'
-import Modal from './Modal'
+import Modal from '../_Common/Modal'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
 import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
 import "react-datepicker/dist/react-datepicker.css";

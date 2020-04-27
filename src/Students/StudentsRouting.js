@@ -9,23 +9,12 @@ import StudentChallengeEntryForm from './StudentChallenges/StudentChallengeEntry
 import StudentDragonBucksList from './StudentDragonBucks/StudentDragonBucksListContainer'
 import StudentDragonBucksForm from './StudentDragonBucks/StudentDragonBucksForm'
 
-import FormContainer from '../_Common/FormContainer'
-
 const StudentsRouting = (props) => {
     const rootPath = `/students/:rowId`
     return(
     <>
         <Route exact path='/students/' component={StudentsListContainer} />
-
-        <Route 
-        path={`${rootPath}/profile`} 
-        render={props => <FormContainer {...props} tableName = 'students'/>}
-        />
-
-
-
-
-
+        <Route path={`${rootPath}/profile`} component={StudentFormProfileContainer}/>
         <Route path={`${rootPath}/communities`} component={StudentFormCommunities}/>
         <Route exact path={`${rootPath}/challenges/`} component={StudentChallengesListContainer}/>
         <Route path={`${rootPath}/challenges/:challenges_id`} component={StudentChallengeEntriesListContainer}/>
