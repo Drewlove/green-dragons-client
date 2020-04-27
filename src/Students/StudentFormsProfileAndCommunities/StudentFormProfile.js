@@ -51,7 +51,7 @@ const StudentFormProfile = (props) => {
                         />
                         {isInputValid('last_name', 'Must have two letters, at least one capital letter')}
                     </div>
-                    <label htmlFor='birthDate'>Date Picker</label>
+                    <label htmlFor='birthDate'>Birthdate</label>
                     <div className='input-wrapper'>
                         <DatePicker 
                         id='birthDate'
