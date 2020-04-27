@@ -344,18 +344,14 @@ nav .active{
 
 .students-list-item-links-wrapper{
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: space-around;
   width: 100%;
   margin-top: 10px;
 }
 
-.students-list-item-link:hover .students-list-item-link-tooltip{
-  visibility: initial; 
-}
-
-.students-list-item-link-transactions:hover .students-list-item-link-tooltip{
-  visibility: initial; 
+.students-list-item-link-dragon-bucks{
+  margin-top: 20px; 
 }
 
 .students-list-item-link-icon{
@@ -364,42 +360,35 @@ nav .active{
   margin: auto;
 }
 
+.students-list-item-link-tooltip{
+  display: none
+}
+
 .students-list-item-link-transactions{
   margin-top: 20px;
   text-align: center;
 }
 
-.students-list-item-link-tooltip{
-  visibility: hidden; 
-  background-color: green;
-  color: white;
-  line-height: 20px;
-  margin-top: 5px;
-  padding: 0px 5px;
-  border-radius: 5px;
-}
-
 .students-list-item-name{
+  font-size: 21px;
   margin-left: 10px;
-  width: 100%;
-  min-width: 75px;
+  width: 50%;
 }
 
-/* .student-nav-tabs{
-  width: 400px;
-  display: flex;
-  justify-content: space-around;
-  font-size: 18px;
-  margin: 25px auto;
+@media only screen and (min-width: 600px) {
+  .students-list-item-link:hover .students-list-item-link-tooltip{
+    visibility: initial; 
+  }
+
+  .students-list-item-link-tooltip {
+    display: block; 
+    visibility: hidden;
+    background-color: green;
+    color: white;
+    line-height: 20px;
+    margin-top: 5px;
+    padding: 0px 5px;
+    border-radius: 5px;
+  }
 }
 
-.student-nav-tabs>a{
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.student-nav-tabs .active{
-  background-color: lightgrey;
-  color: white;
-} */
