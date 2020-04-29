@@ -1,7 +1,7 @@
 import React from 'react'
 import ListMainWrapper from '../_Common/ListMainWrapper'
 
-const ChallengeTypesListContainer = () => {
+const ChallengeListContainer = () => {
     
     const challengesList = [
         {name: 'Challenge 1', challenges_id: 1}, 
@@ -31,4 +31,4 @@ const ChallengeTypesListContainer = () => {
     )
 }
 
-export default ChallengeTypesListContainer
+export default ChallengeListContainer

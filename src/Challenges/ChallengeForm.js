@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ChallengeTypeForm = () => {
+const ChallengeForm = () => {
     return(
     <main>
         <form className='challenge-types-form'>
@@ -44,4 +44,4 @@ const ChallengeTypeForm = () => {
     )
 }
 
-export default ChallengeTypeForm
+export default ChallengeForm
