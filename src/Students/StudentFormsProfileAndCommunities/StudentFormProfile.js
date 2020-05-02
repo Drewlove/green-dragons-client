@@ -7,7 +7,7 @@ const StudentFormProfile = (props) => {
 
     const isInputValid = (inputName, message) => {
         return props.invalidInputs.indexOf(inputName) >= 0 ? 
-        <FormInvalidInputMessage message={message}/> : <FormInvalidInputMessage className='hidden' message={message}/>
+        <FormInvalidInputMessage message={message}/> : <FormInvalidInputMessage className='visibility-hidden' message={message}/>
     }
 
     const handleBlur = e  => {

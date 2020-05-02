@@ -11,7 +11,7 @@ export const GET_INVALID_INPUTS = (inputActual, inputReqs, invalidInputs) => {
 }
 
 const validateInputAgainstReq = {
-    length: function(actualInputValue, reqInputValue){
+    minLength: function(actualInputValue, reqInputValue){
         return actualInputValue.length >= reqInputValue ? true : false
     },
     pattern: function(actualInputValue, reqInputValue){

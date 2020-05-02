@@ -21,13 +21,11 @@ WORK TEMPLATE:
 CLIENT: implement getting lists, and forms with HTTP methods for forms, using user profile as a template
 API: Create service and router, create tests with users as template
 
-Challenges
-
-Community
 Subcommunity
 
 THEN
-work with user related data, user challenges, use rcommunities and user transactions
+work with user related data...
+user challenges, user communities and user transactions
 
 ***NEXT UP:***
 Finish challenges, 

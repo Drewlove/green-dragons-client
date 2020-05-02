@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom'
 import Nav from './_Common/Nav'
-import ChallengesRouting from './ChallengeTypes/ChallengeTypesRouting'
+import ChallengesRouting from './Challenges/ChallengesRouting'
 import CommunitiesRouting from './Communities/CommunitiesRouting'
 import StudentsRouting from './Students/StudentsRouting'
 import HomePage from './_Common/HomePage'

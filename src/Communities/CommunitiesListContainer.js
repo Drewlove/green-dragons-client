@@ -1,53 +1,67 @@
-import React from 'react'
+import React, {Component} from 'react'
 import CommunitiesListItem from './CommunitiesListItem'
+import Modal from '../_Common/Modal'
+import {Redirect} from 'react-router-dom'
+import {HTTP_METHODS} from '../Utilities/HttpMethods'
+import MODAL_MESSAGES from '../_Common/Modal'
 
-const CommunitiesListContainer = () => {
-    
-    const communitiesList = [
-        {
-            name: 'Community 1', communities_id: 1, 
-            subcommunities: [
-                {name: 'subcommunity 1', subcommunities_id: 11},
-                {name: 'subcommunity 2', subcommunities_id: 12},
-                {name: 'subcommunity 3', subcommunities_id: 13},
-                {name: 'subcommunity 4', subcommunities_id: 14},
-                {name: 'subcommunity 5', subcommunities_id: 15},
-                {name: 'subcommunity 6', subcommunities_id: 16}
-            ]
-        }, 
-        {
-            name: 'Community 2', communities_id: 2, 
-            subcommunities: [
-                {name: 'subcommunity 1', subcommunities_id: 21},
-                {name: 'subcommunity 2', subcommunities_id: 22},
-                {name: 'subcommunity 3', subcommunities_id: 23}
-            ]
-        },
-        {
-            name: 'Community 3', communities_id: 3, 
-            subcommunities: [
-                {name: 'subcommunity 1', subcommunities_id: 31},
-                {name: 'subcommunity 2', subcommunities_id: 32},
-                {name: 'subcommunity 3', subcommunities_id: 33}
-            ]
-        },
-    ]
-
-    const renderList = () => {
-        return communitiesList.map(listItem => {
-            return(
-                <CommunitiesListItem key={listItem.communities_id} listItem={listItem} />
-            )
-        })
+class ChallengesListContainer extends Component{
+    state = {
+        communities: [], 
+        modalMessage: '',
+        redirectUrl: '', 
+        isLoaded: false, 
     }
-    
-    return(
+
+    componentDidMount(){
+        this.fetchChallenges()
+    }
+
+    async fetchChallenges(){
+        const endpointSuffix = `communities`
+        const response = await HTTP_METHODS.getData(endpointSuffix)
+        response.ok ? 
+        this.setState({communities: response.data}, () => this.setState({isLoaded: true})) 
+        : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+    }
+
+    toggleModalDisplay(){
+        this.setState({redirectUrl: '/'})
+    }
+
+    renderModal(){
+        return(
+            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
+                <p>{this.state.modalMessage}</p>
+            </Modal>
+        )
+    }
+
+    renderPage(){
+        return(
         <main>
-            <ul className='communities-list-container list-main-wrapper'>
-                {renderList()}
-            </ul>
+            {this.state.communities.map(community => {
+                return(
+                    <CommunitiesListItem 
+                    community={community}  
+                    key={community.community_id}                  
+                    />
+                )
+            })
+            }
         </main>
         )
+    }
+    
+    render(){
+        return(
+            <>
+                {this.state.isLoaded ? this.renderPage() : <h1>Loading...</h1>}
+                {this.state.modalMessage.length > 0 ? this.renderModal() : null}
+                {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl} /> : null}
+            </>
+        )
+    }
 }
 
-export default CommunitiesListContainer
+export default ChallengesListContainer

@@ -18,10 +18,10 @@ class CommunitiesListItem extends Component{
                 <div className='communities-list-item-community-wrapper'>
                     <button onClick={() => this.handleClick()} className='communities-list-item-button'>&#10148;</button>
                     <div className='communities-list-item-link-wrapper'>
-                        <Link className='communities-list-item-link' to={`/communities/${this.props.listItem.communities_id}`}>{this.props.listItem.name}</Link>
+                        <Link className='communities-list-item-link' to={`/communities/${this.props.community.community_id}`}>{this.props.community.community_name}</Link>
                     </div>
                 </div>
-                <CommunitiesListItemSubcommunitiesList subcommunities={this.props.listItem.subcommunities}/>
+                {/* <CommunitiesListItemSubcommunitiesList subcommunities={this.props.listItem.subcommunities}/> */}
              </li>
         )
     }

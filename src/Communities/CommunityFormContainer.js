@@ -1,19 +1,17 @@
 import React, {Component} from 'react'
 import {Redirect, withRouter } from 'react-router-dom'
-import StudentFormProfile from './StudentFormProfile'
-import {GET_UTCDATE_WITH_TIMEZONE_OFFSET} from '../../Utilities/UtilityFunctions'
-import {GET_INVALID_INPUTS} from '../../Utilities/FormValidation'
-import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
-import {HTTP_METHODS} from '../../Utilities/HttpMethods'
-import Modal from '../../_Common/Modal'
+import CommunityForm from './CommunityForm'
+import {GET_INVALID_INPUTS} from '../Utilities/FormValidation'
+import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
+import {HTTP_METHODS} from '../Utilities/HttpMethods'
+import Modal from '../_Common/Modal'
 import "react-datepicker/dist/react-datepicker.css";
 
-class StudentFormProfileContainer extends Component{
+class ChallengeFormContainer extends Component{
     state = {
-        student: {
-            first_name: '', 
-            last_name: '', 
-            birth_date:  null
+        community: {
+            community_id: null,
+            community_name: '',
         },
         invalidInputs: [],
         isLoaded: false, 
@@ -22,18 +20,17 @@ class StudentFormProfileContainer extends Component{
     } 
 
     async componentDidMount(){
-        return this.props.match.params.rowId === "0" ? this.setState({isLoaded: true}) : this.getStudent()
+        return this.props.match.params.rowId === "0" ? this.setState({isLoaded: true}) : this.getRowFromTable()
     }
 
-    async getStudent(){
-        const endpoint = `students/${this.props.match.params.rowId}`
+    async getRowFromTable(){
+        const endpoint = `communities/${this.props.match.params.rowId}`
         const response = await HTTP_METHODS.getData(endpoint)
-        response.ok ? this.updateStudent(response.data) : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+        response.ok ? this.updateForm(response.data) : this.setState({modalMessage: MODAL_MESSAGES.getFail})
     }  
     
-    updateStudent(data){
-        const student = {...data, birth_date: GET_UTCDATE_WITH_TIMEZONE_OFFSET(data.birth_date)}
-        this.setState({student}, () => this.setState({isLoaded: true})) 
+    updateForm(data){
+        this.setState({community: data}, () => this.setState({isLoaded: true})) 
     }
 
     setModalMessage(modalMessage){
@@ -42,7 +39,7 @@ class StudentFormProfileContainer extends Component{
 
     toggleModalDisplay(){
         return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
-        this.setState({redirectUrl: `/students`}) : this.setState({modalMessage: ''})
+        this.setState({redirectUrl: `/communities`}) : this.setState({modalMessage: ''})
     }
 
     renderModal(){
@@ -58,23 +55,24 @@ class StudentFormProfileContainer extends Component{
     }
 
     resetForm(){
-        const student = {
-            first_name: '', 
-            last_name: '', 
-            birth_date: ''
+        const community = {
+            community_id: null,
+            community_name: '',
          }
-        this.setState({student})
+        this.setState({community})
         this.setState({invalidInputs: []})
     }
 
     handleSave(e){
         e.preventDefault()
+        console.log('handleSave')
         this.validateAllInputs()
-        return this.isFormValid() ? this.saveStudentRecord(): this.setState({modalMessage:MODAL_MESSAGES.saveFailInputsInvalid})
+        return this.isFormValid() ? this.saveRecord(): this.setState({modalMessage:MODAL_MESSAGES.saveFailInputsInvalid})
     }
 
-    async saveStudentRecord(){
-        const saveResponse = await HTTP_METHODS.submitData(this.state.student, this.getEndpointSuffix(), this.isPatchOrPost()) 
+    async saveRecord(){
+        console.log('saveRecord')
+        const saveResponse = await HTTP_METHODS.submitData(this.state.community, this.getEndpointSuffix(), this.isPatchOrPost()) 
         saveResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.saveSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.saveFail})
     }
 
@@ -83,38 +81,35 @@ class StudentFormProfileContainer extends Component{
     }
 
     getEndpointSuffix(){
-        return this.isPatchOrPost() === 'POST' ? `students` : `students/${this.props.match.params.rowId}`
+        return this.isPatchOrPost() === 'POST' ? `communities` : `communities/${this.props.match.params.rowId}`
     }
 
     validateAllInputs(){
-        for(let [key, value] of Object.entries(this.state.student)){
-            if(key !== 'student_id'){
+        console.log('validateAllInputs')
+        for(let [key, value] of Object.entries(this.state.community)){
+            if(key !== 'community_id'){
                 this.updateInvalidInputs(key, value)
             } 
         }
     }
 
     isFormValid(){
+        console.log('isFormValid')
         return this.state.invalidInputs.length > 0 ? false : true 
     }
 
     async handleDelete(e){
         e.preventDefault()
-        const deleteResponse = await HTTP_METHODS.deleteData(`students/${this.props.match.params.rowId}`)
+        const deleteResponse = await HTTP_METHODS.deleteData(`communities/${this.props.match.params.rowId}`)
         deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
     }
 
     handleChange(e){
+        console.log('changing')
         const {name, value} = e.target
-        const student = {...this.state.student, [name]: value}
-        this.setState({student})
+        const community = {...this.state.community, [name]: value}
+        this.setState({community})
         return this.state.invalidInputs.indexOf(e.target.name) >= 0 ? this.updateInvalidInputs(name, value) : null
-    }
-
-    handleBirthdateChange(date){
-        this.updateInvalidInputs('birth_date', date)
-        const student = {...this.state.student, birth_date: date}
-        this.setState({student})
     }
 
     updateInvalidInputs(inputName, inputValue){
@@ -126,29 +121,21 @@ class StudentFormProfileContainer extends Component{
 
     getInputReqs(inputName){
         const inputRequirements = {
-            first_name: {
+            community_name: {
                 minLength: 2,
-                pattern: /^[a-zA-Z ]*[A-Z]+[a-zA-Z ]*$/g //one capital letter, allow spaces
-            },
-            last_name: {
-                minLength: 2,
-                pattern: /^[a-zA-Z ]*[A-Z]+[a-zA-Z ]*$/g //one capital letter, allow spaces
-            },
-            birth_date:{
-                dataType: 'object'
+                pattern: /^[a-zA-Z0-9 ]*[A-Z]+[a-zA-Z0-9 ]*$/g //one capital letter, allow spaces, and numbers
             }
         }   
         return inputRequirements[inputName]
     }
 
-    renderStudentFormProfile(){
+    renderForm(){
         return(
-            <StudentFormProfile 
-            student = {this.state.student} 
+            <CommunityForm 
+            community = {this.state.community} 
             invalidInputs={this.state.invalidInputs}
             updateInvalidInputs={(name, value)=> this.updateInvalidInputs(name, value)}
             handleChange = {e=> this.handleChange(e)}
-            handleBirthdateChange = {e=> this.handleBirthdateChange(e)}
             handleSave = {e => this.handleSave(e)}
             handleDelete = {e => this.handleDelete(e)}
             />    
@@ -160,10 +147,10 @@ class StudentFormProfileContainer extends Component{
             <>
             {this.state.modalMessage.length > 0 ? this.renderModal() : null}
             {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl}/> : null}
-            {this.state.isLoaded ? this.renderStudentFormProfile() : <h1>Loading</h1>}
+            {this.state.isLoaded ? this.renderForm() : <h1>Loading</h1>}
             </>
         )
     }
 }
 
-export default withRouter(StudentFormProfileContainer)
+export default withRouter(ChallengeFormContainer)

@@ -1,7 +1,9 @@
-/* color: #2F9400 */
-
-.hidden{
+.visibility-hidden{
   visibility: hidden; 
+}
+
+.display-none{
+  display: none; 
 }
 
 *{
@@ -26,6 +28,7 @@ button:focus{
 .communities-list-item{
   max-width: 750px;
   width: 100%;
+  list-style: none; 
 }
 
 .communities-list-item.view-subcommunities>.communities-list-item-subcommunities-list{
@@ -147,37 +150,26 @@ form .invalid-input-message{
 
 form input, textarea, select{
   border: 1px solid black;
+  width: 200px;
+  font-size: 18px;
+}
+
+form .input-radio{
+  width: initial;
+  margin: 0px 5px;
+}
+
+form .input-radio:hover{
+  cursor: pointer; 
 }
 
 form .save-button{
   margin-left: auto; 
 }
 
-/* 
-form .input-wrapper{
-  display: flex;
-  flex-direction: column;
+form select:hover{
+  cursor: pointer; 
 }
-
-form label{
-  width: 125px;
-  text-align: right;
-  margin-right: 10px;
-}
-
-form .radio{
-  width: 25px;
-} */
-
-/* form .radio-wrapper{
-  display: flex; 
-  align-items: center; 
-} */
-
-/* form section{
-  display: flex;
-  margin: 10px 0px;
-} */
 
 form .student-form-communities-section{
   margin-top: 10px; 
@@ -332,7 +324,7 @@ nav .active{
   text-align: center;
 }
 
-.students-list-item{
+.students-list-main-item{
   display: flex;
   align-items: center;
   max-width: 750px;
