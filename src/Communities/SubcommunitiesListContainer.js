@@ -21,19 +21,31 @@ class SubcommunitiesListContainer extends Component{
         : this.setState({message: MODAL_MESSAGES.getFail})
     }
 
-    renderSubcommunitiesList(){
+    renderSubcommunities(){
+        return this.state.subcommunities.length > 0 ? this.renderList() : this.renderEmptyList()
+    }
+
+    renderList(){
         return this.state.subcommunities.map(subcommunity => {
+            console.log('list item')
             return(
                 <SubcommunitiesListItem key={subcommunity.subcommunity_id} subcommunity={subcommunity}/>
             )
         })
     }
+    
+
+    renderEmptyList(){
+        return(
+            <p>No subcommunities</p>
+        )
+    }
 
     render(){
         return(
             <ul className='communities-list-item-subcommunities-list'>
-            <h2>Subcommunities</h2>
-            {this.state.isLoaded ? this.renderSubcommunitiesList() : <h1>Loading...</h1>}
+                <h2>Subcommunities</h2>
+                {this.state.isLoaded ? this.renderSubcommunities() : <h1>Loading...</h1>}
         </ul>
         )
     }
