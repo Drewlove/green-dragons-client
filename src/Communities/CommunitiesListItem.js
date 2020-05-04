@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import CommunitiesListItemSubcommunitiesList from './CommunitiesListItemSubcommunitiesList'
+import SubcommunitiesListContainer from './SubcommunitiesListContainer'
 
 class CommunitiesListItem extends Component{
     state = {
-        toggleViewSubcommunities: false
+        toggleViewSubcommunities: false,
     }
 
     handleClick(){
@@ -13,15 +13,16 @@ class CommunitiesListItem extends Component{
     }
 
     render(){
+        const {community_id, community_name} = this.props.community
         return(
             <li className={`communities-list-item ${this.state.toggleViewSubcommunities ? 'view-subcommunities' :''}`}>
                 <div className='communities-list-item-community-wrapper'>
                     <button onClick={() => this.handleClick()} className='communities-list-item-button'>&#10148;</button>
                     <div className='communities-list-item-link-wrapper'>
-                        <Link className='communities-list-item-link' to={`/communities/${this.props.community.community_id}`}>{this.props.community.community_name}</Link>
+                        <Link className='communities-list-item-link' to={`/communities/${community_id}`}>{community_name}</Link>
                     </div>
                 </div>
-                {/* <CommunitiesListItemSubcommunitiesList subcommunities={this.props.listItem.subcommunities}/> */}
+                <SubcommunitiesListContainer community_id={community_id}/>
              </li>
         )
     }

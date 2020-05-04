@@ -1,16 +1,19 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-const CommunitiesListItemSubcommunitiesListItem = (props) => {
+const SubcommunitiesListItem = (props) => {
+
+    const {subcommunity_name, subcommunity_id} = props.subcommunity
+
     return(
             <li className='communities-list-item-subcommunities-list-item'>
                 <Link 
                 className='communities-list-item-subcommunities-list-item-link'
-                to={`/communities/subcommunities/${props.subcommunity.subcommunities_id}`}>
-                    {props.subcommunity.name}
+                to={`/communities/subcommunities/${subcommunity_id}`}>
+                    {subcommunity_name}
                 </Link>
             </li>
     )
 }
 
-export default CommunitiesListItemSubcommunitiesListItem
+export default SubcommunitiesListItem

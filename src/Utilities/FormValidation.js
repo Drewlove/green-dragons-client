@@ -14,6 +14,10 @@ const validateInputAgainstReq = {
     minLength: function(actualInputValue, reqInputValue){
         return actualInputValue.length >= reqInputValue ? true : false
     },
+    minNumber: function(actualInputValue, reqInputValue){
+        console.log(actualInputValue)
+        return actualInputValue >= reqInputValue ? true : false
+    },
     pattern: function(actualInputValue, reqInputValue){
         const actualInputValueStripPunctuation = actualInputValue.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"");
         return actualInputValueStripPunctuation.match(reqInputValue) ? true : false

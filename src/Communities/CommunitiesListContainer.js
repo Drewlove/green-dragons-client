@@ -5,23 +5,22 @@ import {Redirect} from 'react-router-dom'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
 import MODAL_MESSAGES from '../_Common/Modal'
 
-class ChallengesListContainer extends Component{
+class CommunitiesListContainer extends Component{
     state = {
-        communities: [], 
+        communities: [],
         modalMessage: '',
         redirectUrl: '', 
         isLoaded: false, 
     }
 
     componentDidMount(){
-        this.fetchChallenges()
+        this.getAllRowsFromEndpoint('communities')
     }
 
-    async fetchChallenges(){
-        const endpointSuffix = `communities`
-        const response = await HTTP_METHODS.getData(endpointSuffix)
-        response.ok ? 
-        this.setState({communities: response.data}, () => this.setState({isLoaded: true})) 
+    async getAllRowsFromEndpoint(endpoint){
+        const response = await HTTP_METHODS.getData(endpoint)
+        return response.ok ? 
+        this.setState({communities: response.data}, () => this.setState({isLoaded: true}))
         : this.setState({modalMessage: MODAL_MESSAGES.getFail})
     }
 
@@ -40,17 +39,19 @@ class ChallengesListContainer extends Component{
     renderPage(){
         return(
         <main>
-            {this.state.communities.map(community => {
-                return(
-                    <CommunitiesListItem 
-                    community={community}  
-                    key={community.community_id}                  
-                    />
-                )
-            })
-            }
+            <ul className='list-main-wrapper'>
+            {this.renderCommunities()}
+            </ul>
         </main>
         )
+    }
+
+    renderCommunities(){
+        return this.state.communities.map(community => {
+            return (
+                <CommunitiesListItem key={community.community_id} community={community}/>
+            )
+        })
     }
     
     render(){
@@ -64,4 +65,4 @@ class ChallengesListContainer extends Component{
     }
 }
 
-export default ChallengesListContainer
+export default CommunitiesListContainer

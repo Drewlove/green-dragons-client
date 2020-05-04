@@ -1,21 +1,20 @@
 import React, {Component} from 'react'
 import {Redirect, withRouter } from 'react-router-dom'
-import ChallengeForm from './ChallengeForm'
+import SubcommunityForm from './SubcommunityForm'
 import {GET_INVALID_INPUTS} from '../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
 import Modal from '../_Common/Modal'
 import "react-datepicker/dist/react-datepicker.css";
 
-class ChallengeFormContainer extends Component{
+class SubcommunityFormContainer extends Component{
     state = {
-        challenge: {
-            challenge_id: null,
-            challenge_name: '',
-            challenge_description: '',
-            challenge_best_record: '',
-            units: '',
+        subcommunity: {
+            subcommunity_id: null,
+            subcommunity_name: '',
+            community_id: '',
         },
+        communities: [],
         invalidInputs: [],
         isLoaded: false, 
         modalMessage: '', 
@@ -23,18 +22,30 @@ class ChallengeFormContainer extends Component{
     } 
 
     async componentDidMount(){
-        return this.props.match.params.rowId === "0" ? this.setState({isLoaded: true}) : this.getRowFromTable()
+        return this.props.match.params.rowId === "0" ? this.getCommunities() : this.getData()
     }
 
-    async getRowFromTable(){
-        const endpoint = `challenges/${this.props.match.params.rowId}`
-        const response = await HTTP_METHODS.getData(endpoint)
-        response.ok ? this.updateForm(response.data) : this.setState({modalMessage: MODAL_MESSAGES.getFail})
-    }  
-    
-    updateForm(data){
-        this.setState({challenge: data}, () => this.setState({isLoaded: true})) 
+    async getCommunities(){
+        const communities = await this.getAllRowsFromEndpoint('communities')
+        this.setState({communities}, this.setState({isLoaded: true}))
     }
+
+    async getData(){
+        const communities = await this.getAllRowsFromEndpoint('communities')
+        const subcommunity = await this.getRowFromEndpoint('subcommunities')
+        this.setState({communities})
+        this.setState({subcommunity}, () => this.setState({isLoaded: true}))
+    }
+
+    async getAllRowsFromEndpoint(endpoint){
+        const response = await HTTP_METHODS.getData(endpoint)
+        return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+    }
+
+    async getRowFromEndpoint(endpoint){
+        const response = await HTTP_METHODS.getData(`${endpoint}/${this.props.match.params.rowId}`)
+        return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+    }  
 
     setModalMessage(modalMessage){
         this.setState({modalMessage})
@@ -42,7 +53,7 @@ class ChallengeFormContainer extends Component{
 
     toggleModalDisplay(){
         return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
-        this.setState({redirectUrl: `/challenges`}) : this.setState({modalMessage: ''})
+        this.setState({redirectUrl: `/communities`}) : this.setState({modalMessage: ''})
     }
 
     renderModal(){
@@ -58,27 +69,22 @@ class ChallengeFormContainer extends Component{
     }
 
     resetForm(){
-        const challenge = {
-            challenge_id: null,
-            challenge_name: '',
-            challenge_description: '',
-            challenge_best_record: '',
-            units: '',
+        const community = {
+            community_id: null,
+            community_name: '',
          }
-        this.setState({challenge})
+        this.setState({community})
         this.setState({invalidInputs: []})
     }
 
     handleSave(e){
         e.preventDefault()
-        console.log('handleSave')
         this.validateAllInputs()
         return this.isFormValid() ? this.saveRecord(): this.setState({modalMessage:MODAL_MESSAGES.saveFailInputsInvalid})
     }
 
     async saveRecord(){
-        console.log('saveRecord')
-        const saveResponse = await HTTP_METHODS.submitData(this.state.challenge, this.getEndpointSuffix(), this.isPatchOrPost()) 
+        const saveResponse = await HTTP_METHODS.submitData(this.state.subcommunity, this.getEndpointSuffix(), this.isPatchOrPost()) 
         saveResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.saveSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.saveFail})
     }
 
@@ -87,13 +93,12 @@ class ChallengeFormContainer extends Component{
     }
 
     getEndpointSuffix(){
-        return this.isPatchOrPost() === 'POST' ? `challenges` : `challenges/${this.props.match.params.rowId}`
+        return this.isPatchOrPost() === 'POST' ? `subcommunities` : `subcommunities/${this.props.match.params.rowId}`
     }
 
     validateAllInputs(){
-        console.log('validateAllInputs')
-        for(let [key, value] of Object.entries(this.state.challenge)){
-            if(key !== 'challenge_id'){
+        for(let [key, value] of Object.entries(this.state.subcommunity)){
+            if(key !== 'subcommunity_id'){
                 this.updateInvalidInputs(key, value)
             } 
         }
@@ -106,50 +111,42 @@ class ChallengeFormContainer extends Component{
 
     async handleDelete(e){
         e.preventDefault()
-        const deleteResponse = await HTTP_METHODS.deleteData(`challenges/${this.props.match.params.rowId}`)
+        const deleteResponse = await HTTP_METHODS.deleteData(`subcommunities/${this.props.match.params.rowId}`)
         deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
     }
 
     handleChange(e){
         const {name, value} = e.target
-        const challenge = {...this.state.challenge, [name]: value}
-        this.setState({challenge})
+        const subcommunity = {...this.state.subcommunity, [name]: value}
+        this.setState({subcommunity})
         return this.state.invalidInputs.indexOf(e.target.name) >= 0 ? this.updateInvalidInputs(name, value) : null
     }
 
     updateInvalidInputs(inputName, inputValue){
         const inputReqs = this.getInputReqs(inputName)
         const inputActual = {name: inputName, value: inputValue}
-        console.log(inputActual, inputActual.value.length)
         const invalidInputs = GET_INVALID_INPUTS(inputActual, inputReqs, this.state.invalidInputs)
         this.setState({invalidInputs})
     }
 
-    //HOW TO VERIFY CHALLENGE_BEST_RECORD?
     getInputReqs(inputName){
         const inputRequirements = {
-            challenge_name: {
+            subcommunity_name: {
                 minLength: 2,
                 pattern: /^[a-zA-Z0-9 ]*[A-Z]+[a-zA-Z0-9 ]*$/g //one capital letter, allow spaces, and numbers
             },
-            challenge_description: {
-                minLength: 2,
-                pattern: /^[a-zA-Z0-9 ]*[A-Z]+[a-zA-Z0-9 ]*$/g //one capital letter, allow spaces, and numbers
-            },
-            challenge_best_record: {
-                minLength: 1
-            },
-            units: {
+            community_id: {
                 minNumber: 1,
-            },
+            }
         }   
         return inputRequirements[inputName]
     }
 
     renderForm(){
         return(
-            <ChallengeForm 
-            challenge = {this.state.challenge} 
+            <SubcommunityForm 
+            subcommunity = {this.state.subcommunity} 
+            communities={this.state.communities}
             invalidInputs={this.state.invalidInputs}
             updateInvalidInputs={(name, value)=> this.updateInvalidInputs(name, value)}
             handleChange = {e=> this.handleChange(e)}
@@ -170,4 +167,4 @@ class ChallengeFormContainer extends Component{
     }
 }
 
-export default withRouter(ChallengeFormContainer)
+export default withRouter(SubcommunityFormContainer)

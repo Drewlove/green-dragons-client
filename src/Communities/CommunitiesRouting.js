@@ -2,12 +2,12 @@ import React from 'react'
 import {Route, Switch} from 'react-router-dom'
 import CommunitiesListContainer from './CommunitiesListContainer'
 import CommunityFormContainer from './CommunityFormContainer'
-import SubcommunityForm from './SubcommunityForm'
+import SubcommunityFormContainer from './SubcommunityFormContainer'
 
 const CommunitiesRouting = () => {
     return(
         <Switch>
-            <Route path='/communities/subcommunities/:subcommunities_id' component={SubcommunityForm} />
+            <Route path='/communities/subcommunities/:rowId' component={SubcommunityFormContainer} />
             <Route path='/communities/:rowId' component={CommunityFormContainer} />
             <Route path='/communities' component={CommunitiesListContainer} />
         </Switch>

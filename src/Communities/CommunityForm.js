@@ -36,7 +36,7 @@ const CommunityForm = (props) => {
                 <section className='button-section'>
                 {community_id ? <button onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
                 <button className='save-button' onClick={e => props.handleSave(e)}>Save</button>
-            </section>
+                </section>
             </fieldset>
         </form>
     </main>
