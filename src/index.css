@@ -43,6 +43,10 @@ button:focus{
   font-size: 24px;
 }
 
+.communities-list-item-button:hover{
+  cursor: pointer; 
+}
+
 .communities-list-item-community-wrapper{
   display: flex;
   margin: 10px auto;

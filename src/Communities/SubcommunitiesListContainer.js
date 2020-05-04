@@ -33,7 +33,6 @@ class SubcommunitiesListContainer extends Component{
             )
         })
     }
-    
 
     renderEmptyList(){
         return(
