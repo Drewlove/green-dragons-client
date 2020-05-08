@@ -9,7 +9,7 @@ const StudentNavTabs = (props) => {
                 <NavLink activeClassName='active' to={`${rootPath}/profile`}>Profile</NavLink>
                 <NavLink activeClassName='active' to={`${rootPath}/communities`}>Communities</NavLink>
                 <NavLink activeClassName='active' to={`${rootPath}/challenges`}>Challenges</NavLink>
-                <NavLink activeClassName='active' to={`${rootPath}/dragon-bucks`}>Dragon Bucks</NavLink>
+                <NavLink activeClassName='active' to={`${rootPath}/exchanges`}>Dragon Bucks</NavLink>
             </section>
         )
 }

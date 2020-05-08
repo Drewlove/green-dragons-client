@@ -6,8 +6,8 @@ import StudentFormCommunities from './StudentFormsProfileAndCommunities/StudentF
 import StudentChallengesListContainer from './StudentChallenges/StudentChallengesListContainer'
 import StudentChallengeEntriesListContainer from './StudentChallenges/StudentChallengeEntriesListContainer'
 import StudentChallengeEntryForm from './StudentChallenges/StudentChallengeEntryForm'
-import StudentDragonBucksList from './StudentDragonBucks/StudentDragonBucksListContainer'
-import StudentDragonBucksForm from './StudentDragonBucks/StudentDragonBucksForm'
+import StudentExchangessList from './StudentExchanges/StudentExchangesListContainer'
+import StudentExchangeFormContainer from './StudentExchanges/StudentExchangeFormContainer'
 
 const StudentsRouting = (props) => {
     const rootPath = `/students/:rowId`
@@ -17,10 +17,10 @@ const StudentsRouting = (props) => {
         <Route path={`${rootPath}/profile`} component={StudentFormProfileContainer}/>
         <Route path={`${rootPath}/communities`} component={StudentFormCommunities}/>
         <Route exact path={`${rootPath}/challenges/`} component={StudentChallengesListContainer}/>
-        <Route path={`${rootPath}/challenges/:challenges_id`} component={StudentChallengeEntriesListContainer}/>
-        <Route path={`${rootPath}/student-challenges/:student_challenges_id`} component={StudentChallengeEntryForm}/>
-        <Route exact path={`${rootPath}/dragon-bucks/`} component={StudentDragonBucksList}/>
-        <Route path={`${rootPath}/student-dragon-bucks/:dragon_bucks_id`} component={StudentDragonBucksForm}/>
+        <Route path={`${rootPath}/challenges/:rowId`} component={StudentChallengeEntriesListContainer}/>
+        <Route path={`${rootPath}/challenges/:rowId`} component={StudentChallengeEntryForm}/>
+        <Route exact path={`${rootPath}/exchanges/`} component={StudentExchangessList}/>
+        <Route path={`${rootPath}/exchanges/:exchangeRowId`} component={StudentExchangeFormContainer}/>
     </> 
     )
 }

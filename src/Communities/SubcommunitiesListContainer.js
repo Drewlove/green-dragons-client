@@ -27,7 +27,6 @@ class SubcommunitiesListContainer extends Component{
 
     renderList(){
         return this.state.subcommunities.map(subcommunity => {
-            console.log('list item')
             return(
                 <SubcommunitiesListItem key={subcommunity.subcommunity_id} subcommunity={subcommunity}/>
             )

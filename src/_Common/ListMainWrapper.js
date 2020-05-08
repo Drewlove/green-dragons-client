@@ -15,11 +15,15 @@ const ListMainWrapper = (props) => {
     }
 
     const displayText = (listItem) => {
-        return props.propertiesToDisplay.map(value => {
+        return props.propertiesToDisplay.map(key => {
             return(
-                <div key={`${listItem.id}-${value}`}>{listItem[value]}</div>
+                <div className={isAmountNegative(listItem[key])}key={`${listItem.id}-${key}`}>{listItem[key]}</div>
             )
         })
+    }
+
+    const isAmountNegative = (value) => {
+        return parseInt(value) < 0 ? 'negative-amount' : ''
     }
     
     return(

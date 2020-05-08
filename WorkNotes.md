@@ -21,6 +21,14 @@ API: Create service and router, create tests with users as template
 Subcommunity
 *Change API so communities and subcommunities are returned in alphabetical order
 
+BUG: 
+ChallengeFormContainer
+*Select "Other" for units, then select Time, click save button
+Desired: Form saves
+Actual: Form identifies "units" as an invalid input
+
+ADD prettier package and precommit hook using "husky"
+
 
 THEN
 work with user related data...

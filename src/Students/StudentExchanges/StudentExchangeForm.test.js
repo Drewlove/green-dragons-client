@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import StudentDragonBucksForm from './StudentDragonBucksForm'
+import StudentExchangeForm from './StudentExchangeForm'
 
-describe('Dragon Busk Form', () => {
+describe('StudentExchangeForm', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div')
         ReactDOM.render(
-            <StudentDragonBucksForm />, 
+            <StudentExchangeForm />, 
             div
         )
         ReactDOM.unmountComponentAtNode(div)

@@ -71,13 +71,11 @@ class ChallengeFormContainer extends Component{
 
     handleSave(e){
         e.preventDefault()
-        console.log('handleSave')
         this.validateAllInputs()
         return this.isFormValid() ? this.saveRecord(): this.setState({modalMessage:MODAL_MESSAGES.saveFailInputsInvalid})
     }
 
     async saveRecord(){
-        console.log('saveRecord')
         const saveResponse = await HTTP_METHODS.submitData(this.state.challenge, this.getEndpointSuffix(), this.isPatchOrPost()) 
         saveResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.saveSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.saveFail})
     }
@@ -91,7 +89,6 @@ class ChallengeFormContainer extends Component{
     }
 
     validateAllInputs(){
-        console.log('validateAllInputs')
         for(let [key, value] of Object.entries(this.state.challenge)){
             if(key !== 'challenge_id'){
                 this.updateInvalidInputs(key, value)
@@ -100,7 +97,6 @@ class ChallengeFormContainer extends Component{
     }
 
     isFormValid(){
-        console.log('isFormValid')
         return this.state.invalidInputs.length > 0 ? false : true 
     }
 
@@ -120,7 +116,6 @@ class ChallengeFormContainer extends Component{
     updateInvalidInputs(inputName, inputValue){
         const inputReqs = this.getInputReqs(inputName)
         const inputActual = {name: inputName, value: inputValue}
-        console.log(inputActual, inputActual.value.length)
         const invalidInputs = GET_INVALID_INPUTS(inputActual, inputReqs, this.state.invalidInputs)
         this.setState({invalidInputs})
     }

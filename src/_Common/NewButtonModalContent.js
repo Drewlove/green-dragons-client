@@ -14,7 +14,7 @@ const ModalContentLinkswrapper = (props) => {
             <Link className='new-button-modal-content-link' to='/challenges/0' onClick={() => handleClick()}>Challenge Type</Link>            
             <Link className='new-button-modal-content-link' to='/students/0/profile' onClick={() => handleClick()}>Student</Link>
             <Link className='new-button-modal-content-link indent' to='/students/0/student-challenges/0' onClick={() => handleClick()}>Challenge Entry</Link>
-            <Link className='new-button-modal-content-link indent' to='/students/0/student-dragon-bucks/0' onClick={() => handleClick()}>Transaction</Link>
+            <Link className='new-button-modal-content-link indent' to='/students/0/student-exchanges/0' onClick={() => handleClick()}>Transaction</Link>
         </div>
     )
 }

@@ -143,7 +143,7 @@ form label{
 
 form .inputs-section{
   display: grid;
-  grid-template-columns: 100px auto;
+  grid-template-columns: 85px auto;
   grid-column-gap: 10px;
   grid-row-gap: 15px;
 }
@@ -154,7 +154,7 @@ form .invalid-input-message{
 
 form input, textarea, select{
   border: 1px solid black;
-  width: 200px;
+  width: 225px;
   font-size: 18px;
 }
 
@@ -189,6 +189,13 @@ form .student-form-communities-subcommunity-section-input{
 
 form .student-form-communities-subcommunity-section-label{
   width: auto; 
+}
+
+header{
+  text-align: center;
+  position: sticky;
+  top: 50px;
+  background-color: white;
 }
 
 .home-page-header{
@@ -315,6 +322,10 @@ nav .active{
   font-size: 18px;
 }
 
+.negative-amount{
+  color: red; 
+}
+
 .nav-wrapper .new-button:hover{
   cursor: pointer; 
 }
@@ -346,7 +357,7 @@ nav .active{
   margin-top: 10px;
 }
 
-.students-list-item-link-dragon-bucks{
+.students-list-item-link-exchanges{
   margin-top: 20px; 
 }
 

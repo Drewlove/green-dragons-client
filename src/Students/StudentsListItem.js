@@ -24,8 +24,8 @@ const StudentsListItem = (props) => {
                 <img className='students-list-item-link-icon' alt='challenges icon' src={ChallengesIcon}/>
                 <p className='students-list-item-link-tooltip'>Challenges</p>
             </Link>
-            <Link className='students-list-item-link' to={`/students/${student_id}/dragon-bucks`}>
-                <div className='students-list-item-link-dragon-bucks'>$100.00</div>
+            <Link className='students-list-item-link' to={`/students/${student_id}/exchanges`}>
+                <div className='students-list-item-link-exchanges'>$100.00</div>
                 <p className='students-list-item-link-tooltip'>Transactions</p>
             </Link>
         </div>

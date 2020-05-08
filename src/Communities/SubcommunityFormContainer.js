@@ -105,7 +105,6 @@ class SubcommunityFormContainer extends Component{
     }
 
     isFormValid(){
-        console.log('isFormValid')
         return this.state.invalidInputs.length > 0 ? false : true 
     }
 

@@ -1,29 +1,33 @@
 export const GET_INVALID_INPUTS = (inputActual, inputReqs, invalidInputs) => {
     let failedInputReqs = 0; 
-    for (let [inputReqProperty, inputReqValue] of Object.entries(inputReqs)){   
-        if(validateInputAgainstReq[inputReqProperty](inputActual.value, inputReqValue)){
+    for (let [inputReqKey, inputReqValue] of Object.entries(inputReqs)){   
+        if(validateInput[inputReqKey](inputActual.value, inputReqValue)){
             failedInputReqs += 0
-        } else if(!validateInputAgainstReq[inputReqProperty](inputActual.value, inputReqValue)){
+        } else if(!validateInput[inputReqKey](inputActual.value, inputReqValue)){
             failedInputReqs += 1
         }
     }
     return failedInputReqs > 0 ? addToInvalidInputs(inputActual.name, invalidInputs) : removeFromInvalidInputs(inputActual.name, invalidInputs)        
 }
 
-const validateInputAgainstReq = {
-    minLength: function(actualInputValue, reqInputValue){
-        return actualInputValue.length >= reqInputValue ? true : false
+const validateInput= {
+    minLength: function(inputActualValue, reqInputValue){
+        console.log(inputActualValue.length, reqInputValue)
+        return inputActualValue.length >= reqInputValue ? true : false
     },
-    minNumber: function(actualInputValue, reqInputValue){
-        console.log(actualInputValue)
-        return actualInputValue >= reqInputValue ? true : false
+    minNumber: function(inputActualValue, reqInputValue){
+        return inputActualValue >= reqInputValue ? true : false
     },
-    pattern: function(actualInputValue, reqInputValue){
-        const actualInputValueStripPunctuation = actualInputValue.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"");
-        return actualInputValueStripPunctuation.match(reqInputValue) ? true : false
+    pattern: function(inputActualValue, reqInputValue){
+        const inputActualValueStripPunctuation = inputActualValue.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"");
+        return inputActualValueStripPunctuation.match(reqInputValue) ? true : false
     }, 
-    dataType: function(actualInputValue, reqInputValue){
-        return typeof actualInputValue === reqInputValue && actualInputValue !== null ? true : false
+    dataType: function(inputActualValue, reqInputValue){
+        return typeof inputActualValue === reqInputValue && inputActualValue !== null ? true : false
+    },
+    required: function(){
+        return true
+        // return typeof inputActualValue === reqInputValue && inputActualValue !== null ? true : false
     }
 }
 
