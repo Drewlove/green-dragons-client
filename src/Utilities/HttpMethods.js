@@ -18,7 +18,6 @@ const getData = async function(endpointSuffix){
         error: '',
         data: {}
     }
-    console.log(url, options)
 
     try{
         const response = await fetch(url, options)
