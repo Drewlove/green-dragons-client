@@ -22,6 +22,7 @@ class StudentExchangeFormContainer extends Component{
     } 
 
     async componentDidMount(){
+        console.log('mount')
         return this.props.match.params.exchangeRowId === "0" ? 
         this.getStudents() 
         : this.getStudentsAndExchange()
