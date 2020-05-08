@@ -39,6 +39,7 @@ class StudentExchangeFormContainer extends Component{
     async getStudentsAndExchange(){
         const students = await this.getAllRowsFromEndpoint('students')
         const exchangeRaw = await this.getRowFromEndpoint('exchanges')
+        console.log(students, exchangeRow)
         const exchange = this.reformatDate(exchangeRaw)
         this.setState({students})
         this.setState({exchange}, () => this.setState({isLoaded: true}))
