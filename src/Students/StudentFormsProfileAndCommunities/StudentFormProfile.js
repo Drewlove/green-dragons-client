@@ -15,7 +15,8 @@ const StudentFormProfile = (props) => {
     }
 
     const handleDateBlur = e  => {
-        props.updateInvalidInputs('birth_date', e.target.value)
+        const date = new Date(e.target.value)
+        props.updateInvalidInputs('birth_date', date)
     }
 
     return(

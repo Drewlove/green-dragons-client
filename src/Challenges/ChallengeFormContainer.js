@@ -124,12 +124,10 @@ class ChallengeFormContainer extends Component{
     getInputReqs(inputName){
         const inputRequirements = {
             challenge_name: {
-                minLength: 2,
-                pattern: /^[a-zA-Z0-9 ]*[A-Z]+[a-zA-Z0-9 ]*$/g //one capital letter, allow spaces, and numbers
+                minLength: 1,
             },
             challenge_description: {
-                minLength: 2,
-                pattern: /^[a-zA-Z0-9 ]*[A-Z]+[a-zA-Z0-9 ]*$/g //one capital letter, allow spaces, and numbers
+                minLength: 1,
             },
             challenge_best_record: {
                 minLength: 1

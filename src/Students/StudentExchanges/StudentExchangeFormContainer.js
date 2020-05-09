@@ -40,7 +40,6 @@ class StudentExchangeFormContainer extends Component{
     async getStudentsAndExchange(){
         const students = await this.getAllRowsFromEndpoint('students')
         const exchangeRaw = await this.getRowFromEndpoint('exchanges')
-        console.log(students, exchangeRaw)
         const exchange = this.reformatDate(exchangeRaw)
         this.setState({students})
         this.setState({exchange}, () => this.setState({isLoaded: true}))
@@ -95,7 +94,7 @@ class StudentExchangeFormContainer extends Component{
         const inputRequirements = {
             amount: {
                 minLength: 1,
-                // pattern: /^[a-zA-Z ]*[A-Z]+[a-zA-Z ]*$/g //one capital letter, allow spaces
+                pattern: /^-?[0-9]+(\.[0-9]{1,2})?$/g //positive or negative int with two decimal places
             },
             student_id: {
                 minNumber: 1,

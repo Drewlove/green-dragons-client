@@ -1,6 +1,7 @@
 import React from 'react'
 import DatePicker from "react-datepicker";
 import FormInvalidInputMessage from '../../_Common/FormInvalidInputMessage'
+import {GET_UTCDATE_WITH_TIMEZONE_OFFSET} from '../../Utilities/UtilityFunctions'
 
 const StudentExchangeForm = (props) => {
     const {exchange_id, exchange_date, student_id, amount, note} = props.exchange
@@ -15,7 +16,8 @@ const StudentExchangeForm = (props) => {
     }
 
     const handleDateBlur = e  => {
-        props.updateInvalidInputs('exchange_date', e.target.value)
+        const date = new Date(e.target.value)
+        props.updateInvalidInputs('exchange_date', date)
     }
 
     const renderOptions = () => {
@@ -55,7 +57,7 @@ const StudentExchangeForm = (props) => {
                         onChange={e => props.handleChange(e)}
                         onBlur={(e) => handleBlur(e)}
                         />
-                        {isInputValid('amount', 'Must be at least $0.01')}
+                        {isInputValid('amount', 'Positive or negative, no more than two decimal places')}
                     </div>
                     <label htmlFor='exchangeDate'>Date</label>
                     <div className='input-wrapper'>

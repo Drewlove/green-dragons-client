@@ -12,17 +12,16 @@ export const GET_INVALID_INPUTS = (inputActual, inputReqs, invalidInputs) => {
 
 const validateInput= {
     minLength: function(inputActualValue, reqInputValue){
-        console.log(inputActualValue.length, reqInputValue)
         return inputActualValue.length >= reqInputValue ? true : false
     },
     minNumber: function(inputActualValue, reqInputValue){
         return inputActualValue >= reqInputValue ? true : false
     },
     pattern: function(inputActualValue, reqInputValue){
-        const inputActualValueStripPunctuation = inputActualValue.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"");
-        return inputActualValueStripPunctuation.match(reqInputValue) ? true : false
-    }, 
+        return inputActualValue.match(reqInputValue) ? true : false
+    },  
     dataType: function(inputActualValue, reqInputValue){
+        console.log('validation', typeof inputActualValue)
         return typeof inputActualValue === reqInputValue && inputActualValue !== null ? true : false
     },
     required: function(){

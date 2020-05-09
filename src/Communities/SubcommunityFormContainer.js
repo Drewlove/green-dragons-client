@@ -131,8 +131,7 @@ class SubcommunityFormContainer extends Component{
     getInputReqs(inputName){
         const inputRequirements = {
             subcommunity_name: {
-                minLength: 2,
-                pattern: /^[a-zA-Z0-9 ]*[A-Z]+[a-zA-Z0-9 ]*$/g //one capital letter, allow spaces, and numbers
+                minLength: 1,
             },
             community_id: {
                 minNumber: 1,

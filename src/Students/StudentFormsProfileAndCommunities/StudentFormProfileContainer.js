@@ -127,12 +127,10 @@ class StudentFormProfileContainer extends Component{
     getInputReqs(inputName){
         const inputRequirements = {
             first_name: {
-                minLength: 2,
-                pattern: /^[a-zA-Z ]*[A-Z]+[a-zA-Z ]*$/g //one capital letter, allow spaces
+                minLength: 1,
             },
             last_name: {
-                minLength: 2,
-                pattern: /^[a-zA-Z ]*[A-Z]+[a-zA-Z ]*$/g //one capital letter, allow spaces
+                minLength: 1,
             },
             birth_date:{
                 dataType: 'object'
