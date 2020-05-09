@@ -340,13 +340,14 @@ nav .active{
 }
 
 .students-list-main-item{
-  display: flex;
-  align-items: center;
   max-width: 750px;
   height: 60px;
   margin: 10px auto;
   border: 1px solid black;
   border-radius: 5px;
+  display: grid;
+  grid-template-columns: 33% 1fr 1fr 1fr 1fr;
+  align-items: center;
 }
 
 .students-list-item-links-wrapper{
@@ -355,6 +356,14 @@ nav .active{
   justify-content: space-around;
   width: 100%;
   margin-top: 10px;
+}
+
+.students-list-item-link{
+  margin-top: 5px;
+  display: grid;
+  grid-template-rows: 1.75fr 1fr;
+  align-items: center;
+  justify-items: center;
 }
 
 .students-list-item-link-exchanges{
@@ -378,8 +387,12 @@ nav .active{
 
 .students-list-item-name{
   font-size: 21px;
-  margin-left: 10px;
-  width: 50%;
+  /* margin-left: 10px; */
+  /* width: 50%; */
+}
+.students-list-item-name>p{
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 @media only screen and (min-width: 600px) {
