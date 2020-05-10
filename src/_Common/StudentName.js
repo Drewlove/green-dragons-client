@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {HTTP_METHODS} from '../../Utilities/HttpMethods'
+import {HTTP_METHODS} from '../Utilities/HttpMethods'
 
-class StudentExchangesListHeader extends Component{
+class StudentName extends Component{
     state = {
         student: null, 
         isLoaded: false
@@ -19,28 +19,23 @@ class StudentExchangesListHeader extends Component{
         : null
     }
 
-    isAmountNegative(){
-        return this.props.balance < 0 ? "negative-amount" : ""
-    }
-
     renderPage(){
         const {first_name, last_name} = this.state.student
         return(
             <>
             <h1>{first_name} {last_name}</h1>
-            <h2 className={this.isAmountNegative()}>Balance: ${this.props.balance.toFixed(2)}</h2>
             </>
         )
     }
 
     render(){
         return(
-            <header>
+            <div>
                 {this.state.isLoaded ? this.renderPage() : <h2>Loading...</h2>}
-            </header>
+            </div>
         )
     }
 }
 
-export default StudentExchangesListHeader
+export default StudentName
 

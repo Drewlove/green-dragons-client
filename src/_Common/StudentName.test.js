@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import StudentExchangesListHeader from './StudentExchangesListHeader'
+import StudentName from './StudentName'
 
-describe('StudentExchangesListHeader', () => {
+describe('StudentName', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div')
         ReactDOM.render(
-            <StudentExchangesListHeader/>,
+            <StudentName/>,
             div
         )
         ReactDOM.unmountComponentAtNode(div)

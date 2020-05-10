@@ -1,34 +1,123 @@
-import React from 'react'
-import {withRouter} from 'react-router-dom'
+import React, {Component} from 'react'
+import {Redirect} from 'react-router-dom'
+import StudentName from '../../_Common/StudentName'
 import ListMainWrapper from '../../_Common/ListMainWrapper'
+import {HTTP_METHODS} from '../../Utilities/HttpMethods'
+import Modal from '../../_Common/Modal'
+import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
+import {GET_MM_DD_YYYY_DATE} from '../../Utilities/UtilityFunctions'
 
-const StudentChallengesListContainer = (props) => {
+class StudentChallengeEntriesListContainer extends Component{
+    state = {
+        challengeEntries: [],
+        challengeType: {},
+        view: 'Graph',
+        modalMessage: '',
+        redirectUrl: '', 
+        isLoaded: false, 
+    }
 
-    const {student_id} = props.match.params
+    //have two tabs, Graph, List
+    //so this component renders the header, then either the graph or list, depending upon user's selection
 
-    const studentChallengeEntriesList = [
-        {challengeName: '1/2 Mile Run', entry: '2 min 00s', date: '03/01/20', student_challenge_id: 1}, 
-        {challengeName: '1/2 Mile Run', entry: '1 min 50s', date: '03/11/20', student_challenge_id: 2},
-        {challengeName: '1/2 Mile Run', entry: '1 min 45s', date: '03/21/20', student_challenge_id: 3},
-        {challengeName: '1/2 Mile Run', entry: '1 min 35s', date: '03/28/20', student_challenge_id: 4}  
-    ]
+    async componentDidMount(){
+        const challengeType = await this.fetchData(`challenges/${this.props.match.params.challengeId}`)
+        this.setState({challengeType}, () => this.fetchChallenges())
+    }
 
-    return(
+    async fetchChallenges(){
+        const studentId = this.props.match.params.rowId
+        const challengeId = this.props.match.params.challengeId
+        const challengesRaw = await this.fetchData(`challenge-entries/students/${studentId}/challenges/${challengeId}`)
+        const challengeEntries = await this.reformatListItems(challengesRaw)
+        this.setState({challengeEntries}, () => this.setState({isLoaded: true}))
+    }
+
+    async fetchData(endpointSuffix){
+        const response = await HTTP_METHODS.getData(endpointSuffix)
+        return response.ok ? 
+        response.data
+        : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+    }
+    
+    async reformatListItems(list){
+        const {challengeType} = this.state
+        return list.map(key => {
+            return {
+                ...key, 
+                entry_date : GET_MM_DD_YYYY_DATE(key.entry_date), 
+                record: challengeType.units === 'seconds' ? this.convertTime(key.record) : `${key.record} ${challengeType.units}`
+            }
+        })
+    }
+
+    convertTime(time){
+        const minutes = Math.floor(time/60)
+        const seconds = time%60
+        return `${minutes} min ${seconds} seconds`
+    }
+
+    toggleModalDisplay(){
+        this.setState({redirectUrl: '/'})
+    }
+
+    renderModal(){
+        return(
+            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
+                <p>{this.state.modalMessage}</p>
+            </Modal>
+        )
+    }
+
+    handleClick(e){
+        this.setState({view: e.target.innerHTML})
+    }
+
+    renderGraph(){
+        return(
+            <h1>Graph</h1>
+        )
+    }
+
+    renderList(){
+        return (
+        <ListMainWrapper 
+        rootPath={`/challenge-entries`}
+        tableName='challenge_entry'
+        listData={this.state.challengeEntries}
+        propertiesToDisplay={['entry_date', 'record']} 
+        listClassName='challenge-entries-list'
+        />
+       )
+    }
+
+    renderPage(){
+        return(
         <>
-            <header className='student-challenge-entries-challenge-title'>
-                <h1>{studentChallengeEntriesList[0].challengeName}</h1>
-            </header>
-            <main>
-            <ListMainWrapper
-            rootPath={`/students/${student_id}/student-challenges`}
-            tableName='student_challenge'
-            listData={studentChallengeEntriesList}
-            propertiesToDisplay={['date', 'entry']} 
-            listClassName='student-challenge-entries-list'
-            />
-            </main>
+        <header>
+            <StudentName studentId={this.props.match.params.rowId}/>
+        <h2>{this.state.challengeType.challenge_name}</h2>
+        </header>
+        <section>
+            <button onClick={(e) => this.handleClick(e)}>Graph</button>
+            <button onClick={(e) => this.handleClick(e)}>List</button>
+        </section>
+        <main>
+            {this.state.view === 'Graph' ? this.renderGraph() : this.renderList()}
+        </main>
         </>
         )
+    }
+    
+    render(){
+        return(
+            <>
+                {this.state.isLoaded ? this.renderPage() : <h1>Loading...</h1>}
+                {this.state.modalMessage.length > 0 ? this.renderModal() : null}
+                {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl} /> : null}
+            </>
+        )
+    }
 }
 
-export default withRouter(StudentChallengesListContainer)
+export default StudentChallengeEntriesListContainer

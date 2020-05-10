@@ -17,8 +17,8 @@ const StudentsRouting = (props) => {
         <Route path={`${rootPath}/profile`} component={StudentFormProfileContainer}/>
         <Route path={`${rootPath}/communities`} component={StudentFormCommunities}/>
         <Route exact path={`${rootPath}/challenges/`} component={StudentChallengesListContainer}/>
-        <Route path={`${rootPath}/challenges/:rowId`} component={StudentChallengeEntriesListContainer}/>
-        <Route path={`${rootPath}/challenges/:rowId`} component={StudentChallengeEntryForm}/>
+        <Route path={`${rootPath}/challenges/:challengeId`} component={StudentChallengeEntriesListContainer}/>
+        <Route path={`${rootPath}/challenge-entries/:rowId`} component={StudentChallengeEntryForm}/>
         <Route exact path={`${rootPath}/exchanges/`} component={StudentExchangessList}/>
         <Route path={`${rootPath}/exchanges/:exchangeRowId`} component={StudentExchangeFormContainer}/>
     </> 

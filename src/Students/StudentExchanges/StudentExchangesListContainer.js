@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
-import StudentExchangesListHeader from './StudentExchangesListHeader'
+import StudentName from '../../_Common/StudentName'
 import ListMainWrapper from '../../_Common/ListMainWrapper'
 import {HTTP_METHODS} from '../../Utilities/HttpMethods'
 import Modal from '../../_Common/Modal'
@@ -41,13 +41,6 @@ class ExchangesListContainer extends Component{
         return listData
     }
 
-    getBalance(){
-        const balance = this.state.exchanges.reduce((total, exchange) => {
-            return total + parseInt(exchange.amount)
-          }, 0); 
-          return balance
-    }
-
     toggleModalDisplay(){
         this.setState({redirectUrl: '/'})
     }
@@ -60,19 +53,34 @@ class ExchangesListContainer extends Component{
         )
     }
 
+    getBalance(){
+        return this.state.exchanges.reduce((total, exchange) => {
+            return total + parseFloat(exchange.amount)
+          }, 0.00)
+          .toFixed(2); 
+    }
+
+    isAmountNegative(){
+        const balance = this.getBalance()
+        return balance < 0 ? "negative-amount" : ""
+    }
+
     renderPage(){
         return(
         <>
-        <StudentExchangesListHeader studentId={this.props.match.params.rowId} balance={this.getBalance()}/>
-        <main>
-            <ListMainWrapper 
-            rootPath={`${this.props.location.pathname}`}
-            tableName='exchange'
-            listData={this.getListData()}
-            propertiesToDisplay={['exchange_date', 'amount']} 
-            listClassName='exchanges-list'
-            />
-        </main>
+            <header>
+                <StudentName studentId={this.props.match.params.rowId} />
+                <h2 className={this.isAmountNegative()}>Balance: ${this.getBalance()}</h2>
+            </header>
+            <main>
+                <ListMainWrapper 
+                rootPath={`${this.props.location.pathname}`}
+                tableName='exchange'
+                listData={this.getListData()}
+                propertiesToDisplay={['exchange_date', 'amount']} 
+                listClassName='exchanges-list'
+                />
+            </main>
         </>
         )
     }

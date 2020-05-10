@@ -1,7 +1,6 @@
 import React from 'react'
 import DatePicker from "react-datepicker";
 import FormInvalidInputMessage from '../../_Common/FormInvalidInputMessage'
-import {GET_UTCDATE_WITH_TIMEZONE_OFFSET} from '../../Utilities/UtilityFunctions'
 
 const StudentExchangeForm = (props) => {
     const {exchange_id, exchange_date, student_id, amount, note} = props.exchange
