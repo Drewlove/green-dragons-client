@@ -330,13 +330,10 @@ nav .active{
   cursor: pointer; 
 }
 
-.student-challenge-entries-challenge-title{
-  position: sticky;
-  z-index: 0; 
-  top: 50px;
-  margin-top: 10px; 
-  background-color: white;
-  text-align: center;
+.student-challenge-entries-graph{
+  position: relative;
+  width: 90vw;
+  margin: 0 auto;
 }
 
 .students-list-main-item{

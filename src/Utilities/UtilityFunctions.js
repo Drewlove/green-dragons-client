@@ -25,6 +25,12 @@ export const GET_UTCDATE_WITH_TIMEZONE_OFFSET = (originalDateString) => {
     return `${month}/${day}/${year}`
   }
 
+  export const CONVERT_TIME = time => {
+    const minutes = Math.floor(time/60)
+    const seconds = time%60
+    return seconds < 10 ? `${minutes}m 0${seconds}s`: `${minutes}m ${seconds}s`
+}
+
 
 //   export const MERGE_PARENT_CHILD_ARRAYS = (parentArray, childArray, parentId) => {
 //     const parentObj = parentArray.reduce((obj, item) => {
