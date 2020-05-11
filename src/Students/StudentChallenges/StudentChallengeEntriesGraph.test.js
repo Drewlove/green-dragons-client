@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import StudentChallengeEntriesGraph from './StudentChallengeEntriesGraph'
-import Chart from 'chart.js'
 
 const challengeEntries = [
     {
@@ -30,17 +29,17 @@ const challengeEntries = [
     }
 ]
 
-const chartRef = React.createRef()
+
 
 describe('StudentChallengeEntriesGraph', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div')
         ReactDOM.render(
+            <canvas>
                 <StudentChallengeEntriesGraph 
                 challengeEntries={challengeEntries}
-                // chartRef={chartRef} 
-                // Chart={Chart}
-                />, 
+                />
+            </canvas>, 
             div
         )
         ReactDOM.unmountComponentAtNode(div)
