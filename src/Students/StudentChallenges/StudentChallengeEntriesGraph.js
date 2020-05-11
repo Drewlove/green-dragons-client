@@ -6,14 +6,24 @@ import Chart from 'chart.js'
 export default class ChallengeHistoryGraph extends Component{
     state = {
         chart: null, 
+        chartRef: null,
         redirectUrl: ''
     }
-
+    
     chartRef = React.createRef()
     
     componentDidMount() {
+        const chartRef = this.chartRef
         const chart = this.renderChart()
-        this.setState({chart})
+
+        // const chart = this.renderChart()
+        // this.setState({chart})
+
+        // const chartRef = this.chartRef
+        // this.setState({chartRef})
+
+        // const chart = this.renderChart()
+        // this.setState({chart})
     }
 
     // componentDidUpdate(prevProps){
@@ -23,61 +33,58 @@ export default class ChallengeHistoryGraph extends Component{
     // }
 
     renderChart(){
-      const myChartRef = this.chartRef.current.getContext("2d");
-    //   const firstChallenge = this.props.challengeEntries[0]
-    //   const displayTitle = this.props.displayTitle
-      return new Chart(myChartRef, {
-          props: this.getProps(),
-          type: "line",
-          data: {
-              IDs: this.getIDs(), 
-              labels: this.getLabels(),
-              datasets: [
-                {
-                    //   label: firstChallenge.units === 'seconds' ? 'Time' : firstChallenge.units,
-                      data: this.getData(),
-                      pointBackgroundColor: '#0b800d',
-                      fill: false,
-                  }
-              ]
-            },
-          options: {
-            responsive: true,
-            maintainAspectRatio: true, 
-            legend: {
-                display: false
-            },
-            hover: {
-                onHover: function(e) {
-                   var point = this.getElementAtEvent(e);
-                   if (point.length) e.target.style.cursor = 'pointer';
-                   else e.target.style.cursor = 'default';
-                }
-             },
-            title: {
-              display: false, 
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        callback: function(value) {
-                            const {units} = this.chart.config.props.challengeType
-                            return units === 'seconds' ? CONVERT_TIME(value) : value
-                        }
+        const myChartRef = this.chartRef.current.getContext("2d")
+        return new Chart(myChartRef, {
+            props: this.getProps(),
+            type: "line",
+            data: {
+                IDs: this.getIDs(), 
+                labels: this.getLabels(),
+                datasets: [
+                    {
+                        data: this.getData(),
+                        pointBackgroundColor: '#0b800d',
+                        fill: false,
                     }
-                }]
-            },
-              tooltips: {
-                callbacks: {
-                  label: function(tooltipItem) {
-                    const {units} = this._chart.chart.chart.config.props.challengeType
-                    return units === 'seconds' ? CONVERT_TIME(tooltipItem.yLabel) : `${tooltipItem.yLabel} ${units}`
-                  }
+                ]
+                },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true, 
+                legend: {
+                    display: false
+                },
+                hover: {
+                    onHover: function(e) {
+                    var point = this.getElementAtEvent(e);
+                    if (point.length) e.target.style.cursor = 'pointer';
+                    else e.target.style.cursor = 'default';
+                    }
+                },
+                title: {
+                display: false, 
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            callback: function(value) {
+                                const {units} = this.chart.config.props.challengeType
+                                return units === 'seconds' ? CONVERT_TIME(value) : value
+                            }
+                        }
+                    }]
+                },
+                tooltips: {
+                    callbacks: {
+                    label: function(tooltipItem) {
+                        const {units} = this._chart.chart.chart.config.props.challengeType
+                        return units === 'seconds' ? CONVERT_TIME(tooltipItem.yLabel) : `${tooltipItem.yLabel} ${units}`
+                    }
+                    }
                 }
-              }
-          }
-      })
-    }  
+            }
+        })
+        }  
 
     getProps(){
         return this.props

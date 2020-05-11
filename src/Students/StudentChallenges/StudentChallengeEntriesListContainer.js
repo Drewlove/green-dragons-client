@@ -72,25 +72,13 @@ class StudentChallengeEntriesListContainer extends Component{
         this.setState({view: e.target.innerHTML})
     }
 
-    renderGraph(){
-        return(
-            <StudentChallengeEntriesGraph 
-            challengeEntries={this.state.challengeEntries}
-            challengeType={this.state.challengeType}
-            />
-        )
-    }
-
-    renderList(){
-        return (
-        <ListMainWrapper 
-        rootPath={`/challenge-entries`}
-        tableName='challenge_entry'
-        listData={this.reformatTime(this.state.challengeEntries)}
-        propertiesToDisplay={['entry_date', 'record']} 
-        listClassName='challenge-entries-list'
-        />
-       )
+    renderHeader(){
+       return(
+        <header>
+            <StudentName studentId={this.props.match.params.rowId}/>
+            <h2>{this.state.challengeType.challenge_name}</h2>
+        </header>
+       ) 
     }
 
     renderPage(){
@@ -116,14 +104,32 @@ class StudentChallengeEntriesListContainer extends Component{
             <h1>No results</h1>
         )
     }
+
+    renderGraph(){
+        return(
+            <StudentChallengeEntriesGraph 
+            challengeEntries={this.state.challengeEntries}
+            challengeType={this.state.challengeType}
+            />
+        )
+    }
+
+    renderList(){
+        return (
+        <ListMainWrapper 
+        rootPath={`/challenge-entries`}
+        tableName='challenge_entry'
+        listData={this.reformatTime(this.state.challengeEntries)}
+        propertiesToDisplay={['entry_date', 'record']} 
+        listClassName='challenge-entries-list'
+        />
+       )
+    }
     
     render(){
         return(
             <>
-            <header>
-                <StudentName studentId={this.props.match.params.rowId}/>
-                <h2>{this.state.challengeType.challenge_name}</h2>
-            </header>
+            {this.renderHeader()}
             {this.state.isLoaded ? this.renderPage() : <h1>Loading...</h1>}
             {this.state.modalMessage.length > 0 ? this.renderModal() : null}
             {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl} /> : null}
