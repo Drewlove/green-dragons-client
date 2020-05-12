@@ -12,7 +12,7 @@ class StudentExchangeFormContainer extends Component{
         exchange: {
             exchange_date: null,
             student_id: '', 
-            amount: 0, 
+            amount: '', 
             note: ''
         },
         students: [],

@@ -1,5 +1,4 @@
 export const GET_UTCDATE_WITH_TIMEZONE_OFFSET = (originalDateString) => {   
-  console.log(originalDateString)
     const dateArray = originalDateString.split(' ')
     
     const year = dateArray[3]

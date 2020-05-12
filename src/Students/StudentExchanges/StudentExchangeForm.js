@@ -45,6 +45,7 @@ const StudentExchangeForm = (props) => {
                             <option value={''} disabled>-</option>
                             {renderOptions()}
                         </select>
+                        {isInputValid('student_id', 'Must choose a student')}
                     </div>
                     <label htmlFor='amount'>Amount</label>
                     <div className='input-wrapper'>

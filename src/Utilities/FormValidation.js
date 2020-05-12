@@ -1,7 +1,5 @@
 export const GET_INVALID_INPUTS = (inputActual, inputReqs, invalidInputs) => {
     let failedInputReqs = 0; 
-    console.log(inputActual)
-    console.log(inputReqs)
     for (let [inputReqKey, inputReqValue] of Object.entries(inputReqs)){   
         if(validateInput[inputReqKey](inputActual.value, inputReqValue)){
             failedInputReqs += 0
