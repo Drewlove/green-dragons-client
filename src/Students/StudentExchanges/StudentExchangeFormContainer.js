@@ -12,7 +12,8 @@ class StudentExchangeFormContainer extends Component{
         exchange: {
             exchange_date: null,
             student_id: '', 
-            amount: 0
+            amount: 0, 
+            note: ''
         },
         students: [],
         invalidInputs: [],
@@ -110,9 +111,10 @@ class StudentExchangeFormContainer extends Component{
 
     resetForm(){
         const exchange = {
-            exchange_date: null, 
-            student_id: null, 
-            amount: ''
+            exchange_date: null,
+            student_id: '', 
+            amount: 0, 
+            note: ''
          }
         this.setState({exchange})
         this.setState({invalidInputs: []})
