@@ -65,15 +65,19 @@ const ChallengeForm = (props) => {
                 <label htmlFor='other'>Other</label>            
             </div>
             {units === 'time' ? null : renderUnitNameInput()}
-            <label>Best Record</label>
-            <div className='input-wrapper'>
-                <select name='challenge_best_record' value={challenge_best_record} onChange={e=>props.handleChange(e)}>
-                <option value={""} disabled>-</option>
-                <option value='highest'>Highest</option>  
-                <option value='lowest'>Lowest</option>  
-                </select>
-                {isInputValid('challenge_best_record', 'Please choose one')}            
-            </div>
+            <label htmlFor='bestRecord'>Best Record</label>
+                    <div className='input-wrapper'>
+                        <select 
+                        name='challenge_best_record' 
+                        id='bestRecord'
+                        value={challenge_best_record} 
+                        onChange={e=>props.handleChange(e)}>
+                        <option value={""} disabled>-</option>
+                        <option value='highest'>Highest</option>  
+                        <option value='lowest'>Lowest</option>  
+                        </select>
+                        {isInputValid('challenge_best_record', 'Please choose one')}            
+                    </div>
             </section>
             <section className='button-section'>
                 {challenge_id ? <button onClick={(e) => props.handleDelete(e)}>Delete</button> : null}

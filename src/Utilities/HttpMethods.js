@@ -37,6 +37,7 @@ const submitData = async function(data, endpointSuffix, method){
         }
     }
     const url = `${config.API_ENDPOINT}/${endpointSuffix}`
+    console.log(url)
     try{
         const result = await fetch(url, options)
         return result 

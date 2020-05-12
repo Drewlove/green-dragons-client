@@ -120,7 +120,6 @@ class ChallengeFormContainer extends Component{
         this.setState({invalidInputs})
     }
 
-    //HOW TO VERIFY CHALLENGE_BEST_RECORD?
     getInputReqs(inputName){
         const inputRequirements = {
             challenge_name: {
@@ -133,7 +132,7 @@ class ChallengeFormContainer extends Component{
                 minLength: 1
             },
             units: {
-                minNumber: 1,
+                minLength: 1,
             },
         }   
         return inputRequirements[inputName]

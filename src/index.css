@@ -10,6 +10,12 @@
   margin: 0px; 
 }
 
+:root{
+  --primary-color: green;
+  --box-shadow: 2px 2px 2px grey;
+  --box-shadow-hover: 4px 4px 4px grey;
+}
+
 a{
   text-decoration: none; 
   color: black; 
@@ -330,9 +336,29 @@ nav .active{
   cursor: pointer; 
 }
 
+.student-challenge-entries-button{
+  font-size: 18px;
+  border-radius: 5px;
+  margin: 10px;
+  box-shadow: var(--box-shadow);
+  background-color: white;
+  color: var(--primary-color);
+}
+
+.student-challenge-entries-button:hover{
+  cursor: pointer; 
+  box-shadow: var(--box-shadow-hover)
+}
+
+.student-challenge-entries-button.button-focused{
+  box-shadow: none;
+  background-color: lightgrey;
+  border: 1px solid black;
+}
+
 .student-challenge-entries-graph{
   position: relative;
-  width: 90vw;
+  width: 75vw;
   margin: 0 auto;
 }
 

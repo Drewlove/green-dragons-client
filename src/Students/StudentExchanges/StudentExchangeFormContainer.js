@@ -11,7 +11,7 @@ class StudentExchangeFormContainer extends Component{
     state = {
         exchange: {
             exchange_date: null,
-            student_id: null, 
+            student_id: '', 
             amount: 0
         },
         students: [],
@@ -22,7 +22,6 @@ class StudentExchangeFormContainer extends Component{
     } 
 
     async componentDidMount(){
-        console.log('mount')
         return this.props.match.params.exchangeRowId === "0" ? 
         this.getStudents() 
         : this.getStudentsAndExchange()
@@ -32,8 +31,8 @@ class StudentExchangeFormContainer extends Component{
         return prevProps.match.params.exchangeRowId !== this.props.match.params.exchangeRowId ? this.resetForm() : null
     }
 
-    getStudents(){
-        const students = this.getAllRowsFromEndpoint('students')
+    async getStudents(){
+        const students = await this.getAllRowsFromEndpoint('students')
         this.setState({students}, () => this.setState({isLoaded: true}))
     }
 

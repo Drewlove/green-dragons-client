@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import StudentChallengeEntryForm from './StudentChallengeEntryForm'
+import StudentChallengeEntryFormContainer from './StudentChallengeEntryFormContainer'
 
-describe('StudentChallengeEntryForm', () => {
+describe('StudentChallengeEntryFormContainer', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div')
         ReactDOM.render(
-            <StudentChallengeEntryForm />,
+            <StudentChallengeEntryFormContainer />,
             div
         )
         ReactDOM.unmountComponentAtNode(div)

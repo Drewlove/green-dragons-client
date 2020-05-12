@@ -72,11 +72,19 @@ class StudentChallengeEntriesListContainer extends Component{
         this.setState({view: e.target.innerHTML})
     }
 
+    isFocused(name){
+        return name === this.state.view ? ' button-focused' : ''
+    }
+
     renderHeader(){
        return(
-        <header>
+        <header className='student-challenge-entries-header'>
             <StudentName studentId={this.props.match.params.rowId}/>
-            <h2>{this.state.challengeType.challenge_name}</h2>
+            <h3>{this.state.challengeType.challenge_name}</h3>
+            <section>
+                <button className={`student-challenge-entries-button${this.isFocused('Graph')}`} onClick={(e) => this.handleClick(e)}>Graph</button>
+                <button className={`student-challenge-entries-button${this.isFocused('List')}`} onClick={(e) => this.handleClick(e)}>List</button>
+            </section>
         </header>
        ) 
     }
@@ -88,10 +96,6 @@ class StudentChallengeEntriesListContainer extends Component{
     renderResults(){
         return(
         <>
-        <section>
-            <button onClick={(e) => this.handleClick(e)}>Graph</button>
-            <button onClick={(e) => this.handleClick(e)}>List</button>
-        </section>
         <main>
             {this.state.view === 'Graph' ? this.renderGraph() : this.renderList()}
         </main>
@@ -117,7 +121,7 @@ class StudentChallengeEntriesListContainer extends Component{
     renderList(){
         return (
         <ListMainWrapper 
-        rootPath={`/challenge-entries`}
+        rootPath={`/students/${this.props.match.params.rowId}/challenge-entries`}
         tableName='challenge_entry'
         listData={this.reformatTime(this.state.challengeEntries)}
         propertiesToDisplay={['entry_date', 'record']} 

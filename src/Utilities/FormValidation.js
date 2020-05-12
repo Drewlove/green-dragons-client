@@ -1,5 +1,7 @@
 export const GET_INVALID_INPUTS = (inputActual, inputReqs, invalidInputs) => {
     let failedInputReqs = 0; 
+    console.log(inputActual)
+    console.log(inputReqs)
     for (let [inputReqKey, inputReqValue] of Object.entries(inputReqs)){   
         if(validateInput[inputReqKey](inputActual.value, inputReqValue)){
             failedInputReqs += 0
@@ -21,13 +23,12 @@ const validateInput= {
         return inputActualValue.match(reqInputValue) ? true : false
     },  
     dataType: function(inputActualValue, reqInputValue){
-        console.log('validation', typeof inputActualValue)
         return typeof inputActualValue === reqInputValue && inputActualValue !== null ? true : false
     },
     required: function(){
         return true
         // return typeof inputActualValue === reqInputValue && inputActualValue !== null ? true : false
-    }
+    }, 
 }
 
 const addToInvalidInputs = (inputActualName, invalidInputs) => {

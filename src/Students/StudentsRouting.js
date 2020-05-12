@@ -5,7 +5,7 @@ import StudentFormProfileContainer from './StudentFormsProfileAndCommunities/Stu
 import StudentFormCommunities from './StudentFormsProfileAndCommunities/StudentFormCommunities'
 import StudentChallengesListContainer from './StudentChallenges/StudentChallengesListContainer'
 import StudentChallengeEntriesListContainer from './StudentChallenges/StudentChallengeEntriesListContainer'
-import StudentChallengeEntryForm from './StudentChallenges/StudentChallengeEntryForm'
+import StudentChallengeEntryFormContainer from './StudentChallenges/StudentChallengeEntryFormContainer'
 import StudentExchangessList from './StudentExchanges/StudentExchangesListContainer'
 import StudentExchangeFormContainer from './StudentExchanges/StudentExchangeFormContainer'
 
@@ -18,7 +18,7 @@ const StudentsRouting = (props) => {
         <Route path={`${rootPath}/communities`} component={StudentFormCommunities}/>
         <Route exact path={`${rootPath}/challenges/`} component={StudentChallengesListContainer}/>
         <Route path={`${rootPath}/challenges/:challengeId`} component={StudentChallengeEntriesListContainer}/>
-        <Route path={`${rootPath}/challenge-entries/:rowId`} component={StudentChallengeEntryForm}/>
+        <Route path={`${rootPath}/challenge-entries/:challengeEntryId`} component={StudentChallengeEntryFormContainer}/>
         <Route exact path={`${rootPath}/exchanges/`} component={StudentExchangessList}/>
         <Route path={`${rootPath}/exchanges/:exchangeRowId`} component={StudentExchangeFormContainer}/>
     </> 

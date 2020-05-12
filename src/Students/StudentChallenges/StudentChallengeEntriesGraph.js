@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import { CONVERT_TIME } from "../../Utilities/UtilityFunctions";
 import Chart from "chart.js";
 
-export default class ChallengeHistoryGraph extends Component {
+class ChallengeHistoryGraph extends Component {
   state = {
     chart: null,
     redirectUrl: "",
@@ -101,9 +101,14 @@ export default class ChallengeHistoryGraph extends Component {
   }
 
   handleClick(e, ref) {
-    var index = this.state.chart.getElementsAtEvent(e)[0]["_index"];
+      const chartElement = this.state.chart.getElementsAtEvent(e)[0]
+      return chartElement ? this.setRedirect(chartElement) : null 
+  }
+
+  setRedirect(chartElement){
+    var index = chartElement["_index"];
     const challengeEntryId = this.state.chart.data.IDs[index];
-    const redirectUrl = `/challenge-entries/${challengeEntryId}`;
+    const redirectUrl = `/students/${this.props.match.params.rowId}/challenge-entries/${challengeEntryId}`;
     this.setState({ redirectUrl });
   }
 
@@ -121,3 +126,5 @@ export default class ChallengeHistoryGraph extends Component {
     );
   }
 }
+
+export default withRouter(ChallengeHistoryGraph)

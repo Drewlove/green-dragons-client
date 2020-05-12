@@ -23,7 +23,7 @@ class StudentName extends Component{
         const {first_name, last_name} = this.state.student
         return(
             <>
-            <h1>{first_name} {last_name}</h1>
+            <h2>{first_name} {last_name}</h2>
             </>
         )
     }
