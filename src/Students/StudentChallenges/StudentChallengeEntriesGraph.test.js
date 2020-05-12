@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {BrowserRouter} from 'react-router-dom'
 import StudentChallengeEntriesGraph from './StudentChallengeEntriesGraph'
 
 const challengeEntries = [
@@ -35,11 +36,9 @@ describe('StudentChallengeEntriesGraph', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div')
         ReactDOM.render(
-            <canvas>
-                <StudentChallengeEntriesGraph 
-                challengeEntries={challengeEntries}
-                />
-            </canvas>, 
+            <BrowserRouter>
+                <StudentChallengeEntriesGraph challengeEntries={challengeEntries}/>
+            </BrowserRouter>,
             div
         )
         ReactDOM.unmountComponentAtNode(div)
