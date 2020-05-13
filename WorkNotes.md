@@ -17,17 +17,7 @@ CLIENT: implement getting lists, and forms with HTTP methods for forms, using us
 API: Create service and router, create tests with users as template
 
 ***ACTUAL NEXT STEPS***
-Student Challenges
-*List challenges with entries
-*View all entries for specific challenge in list format
-*View all entries for specific challenge in graph format
-*Form for challenge entries
-
-BUG: 
-ChallengeFormContainer
-*Select "Other" for units, then select Time, click save button
-Desired: Form saves
-Actual: Form identifies "units" as an invalid input
+Student Communities
 
 ADD prettier package and precommit hook using "husky"
 

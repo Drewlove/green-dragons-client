@@ -149,13 +149,17 @@ class StudentChallengeEntryFormContainer extends Component{
     }
 
     handleTimeChange(name, value){
-        const prevTime = parseInt(this.state.challengeEntry.record)
+        const prevTime = this.getPrevTime()
         const prevMin = Math.floor(prevTime / 60)
         const prevSec = prevTime % 60
         const newTime = this.getNewTime(value)
         let timeChange = (newTime - prevMin)
         name === 'minutes' ? timeChange = (newTime - prevMin)*60 : timeChange = (newTime - prevSec)
         this.updateTime(prevTime, timeChange)
+    }
+
+    getPrevTime(){
+        return this.state.challengeEntry.record === '' ? 0 : parseInt(this.state.challengeEntry.record)
     }
 
     getNewTime(value){
@@ -165,7 +169,7 @@ class StudentChallengeEntryFormContainer extends Component{
     updateTime(prevTime, timeChange){
         const newRecord = prevTime + timeChange
         const challengeEntry = {...this.state.challengeEntry, record: newRecord}
-        this.setState({challengeEntry})
+        this.setState({challengeEntry}, () => this.updateInvalidInputs('record', this.state.challengeEntry.record))
     }
 
     updateInvalidInputs(inputName, inputValue){
