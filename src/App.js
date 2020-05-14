@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom'
 import Nav from './_Common/Nav'
 import ChallengesRouting from './Challenges/ChallengesRouting'
 import CommunitiesRouting from './Communities/CommunitiesRouting'
-import StudentsRouting from './Students/StudentsRouting'
+import StudentsRouting from './Students/StudentsRouting/StudentsRouting'
 import HomePage from './_Common/HomePage'
 
 class App extends Component{

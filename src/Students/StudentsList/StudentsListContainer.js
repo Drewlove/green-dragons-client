@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import StudentsListItem from './StudentsListItem'
-import Modal from '../_Common/Modal'
+import Modal from '../../_Common/Modal'
 import {Redirect} from 'react-router-dom'
-import {HTTP_METHODS} from '../Utilities/HttpMethods'
-import MODAL_MESSAGES from '../_Common/Modal'
+import {HTTP_METHODS} from '../../Utilities/HttpMethods'
+import MODAL_MESSAGES from '../../_Common/Modal'
 
 class StudentsListContainer extends Component{
     state = {

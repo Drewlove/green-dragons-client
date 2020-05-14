@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import SubcommunitiesListContainer from './SubcommunitiesListContainer'
+import SubcommunitiesListContainer from '../CommunitiesSubcommunities/SubcommunitiesListContainer'
 
 class CommunitiesListItem extends Component{
     state = {
