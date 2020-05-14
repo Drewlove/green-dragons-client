@@ -48,7 +48,7 @@ const SubcommunityForm = (props) => {
                         value={subcommunity_name}
                         onChange={e=>props.handleChange(e)}
                         onBlur={(e) => handleBlur(e)}/>
-                        {isInputValid('community_name', 'Must have two letters, at least one capital letter')}
+                        {isInputValid('subcommunity_name', 'Must have at least one letter')}
                     </div>
                 </section>
                 <section className='button-section'>

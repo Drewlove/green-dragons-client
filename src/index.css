@@ -147,11 +147,20 @@ form label{
   text-align: right;
 }
 
+/* form .input-wrapper{
+  display: flex; 
+} */
+
 form .inputs-section{
   display: grid;
-  grid-template-columns: 85px auto;
+  grid-template-columns: 100px auto;
   grid-column-gap: 10px;
-  grid-row-gap: 15px;
+  grid-row-gap: 10px;
+}
+
+form .inputs-section.student-subcommunities-form{
+  align-items: center;
+  margin-left: -75px;
 }
 
 form .invalid-input-message{
@@ -181,7 +190,19 @@ form select:hover{
   cursor: pointer; 
 }
 
-form .student-form-communities-section{
+form .student-form-subcommunities-community{
+  margin-top: 20px; 
+}
+
+form .student-form-subcommunities-input{
+  width: 200px;
+}
+
+form .student-form-subcommunities-label{
+  text-align: left; 
+}
+
+/* form .student-form-communities-section{
   margin-top: 10px; 
 }
 
@@ -195,7 +216,7 @@ form .student-form-communities-subcommunity-section-input{
 
 form .student-form-communities-subcommunity-section-label{
   width: auto; 
-}
+} */
 
 header{
   text-align: center;
@@ -371,6 +392,7 @@ nav .active{
   display: grid;
   grid-template-columns: 33% 1fr 1fr 1fr 1fr;
   align-items: center;
+  padding: 0px 5px;
 }
 
 .students-list-item-links-wrapper{

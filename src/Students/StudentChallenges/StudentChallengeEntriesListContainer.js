@@ -123,7 +123,7 @@ class StudentChallengeEntriesListContainer extends Component{
         <ListMainWrapper 
         rootPath={`/students/${this.props.match.params.rowId}/challenge-entries`}
         tableName='challenge_entry'
-        listData={this.reformatTime(this.state.challengeEntries)}
+        listData={this.reformatTime(this.state.challengeEntries).reverse()}
         propertiesToDisplay={['entry_date', 'record']} 
         listClassName='challenge-entries-list'
         />
