@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
-import {NavLink} from 'react-router-dom'
+import {NavLink, withRouter} from 'react-router-dom'
 import Modal from './Modal'
 import NewButtonModalContent from './NewButtonModalContent'
 
 class Nav extends Component{
     state = {
         displayModal: false, 
+        displayMenu: false, 
     }
 
     toggleModalDisplay(){
@@ -13,25 +14,38 @@ class Nav extends Component{
         this.setState({displayModal})
     }
 
+    handleClick(e){
+        const displayMenu = !this.state.displayMenu
+        this.setState({displayMenu})
+    }
+
+    getClassName(){
+        return this.state.displayMenu === true ? 'nav-display-menu' : ''
+    }
+
     render(){
         return(
-            <nav>
-                <div className='nav-wrapper'>
-                <NavLink activeClassName='active' to='/home'>Home</NavLink>
-                <NavLink activeClassName='active' to='/challenges'>Challenges</NavLink>
-                <NavLink activeClassName='active' to='/communities'>Communities</NavLink>
-                <NavLink activeClassName='active' to='/students'>Students</NavLink>
-                {this.props.children}
-                <button className='new-button' onClick={() => this.toggleModalDisplay()}>New</button>
-                {this.state.displayModal ? 
-                <Modal toggleModalDisplay={() => this.toggleModalDisplay()}>
-                    <NewButtonModalContent  toggleModalDisplay={() => this.toggleModalDisplay()}/>
-                </Modal> 
-                : null}
-                </div>
+            <nav className={this.getClassName()}>
+                <button className='nav-hamburger-button' onClick={e => this.handleClick(e)}>
+                    <div className='nav-hamburger top'></div>
+                    <div className='nav-hamburger middle'></div>
+                    <div className='nav-hamburger bottom'></div>
+                </button>
+                <section className='nav-links-wrapper'>
+                    <NavLink onClick={e => this.handleClick(e)} to='/home'>Home</NavLink>
+                    <NavLink onClick={e => this.handleClick(e)} to='/challenges'>Challenges</NavLink>
+                    <NavLink onClick={e => this.handleClick(e)} to='/communities'>Communities</NavLink>
+                    <NavLink onClick={e => this.handleClick(e)} to='/students'>Students</NavLink>
+                    <button className='nav-new-button' onClick={() => this.toggleModalDisplay()}>New</button>
+                    {this.state.displayModal ? 
+                    <Modal toggleModalDisplay={() => this.toggleModalDisplay()}>
+                        <NewButtonModalContent  toggleModalDisplay={() => this.toggleModalDisplay()}/>
+                    </Modal> 
+                    : null}
+                </section>
             </nav>  
         )
     }
 } 
 
-export default Nav
+export default withRouter(Nav)

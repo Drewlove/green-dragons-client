@@ -8,6 +8,7 @@
 
 *{
   margin: 0px; 
+  box-sizing: border-box; 
 }
 
 :root{
@@ -248,7 +249,8 @@ header{
 .list-main-wrapper{
   padding: 0px;
   margin: 50px 10px;
-  list-style: none; 
+  list-style: none;
+  min-width: 350px;
 }
 
 .list-main-item{
@@ -301,29 +303,112 @@ header{
   float: right; 
 }
 
-.new-button-modal-content-wrapper{
+.nav-display-menu .nav-hamburger.top{
+  transform: translateY(5px) rotate(-45deg);
+  transition: .4s;
+}
+
+.nav-display-menu .nav-hamburger.middle{
+  transform: translateY(-5px) rotate(45deg);
+  transition: .4s;
+}
+
+.nav-display-menu .nav-hamburger.bottom{
+  display: none;
+}
+
+.nav-display-menu .nav-links-wrapper{
+  position: fixed;
+  background-color: lightgray;
+  z-index: 1;
+  top: 40px;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.nav-display-menu .nav-links-wrapper>a{
+  display: block;
+  margin: 25px;
+}
+
+.nav-display-menu .nav-new-button{
+  display: none; 
+}
+
+.nav-new-button{
+  background-color: white;
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 18px;
+  margin: 0px 0px 0px auto;
+}
+
+.nav-links-wrapper>a{
+  display: block;
+  font-size: 21px;
+  margin: 0px 10px;
+}
+
+.nav-new-button-modal-content-wrapper{
   
 }
 
-.new-button-modal-content-link{
+.nav-new-button-modal-content-link{
   display: block; 
   padding: 5px; 
 }
 
-.new-button-modal-content-link.indent{
+.nav-new-button-modal-content-link.indent{
   margin-left: 25px; 
 }
 
 nav{
+  height: 40px;
   position: sticky;
   top: 0px;
+  z-index: 1;
   display: flex;
+  align-items: center;
   background-color: lightgray;
-  z-index: 1; 
+}
+
+.nav-hamburger{
+  width: 45px;
+  height: 5px;
+  background-color: black;
+  margin-top: 5px;
+}
+
+.nav-hamburger-button{
+  background-color: transparent;
+}
+.nav-hamburger{
+  background-color: black;
+  height: 5px;
+  width: 45px;
+  margin-top: 5px;
+}
+
+.nav-hamburger-button:hover{
+  cursor: pointer; 
+}
+
+.nav-links-wrapper{
+  margin: 0px 10px 0px auto;
+}
+
+.nav-links-wrapper>a{
+  display: none; 
 }
 
 nav .active{
   color: white; 
+}
+
+.nav-wide-screen-wrapper{
+  display: none; 
 }
 
 .nav-wrapper{
@@ -339,14 +424,6 @@ nav .active{
 .nav-wrapper a{
   display: block;
   font-size: 21px;
-}
-
-.nav-wrapper .new-button{
-  background-color: white;
-  width: 60px;
-  height: 30px;
-  border-radius: 5px;
-  font-size: 18px;
 }
 
 .negative-amount{
@@ -406,7 +483,6 @@ nav .active{
 .students-list-item-link{
   margin-top: 5px;
   display: grid;
-  grid-template-rows: 1.75fr 1fr;
   align-items: center;
   justify-items: center;
 }
@@ -431,9 +507,7 @@ nav .active{
 }
 
 .students-list-item-name{
-  font-size: 21px;
-  /* margin-left: 10px; */
-  /* width: 50%; */
+  font-size: 18px;
 }
 .students-list-item-name>p{
   text-overflow: ellipsis;
@@ -441,6 +515,36 @@ nav .active{
 }
 
 @media only screen and (min-width: 600px) {
+  .nav-hamburger-button{
+    display: none; 
+  }
+
+  .nav-new-button{
+    margin-left: 50px;
+  }
+
+  .nav-new-button:hover{
+    cursor: pointer; 
+  }
+
+  .nav-links-wrapper{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0px auto; 
+  }
+
+  .nav-links-wrapper>a{
+    display: block; 
+    font-size: 21px; 
+    margin: 0px 10px; 
+  }
+  
+  .nav-wide-screen-wrapper>button:hover{
+    cursor: pointer; 
+    color: var(--primary-color)
+  }
+
   .students-list-item-link:hover .students-list-item-link-tooltip{
     visibility: initial; 
   }
