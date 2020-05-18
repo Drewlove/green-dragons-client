@@ -6,6 +6,7 @@ import {GET_INVALID_INPUTS} from '../../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../../Utilities/HttpMethods'
 import Modal from '../../_Common/Modal'
+import ShimmerForm from '../../_Common/ShimmerForm'
 import "react-datepicker/dist/react-datepicker.css";
 
 class StudentFormProfileContainer extends Component{
@@ -158,7 +159,7 @@ class StudentFormProfileContainer extends Component{
             <>
             {this.state.modalMessage.length > 0 ? this.renderModal() : null}
             {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl}/> : null}
-            {this.state.isLoaded ? this.renderStudentFormProfile() : <h1>Loading</h1>}
+            {this.state.isLoaded ? this.renderStudentFormProfile() : <ShimmerForm inputNumber={3}/>}
             </>
         )
     }

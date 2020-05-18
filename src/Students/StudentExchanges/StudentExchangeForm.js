@@ -1,13 +1,13 @@
 import React from 'react'
 import DatePicker from "react-datepicker";
-import FormInvalidInputMessage from '../../_Common/FormInvalidInputMessage'
+import FormInvalidInputWarning  from '../../_Common/FormInvalidInputWarning'
 
 const StudentExchangeForm = (props) => {
     const {exchange_id, exchange_date, student_id, amount, note} = props.exchange
 
     const isInputValid = (inputName, message) => {
         return props.invalidInputs.indexOf(inputName) >= 0 ? 
-        <FormInvalidInputMessage message={message}/> : <FormInvalidInputMessage className='visibility-hidden' message={message}/>
+        <FormInvalidInputWarning  message={message}/> : <FormInvalidInputWarning  hidden={true} message={message}/>
     }
 
     const handleBlur = e  => {
@@ -25,6 +25,11 @@ const StudentExchangeForm = (props) => {
             <option value={key.student_id} key={key.student_id}>{key.first_name} {key.last_name}</option>
             )
         })
+    }
+
+
+    const isAmountNegative = () =>{
+        return amount < 0 ? "negative-amount" : ""
     }
 
     return(
@@ -52,6 +57,7 @@ const StudentExchangeForm = (props) => {
                     <input 
                         id='amount'
                         type='number' 
+                        className={isAmountNegative()}
                         name='amount'
                         value={amount} 
                         onChange={e => props.handleChange(e)}
@@ -69,7 +75,7 @@ const StudentExchangeForm = (props) => {
                         />
                         {isInputValid('exchange_date', 'Please enter a valid date')}
                     </div>
-                    <label htmlFor='note'>Note</label>
+                    <label className='label-textarea' htmlFor='note'>Note</label>
                     <div className='input-wrapper'>
                         <textarea 
                         name='note'
@@ -79,8 +85,9 @@ const StudentExchangeForm = (props) => {
                     </div>
                     </section>
                     <section className='button-section'>
-                        {exchange_id ? <button onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
-                        <button className='save-button' onClick={e => props.handleSave(e)}>Save</button>
+                        {exchange_id ?
+                        <button className='button-delete' onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
+                        <button className='button-save' onClick={e => props.handleSave(e)}>Save</button>
                     </section>
                 </fieldset>
             </form>

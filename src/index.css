@@ -9,12 +9,23 @@
 *{
   margin: 0px; 
   box-sizing: border-box; 
+  font-family: 'Julius Sans One', sans-serif;
 }
+
 
 :root{
   --primary-color: green;
-  --box-shadow: 2px 2px 2px grey;
-  --box-shadow-hover: 4px 4px 4px grey;
+  --box-shadow: 0px 0px 5px 0 #a9a9a9;
+  --box-shadow-hover: 5px 5px 5px darkgrey;
+}
+
+a
+input,
+textarea,
+button,
+select {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  text-overflow: ellipsis;
 }
 
 a{
@@ -22,8 +33,10 @@ a{
   color: black; 
 }
 
-button:focus{
+
+a, button:focus{
   outline: none; 
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .communities-list-container{
@@ -38,20 +51,36 @@ button:focus{
   margin: 0 auto; 
 }
 
+.communities-list-item.view-subcommunities .communities-list-item-link{
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  box-shadow: var(--box-shadow-hover);
+}
+
 .communities-list-item.view-subcommunities>.communities-list-item-subcommunities-list{
   display: block;
   padding: 0px;
   margin-left: 50px;
 }
 
+.communities-list-item.view-subcommunities .communities-list-item-button{
+  transform: rotate(90deg);
+  color: var(--primary-color);
+  transition: 0.25s;
+}
+
 .communities-list-item-button{
-  border: 0px; 
-  background-color: white; 
+  border: 0px;
+  background-color: white;
   font-size: 24px;
+  margin-right: 25px;
+  padding: 0px;
+  transition: .25s;
 }
 
 .communities-list-item-button:hover{
   cursor: pointer; 
+  color: var(--primary-color)
 }
 
 .communities-list-item-community-wrapper{
@@ -62,9 +91,18 @@ button:focus{
 .communities-list-item-link-wrapper{
   height: 60px;
   line-height: 60px;
-  border: 1px solid black;
   border-radius: 5px;
   width: 100%;
+  box-shadow: var(--box-shadow);
+}
+
+.communities-list-item-link-wrapper:hover{
+  box-shadow: var(--box-shadow-hover);
+  border: 1px solid var(--primary-color);
+}
+
+.communities-list-item-link-wrapper:hover>a{
+  color: var(--primary-color);
 }
 
 .communities-list-item-link{
@@ -72,13 +110,7 @@ button:focus{
   display: block;
 }
 
-.communities-list-item-link:hover{
-  cursor: pointer;
-  box-shadow: 2px 2px 2px black; 
-}
-
 .communities-list-item-subcommunities-list{
-  border: 1px solid black;
   max-height: 300px;
   margin: 10px auto;
   overflow: auto;
@@ -99,13 +131,17 @@ button:focus{
   height: 35px;
   line-height: 30px;
   list-style: none;
-  border: 1px solid black;
   border-radius: 5px;
+  box-shadow: var(--box-shadow);
 }
 
 .communities-list-item-subcommunities-list-item:hover{  
   cursor: pointer;
-  box-shadow: 2px 2px 2px black; 
+  box-shadow: var(--box-shadow-hover)
+}
+
+.communities-list-item-subcommunities-list-item:hover>a{
+  color: var(--primary-color)
 }
 
 .communities-list-item-subcommunities-list-item-link{
@@ -121,8 +157,17 @@ form{
   padding: 10px;
 }
 
-form input, label{
-  font-size: 18px; 
+fieldset>h1, fieldset>h2, fieldset>h3{
+  color: black; 
+  text-shadow: 0px 0px 0px black; 
+}
+
+form fieldset{
+  border: none;
+  box-shadow: var(--box-shadow);
+  border-radius: 25px;
+  padding: 20px 5px;
+
 }
 
 form .button-section{
@@ -131,60 +176,137 @@ form .button-section{
   margin-top: 25px;
 }
 
-form button{
-  background-color: lightgray; 
-  font-size: 18px; 
+form .button-section>button{
+  font-size: 18px;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+  width: 100px;
+  margin: 20px 20px;
+  height: 35px;
 }
+
+form .button-delete{
+  background-color: white;
+  color: red;
+  text-shadow: 0px 0px 0px red;
+}
+
+form .button-section>button:hover{
+  cursor: pointer; 
+  box-shadow: var(--box-shadow-hover)
+}
+
 
 form .button-save{
   margin-left: auto; 
+  background-color: var(--primary-color); 
+  color: white; 
+  box-shadow: var(--box-shadow);
+  text-shadow: 0px 0px 0px white; 
 }
 
-form button:hover{
-  cursor: pointer;
+form .input-wrapper>label{
+  color: black; 
 }
 
 form label{
   text-align: right;
+  font-weight: 900;
+  text-shadow: 0px 0px 0px green;
+  color: green;
+  font-size: 16px;
 }
 
-/* form .input-wrapper{
+form .label-textarea{
+  align-self: start;
+}
+
+form legend{
+  position: sticky;
+  background-color: white;
+  top: 90px;
+  color: green;
+  margin: 0 auto;
+  text-shadow: 1px 1px 1px green;
+}
+
+form .input-wrapper{
   display: flex; 
-} */
+}
 
 form .inputs-section{
   display: grid;
-  grid-template-columns: 100px auto;
+  grid-template-columns: auto auto;
   grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  grid-row-gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 form .inputs-section.student-subcommunities-form{
   align-items: center;
-  margin-left: -75px;
+  margin: 10px 0px 0px -50px;
 }
 
-form .invalid-input-message{
-  color: red; 
+form .invalid-input-warning{
+  color: red;
+  font-size: 32px;
 }
 
 form input, textarea, select{
-  border: 1px solid black;
-  width: 225px;
-  font-size: 18px;
+  font-size: 16px;
+  width: 200px;
+  box-shadow: var(--box-shadow);
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: white;
+  text-overflow: ellipsis;
+}
+
+form input:focus, textarea:focus, select:focus {
+  box-shadow: var(--box-shadow-hover);
 }
 
 form .input-radio{
   width: initial;
   margin: 0px 5px;
+  box-shadow: none;
+}
+
+form .input-radio:focus{
+  box-shadow: none; 
 }
 
 form .input-radio:hover{
   cursor: pointer; 
 }
 
-form .save-button{
-  margin-left: auto; 
+form .shimmer-label{
+  width: 120px;
+  margin-top: 0px;
+}
+
+form .shimmer-legend{
+  width: 250px;
+  position: relative;
+  top: -25px;
+  margin: 0px auto;
+}
+
+form .shimmer-input-wrapper{
+  width: 175px; 
+}
+
+form .shimmer-button{
+  margin-left: auto;
+  background-color: white; 
+}
+
+form select:focus{
+  outline: none; 
 }
 
 form select:hover{
@@ -192,38 +314,53 @@ form select:hover{
 }
 
 form .student-form-subcommunities-community{
-  margin-top: 20px; 
+  margin-top: 20px;
+  margin-bottom: 5px;
+  color: green;
+  text-shadow: 0px 0px 0px green;
 }
 
 form .student-form-subcommunities-input{
-  width: 200px;
+  width: 25px;
+  box-shadow: none;
 }
+
+form .student-form-subcommunities-input:focus{
+  box-shadow: none; 
+}
+
+form .student-form-subcommunities-input:hover{
+  cursor: pointer; 
+}
+
+form .student-form-subcommunities-section{
+  display: grid;
+  grid-template-columns: 0fr 1fr 0fr 1fr;
+  align-items: center;
+  grid-row-gap: 10px;
+}
+
 
 form .student-form-subcommunities-label{
   text-align: left; 
+  color: black; 
 }
 
-/* form .student-form-communities-section{
-  margin-top: 10px; 
+form textarea{
+  height: 100px; 
 }
-
-form .student-form-communities-subcommunity-section{
-  padding: 5px; 
-}
-
-form .student-form-communities-subcommunity-section-input{
-  width: auto; 
-}
-
-form .student-form-communities-subcommunity-section-label{
-  width: auto; 
-} */
 
 header{
   text-align: center;
   position: sticky;
-  top: 50px;
+  top: 60px;
+  margin-top: 20px;
   background-color: white;
+}
+
+h1, h2, h3{
+  text-shadow: 1px 1px 1px green;
+  color: Green; 
 }
 
 .home-page-header{
@@ -248,9 +385,13 @@ header{
 
 .list-main-wrapper{
   padding: 0px;
-  margin: 50px 10px;
+  margin: 20px 10px;
   list-style: none;
   min-width: 350px;
+}
+
+.list-main-wrapper li{
+  font-size: 21px; 
 }
 
 .list-main-item{
@@ -259,8 +400,10 @@ header{
   line-height: 60px;
   max-width: 750px;
   margin: 10px auto;
-  border: 1px solid black;
+  box-shadow: var(--box-shadow);
   border-radius: 5px;
+  text-shadow: 0px 0px 0px black;
+  font-weight: bold;
 }
 
 .list-main-item a{
@@ -268,12 +411,17 @@ header{
   justify-content: space-between;
   width: 100%;
   height: 100%;
+  font-size: 18px;
 }
 
 .list-main-item:hover{
-  box-shadow: 2px 2px 2px black; 
-  cursor: pointer; 
-  color: gray; 
+  box-shadow: var(--box-shadow-hover);
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+}
+
+.list-main-item:hover>a{
+  color: var(--primary-color)
 }
 
 .list-main-item div{
@@ -292,15 +440,33 @@ header{
 
 .modal-content{
   background-color: white;
-  margin: 50px auto;
+  margin: 75px auto;
   max-width: 500px;
   width: 75%;
   height: auto;
   min-height: 200px;
+  padding: 10px;
+  font-size: 18px;
 }
 
 .modal-content-close-button{
   float: right; 
+}
+
+nav{
+  height: 50px;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  background-color: black;
+  box-shadow: 5px 5px 5px black;
+}
+
+nav .active{
+  text-decoration: underline;
+  color: green;
 }
 
 .nav-display-menu .nav-hamburger.top{
@@ -319,9 +485,9 @@ header{
 
 .nav-display-menu .nav-links-wrapper{
   position: fixed;
-  background-color: lightgray;
+  background-color: black; 
   z-index: 1;
-  top: 40px;
+  top: 50px;
   left: 0;
   height: 100%;
   width: 100%;
@@ -336,56 +502,13 @@ header{
   display: none; 
 }
 
-.nav-new-button{
-  background-color: white;
-  width: 60px;
-  height: 30px;
-  border-radius: 5px;
-  font-size: 18px;
-  margin: 0px 0px 0px auto;
-}
-
-.nav-links-wrapper>a{
-  display: block;
-  font-size: 21px;
-  margin: 0px 10px;
-}
-
-.nav-new-button-modal-content-wrapper{
-  
-}
-
-.nav-new-button-modal-content-link{
-  display: block; 
-  padding: 5px; 
-}
-
-.nav-new-button-modal-content-link.indent{
-  margin-left: 25px; 
-}
-
-nav{
-  height: 40px;
-  position: sticky;
-  top: 0px;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  background-color: lightgray;
-}
-
-.nav-hamburger{
-  width: 45px;
-  height: 5px;
-  background-color: black;
-  margin-top: 5px;
-}
-
 .nav-hamburger-button{
   background-color: transparent;
+  border: none; 
 }
+
 .nav-hamburger{
-  background-color: black;
+  background-color: white; 
   height: 5px;
   width: 45px;
   margin-top: 5px;
@@ -401,11 +524,44 @@ nav{
 
 .nav-links-wrapper>a{
   display: none; 
+  font-size: 21px;
+  font-weight: bold;
+  color: white;
 }
 
-nav .active{
-  color: white; 
+.nav-new-button{
+  background-color: green;
+  color: white;
+  text-shadow: 0px 0px 0px white;
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 18px;
+  margin: 0px 0px 0px auto;
+  outline: none;
+  border: none;
 }
+
+.nav-new-button-modal-content-wrapper{
+  
+}
+
+.nav-new-button-modal-content-link{
+  display: block;
+  padding: 5px;
+  font-weight: bold;
+  text-shadow: 0px 0px 0px black;
+}
+
+.nav-new-button-modal-content-link:hover{
+  color: green; 
+  text-shadow: 0px 0px 0px green; 
+}
+
+.nav-new-button-modal-content-link.indent{
+  margin-left: 25px; 
+}
+
 
 .nav-wide-screen-wrapper{
   display: none; 
@@ -427,49 +583,115 @@ nav .active{
 }
 
 .negative-amount{
-  color: red; 
+  color: red;
+  text-shadow: 0px 0px 0px red;
 }
 
 .nav-wrapper .new-button:hover{
   cursor: pointer; 
 }
 
+.shimmer-graph{
+  margin: 0 auto;
+  width: 95vw;
+  height: 200px;
+  border-radius: 50px;
+  box-shadow: var(--box-shadow);
+}
+
+.shimmer-line {
+  position: relative;
+  top: 20px;
+  height: 15px;
+  border-radius: 5px;
+}
+
+.shimmer-wrapper {
+  /* width: 0px; */
+  animation: fullView 0.5s forwards linear;
+}
+
+@keyframes fullView {
+  100% {
+    width: 100%;
+  }
+}
+
+.shimmer-animate {
+  animation : shimmer 2s infinite;
+  background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
 .student-challenge-entries-button{
   font-size: 18px;
+  padding: 5px;
+  color: green;
+  text-shadow: 0px 0px 0px green;
   border-radius: 5px;
-  margin: 10px;
-  box-shadow: var(--box-shadow);
-  background-color: white;
-  color: var(--primary-color);
+  background-color:white;
+  margin: 5px; 
 }
 
 .student-challenge-entries-button:hover{
-  cursor: pointer; 
-  box-shadow: var(--box-shadow-hover)
+  cursor: pointer;
+  text-shadow: 0px 0px 0px white;
+  background-color: green;
+  color: white;
 }
 
 .student-challenge-entries-button.button-focused{
-  box-shadow: none;
-  background-color: lightgrey;
-  border: 1px solid black;
+  text-shadow: 0px 0px 0px white;
+  background-color: green;
+  color: white;
 }
 
 .student-challenge-entries-graph{
   position: relative;
-  width: 75vw;
+  width: 95vw;
   margin: 0 auto;
+  box-shadow: var(--box-shadow);
+  margin-top: 10px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.student-challenge-entries-no-records{
+  font-size: 32px;
+  text-align: center;
+  margin-top: 25px;
+  text-shadow: 0px 0px 1px black;
+}
+
+.student-exchange-list-balance{
+  color: black; 
+  text-shadow: 0px 0px 0px black; 
 }
 
 .students-list-main-item{
   max-width: 750px;
   height: 60px;
   margin: 10px auto;
-  border: 1px solid black;
+  box-shadow: var(--box-shadow);
   border-radius: 5px;
   display: grid;
   grid-template-columns: 33% 1fr 1fr 1fr 1fr;
   align-items: center;
   padding: 0px 5px;
+}
+
+.students-list-main-item:hover{
+  color: green;
+  border: 1px solid green;
+  box-shadow: var(--box-shadow-hover);
 }
 
 .students-list-item-links-wrapper{
@@ -498,7 +720,8 @@ nav .active{
 }
 
 .students-list-item-link-tooltip{
-  display: none
+  display: none;
+  font-size: 18px;
 }
 
 .students-list-item-link-transactions{
@@ -509,12 +732,30 @@ nav .active{
 .students-list-item-name{
   font-size: 18px;
 }
+
 .students-list-item-name>p{
   text-overflow: ellipsis;
   overflow: hidden;
+  text-shadow: 0px 0px 0px black;
+  font-weight: bold;
+}
+
+.student-name-shimmer{
+  width: 100px;
+  margin: 0 auto;
+  margin-bottom: 25px;
 }
 
 @media only screen and (min-width: 600px) {
+
+  form input, textarea, select{
+    width: 300px;
+  }
+
+  form .invalid-input-warning{
+    width: auto; 
+  }
+
   .nav-hamburger-button{
     display: none; 
   }
@@ -536,7 +777,6 @@ nav .active{
 
   .nav-links-wrapper>a{
     display: block; 
-    font-size: 21px; 
     margin: 0px 10px; 
   }
   
@@ -545,19 +785,27 @@ nav .active{
     color: var(--primary-color)
   }
 
+  .student-challenge-entries-graph{
+    width: 65vw;
+  }
+
+  .shimmer-graph{
+    width: 65%;
+    height: 400px;
+  }
+
   .students-list-item-link:hover .students-list-item-link-tooltip{
     visibility: initial; 
   }
 
   .students-list-item-link-tooltip {
-    display: block; 
+    display: block;
     visibility: hidden;
     background-color: green;
     color: white;
     line-height: 20px;
     margin-top: 5px;
-    padding: 0px 5px;
+    padding: 2px 4px;
     border-radius: 5px;
   }
 }
-

@@ -19,6 +19,11 @@ class Nav extends Component{
         this.setState({displayMenu})
     }
 
+    handleNavClick(){
+        const displayMenu = false
+        this.setState({displayMenu})
+    }
+
     getClassName(){
         return this.state.displayMenu === true ? 'nav-display-menu' : ''
     }
@@ -32,10 +37,10 @@ class Nav extends Component{
                     <div className='nav-hamburger bottom'></div>
                 </button>
                 <section className='nav-links-wrapper'>
-                    <NavLink onClick={e => this.handleClick(e)} to='/home'>Home</NavLink>
-                    <NavLink onClick={e => this.handleClick(e)} to='/challenges'>Challenges</NavLink>
-                    <NavLink onClick={e => this.handleClick(e)} to='/communities'>Communities</NavLink>
-                    <NavLink onClick={e => this.handleClick(e)} to='/students'>Students</NavLink>
+                    <NavLink onClick={e => this.handleNavClick(e)} to='/home'>Home</NavLink>
+                    <NavLink onClick={e => this.handleNavClick(e)} to='/challenges'>Challenges</NavLink>
+                    <NavLink onClick={e => this.handleNavClick(e)} to='/communities'>Communities</NavLink>
+                    <NavLink onClick={e => this.handleNavClick(e)} to='/students'>Students</NavLink>
                     <button className='nav-new-button' onClick={() => this.toggleModalDisplay()}>New</button>
                     {this.state.displayModal ? 
                     <Modal toggleModalDisplay={() => this.toggleModalDisplay()}>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
+import ShimmerItem from '../_Common/ShimmerItem'
 
 class StudentName extends Component{
     state = {
@@ -28,11 +29,19 @@ class StudentName extends Component{
         )
     }
 
+    renderPlaceHolder(){
+        return(
+            <div className='student-name-shimmer'>
+                <ShimmerItem/>
+            </div>
+        )
+    }
+
     render(){
         return(
-            <div>
-                {this.state.isLoaded ? this.renderPage() : <h2>Loading...</h2>}
-            </div>
+            <>
+                {this.state.isLoaded ? this.renderPage() : this.renderPlaceHolder()}
+            </>
         )
     }
 }

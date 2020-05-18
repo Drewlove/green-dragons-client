@@ -1,5 +1,5 @@
 import React from 'react'
-import FormInvalidInputMessage from '../_Common/FormInvalidInputMessage'
+import FormInvalidInputWarning  from '../_Common/FormInvalidInputWarning'
 
 const SubcommunityForm = (props) => {
 
@@ -8,7 +8,7 @@ const SubcommunityForm = (props) => {
 
     const isInputValid = (inputName, message) => {
         return props.invalidInputs.indexOf(inputName) >= 0 ? 
-        <FormInvalidInputMessage message={message}/> : <FormInvalidInputMessage className='visibility-hidden' message={message}/>
+        <FormInvalidInputWarning  message={message}/> : <FormInvalidInputWarning hidden={true}  className='visibility-hidden' message={message}/>
     }
 
     const handleBlur = e  => {
@@ -28,10 +28,10 @@ const SubcommunityForm = (props) => {
         <form className='subcommunity-form'>
             <fieldset>
                 <legend>
-                    <h2>Subommunity</h2>
+                    <h2>Subcommunity</h2>
                 </legend>
                 <section className='inputs-section'>
-                    <label>Communities</label>
+                    <label>Community</label>
                     <div className='input-wrapper'>
                         <select name='community_id' value={community_id} onChange={e=>props.handleChange(e)}>
                         <option value={""} disabled>-</option>
@@ -39,7 +39,7 @@ const SubcommunityForm = (props) => {
                         </select>
                         {isInputValid('community_id', 'Please choose one')}            
                     </div>
-                    <label htmlFor='subcommunityName'>Name</label>
+                    <label htmlFor='subcommunityName'>Subcommunity</label>
                     <div className='input-wrapper'>
                         <input 
                         id='subcommunityName' 
@@ -48,12 +48,13 @@ const SubcommunityForm = (props) => {
                         value={subcommunity_name}
                         onChange={e=>props.handleChange(e)}
                         onBlur={(e) => handleBlur(e)}/>
-                        {isInputValid('subcommunity_name', 'Must have at least one letter')}
+                        {isInputValid('subcommunity_name', 'Two letters, one capital letter')}
                     </div>
                 </section>
                 <section className='button-section'>
-                    {subcommunity_id ? <button onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
-                    <button className='save-button' onClick={e => props.handleSave(e)}>Save</button>
+                    {subcommunity_id ? 
+                    <button className='button-delete' onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
+                    <button className='button-save' onClick={e => props.handleSave(e)}>Save</button>
                 </section>
             </fieldset>
         </form>

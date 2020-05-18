@@ -1,13 +1,13 @@
 import React from 'react'
 import DatePicker from "react-datepicker";
-import FormInvalidInputMessage from '../../_Common/FormInvalidInputMessage'
+import FormInvalidInputWarning  from '../../_Common/FormInvalidInputWarning'
 
 const StudentFormProfile = (props) => {
     const {first_name, last_name, birth_date, student_id} = props.student
 
     const isInputValid = (inputName, message) => {
         return props.invalidInputs.indexOf(inputName) >= 0 ? 
-        <FormInvalidInputMessage message={message}/> : <FormInvalidInputMessage className='visibility-hidden' message={message}/>
+        <FormInvalidInputWarning /> : <FormInvalidInputWarning  hidden={true} message={message}/>
     }
 
     const handleBlur = e  => {
@@ -38,7 +38,7 @@ const StudentFormProfile = (props) => {
                         onChange={e => props.handleChange(e)}
                         onBlur={(e) => handleBlur(e)}
                         />
-                        {isInputValid('first_name', 'Must have two letters, at least one capital letter')}
+                        {isInputValid('first_name')}
                     </div>
                 <label htmlFor='lastName'>Last Name</label>
                     <div className='input-wrapper'>
@@ -50,7 +50,7 @@ const StudentFormProfile = (props) => {
                         onChange={e => props.handleChange(e)}
                         onBlur={(e) => handleBlur(e)}
                         />
-                        {isInputValid('last_name', 'Must have two letters, at least one capital letter')}
+                        {isInputValid('last_name')}
                     </div>
                     <label htmlFor='birthDate'>Birthdate</label>
                     <div className='input-wrapper'>
@@ -60,12 +60,13 @@ const StudentFormProfile = (props) => {
                         onChange={date => props.handleBirthdateChange(date)}
                         onBlur={(e) => handleDateBlur(e)}
                         />
-                        {isInputValid('birth_date', 'Please enter a valid date')}
+                        {isInputValid('birth_date')}
                     </div>
                 </section>
                 <section className='button-section'>
-                    {student_id ? <button onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
-                    <button className='save-button' onClick={e => props.handleSave(e)}>Save</button>
+                    {student_id ? 
+                    <button className='button-delete' onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
+                    <button className='button-save' onClick={e => props.handleSave(e)}>Save</button>
                 </section>
             </fieldset>
         </form>

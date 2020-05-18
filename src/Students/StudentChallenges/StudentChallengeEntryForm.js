@@ -1,6 +1,6 @@
 import React from 'react'
 import DatePicker from "react-datepicker";
-import FormInvalidInputMessage from '../../_Common/FormInvalidInputMessage'
+import FormInvalidInputWarning  from '../../_Common/FormInvalidInputWarning'
 
 const StudentChallengeEntryForm = (props) => {
 
@@ -12,7 +12,7 @@ const StudentChallengeEntryForm = (props) => {
 
     const isInputValid = (inputName, message) => {
         return props.invalidInputs.indexOf(inputName) >= 0 ? 
-        <FormInvalidInputMessage message={message}/> : <FormInvalidInputMessage className='visibility-hidden' message={message}/>
+        <FormInvalidInputWarning  message={message}/> : <FormInvalidInputWarning  hidden={true} message={message}/>
     }
 
     const handleBlur = e  => {
@@ -74,7 +74,7 @@ const StudentChallengeEntryForm = (props) => {
                 onChange={e => validateSeconds(e)}
                 onBlur={(e) => handleTimeBlur(e)}
                 />
-                {isInputValid('record', 'Please enter a valid time')}
+                {isInputValid('record')}
             </div>
             </> 
         )
@@ -97,23 +97,11 @@ const StudentChallengeEntryForm = (props) => {
                 onChange={e => props.handleChange(e)}
                 onBlur={(e) => handleBlur(e)}
                 />
-                {isInputValid('record', 'Please enter a record')}
+                {isInputValid('record')}
             </div>
             </>
         )
     }
-
-    // const renderUnits = () => {
-    //     return props.challengeEntry.challenge_id ? getUnits() : 'Units'
-    // }
-
-    // const getUnits = () => {
-    //     const selectedChallengeID = parseInt(props.challengeEntry.challenge_id)
-    //     const selectedChallenge = lists.challenge.filter(key => key.challenge_id === selectedChallengeID)[0]
-    //     return selectedChallenge.units === 'seconds' ? "Time" : selectedChallenge.units
-    // }
-
-    
 
     return(
     <main>
@@ -129,7 +117,7 @@ const StudentChallengeEntryForm = (props) => {
                         <option value={""} disabled>-</option>
                         {renderOptions('student')}
                         </select>
-                        {isInputValid('student_id', 'Please choose one')}            
+                        {isInputValid('student_id')}            
                     </div>
                     <label>Challenge</label>
                     <div className='input-wrapper'>
@@ -137,7 +125,7 @@ const StudentChallengeEntryForm = (props) => {
                         <option value={""} disabled>-</option>
                         {renderOptions('challenge')}
                         </select>
-                        {isInputValid('challenge_id', 'Please choose one')}            
+                        {isInputValid('challenge_id')}            
                     </div>
                     <label htmlFor='entryDate'>Date</label>
                     <div className='input-wrapper'>
@@ -147,23 +135,10 @@ const StudentChallengeEntryForm = (props) => {
                         onChange={date => props.handleDateChange(date)}
                         onBlur={(e) => handleDateBlur(e)}
                         />
-                        {isInputValid('entry_date', 'Please enter a valid date')}
+                        {isInputValid('entry_date')}
                     </div>
                     {props.challengeEntry.challenge_id ? renderUnitsInput(): null}
-{/* 
-                    <label htmlFor='record'>{renderUnits()}</label>
-                    <div className='input-wrapper'>
-                        <input 
-                        id='record'
-                        type='number' 
-                        name='record'
-                        value={record} 
-                        onChange={e => props.handleChange(e)}
-                        onBlur={(e) => handleBlur(e)}
-                        />
-                        {isInputValid('record', 'Please enter a record')}
-                    </div> */}
-                    <label htmlFor='notes'>Notes</label>
+                    <label className='label-textarea' htmlFor='notes'>Notes</label>
                     <div className='input-wrapper'>
                         <textarea 
                         name='notes'
@@ -173,8 +148,9 @@ const StudentChallengeEntryForm = (props) => {
                     </div>
                 </section>
                 <section className='button-section'>
-                    {challenge_entry_id ? <button onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
-                    <button className='save-button' onClick={e => props.handleSave(e)}>Save</button>
+                    {challenge_entry_id ? 
+                    <button className='button-delete' onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
+                    <button className='button-save' onClick={e => props.handleSave(e)}>Save</button>
                 </section>
             </fieldset>
         </form>

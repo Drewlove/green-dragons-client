@@ -2,6 +2,7 @@ import React from 'react'
 import studentIcon from '../../Assets/student.png'
 import ChallengesIcon from '../../Assets/challenges.png'
 import CommunitiesIcon from '../../Assets/communities.png'
+import DollarIcon from '../../Assets/dollar.png'
 import {Link} from 'react-router-dom'
 const StudentsListItem = (props) => {
     const {first_name, last_name, student_id} = props.student
@@ -23,8 +24,8 @@ const StudentsListItem = (props) => {
             <p className='students-list-item-link-tooltip'>Challenges</p>
         </Link>
         <Link className='students-list-item-link' to={`/students/${student_id}/exchanges`}>
-            <div className='students-list-item-link-exchanges'>$100.00</div>
-            <p className='students-list-item-link-tooltip'>Transactions</p>
+            <img className='students-list-item-link-icon' alt='dollar icon' src={DollarIcon}/>
+            <p className='students-list-item-link-tooltip'>Bank</p>
         </Link>
     </li>
     )

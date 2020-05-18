@@ -1,12 +1,12 @@
 import React from 'react'
-import FormInvalidInputMessage from '../_Common/FormInvalidInputMessage'
+import FormInvalidInputWarning  from '../_Common/FormInvalidInputWarning'
 
 const CommunityForm = (props) => {
     const {community_id, community_name} = props.community
 
     const isInputValid = (inputName, message) => {
         return props.invalidInputs.indexOf(inputName) >= 0 ? 
-        <FormInvalidInputMessage message={message}/> : <FormInvalidInputMessage className='visibility-hidden' message={message}/>
+        <FormInvalidInputWarning  message={message}/> : <FormInvalidInputWarning hidden={true}  className='visibility-hidden' message={message}/>
     }
 
     const handleBlur = e  => {
@@ -30,12 +30,13 @@ const CommunityForm = (props) => {
                         value={community_name}
                         onChange={e=>props.handleChange(e)}
                         onBlur={(e) => handleBlur(e)}/>
-                        {isInputValid('community_name', 'Must have two letters, at least one capital letter')}
+                        {isInputValid('community_name', 'Two letters, one capital letter')}
                     </div>
                 </section>
                 <section className='button-section'>
-                {community_id ? <button onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
-                <button className='save-button' onClick={e => props.handleSave(e)}>Save</button>
+                {community_id ? 
+                <button className='button-delete' onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
+                <button className='button-save' onClick={e => props.handleSave(e)}>Save</button>
                 </section>
             </fieldset>
         </form>

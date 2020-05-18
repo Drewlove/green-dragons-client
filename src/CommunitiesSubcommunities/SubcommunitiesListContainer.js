@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
 import MODAL_MESSAGES from '../_Common/Modal'
 import SubcommunitiesListItem from './SubcommunitiesListItem'
+import ShimmerList from '../_Common/ShimmerList'
 
 class SubcommunitiesListContainer extends Component{
     state = {
@@ -42,8 +43,7 @@ class SubcommunitiesListContainer extends Component{
     render(){
         return(
             <ul className='communities-list-item-subcommunities-list'>
-                <h2>Subcommunities</h2>
-                {this.state.isLoaded ? this.renderSubcommunities() : <h1>Loading...</h1>}
+                {this.state.isLoaded ? this.renderSubcommunities() : <ShimmerList listLength={5} /> }
         </ul>
         )
     }

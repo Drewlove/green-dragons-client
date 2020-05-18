@@ -3,6 +3,7 @@ import {Redirect, withRouter } from 'react-router-dom'
 import StudentFormSubcommunities from './StudentFormSubcommunities'
 import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../../Utilities/HttpMethods'
+import ShimmerForm from '../../_Common/ShimmerForm'
 import Modal from '../../_Common/Modal'
 
 class StudentFormSubcommunitiesContainer extends Component{
@@ -194,7 +195,7 @@ class StudentFormSubcommunitiesContainer extends Component{
             <>
             {this.state.modalMessage.length > 0 ? this.renderModal() : null}
             {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl}/> : null}
-            {this.state.isLoaded ? this.renderForm() : <h1>Loading</h1>}
+            {this.state.isLoaded ? this.renderForm() : <ShimmerForm inputNumber={5}/>}
             </>
         )
     }

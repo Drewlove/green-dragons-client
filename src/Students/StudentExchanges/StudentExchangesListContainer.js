@@ -6,6 +6,7 @@ import {HTTP_METHODS} from '../../Utilities/HttpMethods'
 import Modal from '../../_Common/Modal'
 import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
 import {GET_MM_DD_YYYY_DATE} from '../../Utilities/UtilityFunctions'
+import ShimmerList from '../../_Common/ShimmerList'
 
 class ExchangesListContainer extends Component{
     state = {
@@ -70,7 +71,7 @@ class ExchangesListContainer extends Component{
         <>
             <header>
                 <StudentName studentId={this.props.match.params.rowId} />
-                <h2 className={this.isAmountNegative()}>Balance: ${this.getBalance()}</h2>
+                <h2 className='student-exchange-list-balance'>Balance: <span className={this.isAmountNegative()}>${this.getBalance()}</span></h2>
             </header>
             <main>
                 <ListMainWrapper 
@@ -88,7 +89,7 @@ class ExchangesListContainer extends Component{
     render(){
         return(
             <>
-                {this.state.isLoaded ? this.renderPage() : <h1>Loading...</h1>}
+                {this.state.isLoaded ? this.renderPage() : <ShimmerList listLength={5} />}
                 {this.state.modalMessage.length > 0 ? this.renderModal() : null}
                 {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl} /> : null}
             </>

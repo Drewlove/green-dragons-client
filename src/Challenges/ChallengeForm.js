@@ -1,12 +1,12 @@
 import React from 'react'
-import FormInvalidInputMessage from '../_Common/FormInvalidInputMessage'
+import FormInvalidInputWarning from '../_Common/FormInvalidInputWarning'
 
 const ChallengeForm = (props) => {
     const {challenge_id, challenge_name, challenge_description, challenge_best_record, units} = props.challenge
     
     const isInputValid = (inputName, message) => {
         return props.invalidInputs.indexOf(inputName) >= 0 ? 
-        <FormInvalidInputMessage message={message}/> : <FormInvalidInputMessage className='visibility-hidden' message={message}/>
+        <FormInvalidInputWarning message={message}/> : <FormInvalidInputWarning hidden={true} message={message}/>
     }
 
     const handleBlur = e  => {
@@ -23,7 +23,7 @@ const ChallengeForm = (props) => {
                 onChange={e=>props.handleChange(e)}
                 value={units}
                 onBlur={(e) => handleBlur(e)}/>
-                {isInputValid('units', 'Must have two letters, at least one capital letter')}
+                {isInputValid('units')}
             </div>
             </>
         )
@@ -45,17 +45,17 @@ const ChallengeForm = (props) => {
                 onChange={e=>props.handleChange(e)}
                 value={challenge_name}
                 onBlur={(e) => handleBlur(e)}/>
-                {isInputValid('challenge_name', 'Must have two letters, at least one capital letter')}
+                {isInputValid('challenge_name')}
             </div>
-            <label htmlFor='description'>Description</label>
+            <label className='label-textarea' htmlFor='task'>Task</label>
             <div className='input-wrapper'>
-                <textarea id='description' 
+                <textarea id='task' 
                 rows='5' 
                 name='challenge_description' 
                 onChange={e=>props.handleChange(e)}
                 value={challenge_description}
                 onBlur={(e) => handleBlur(e)}></textarea>
-                {isInputValid('challenge_description', 'Must have two letters, at least one capital letter')}            
+                {isInputValid('challenge_description')}            
             </div>
             <label>Units</label>
             <div className='input-wrapper'>
@@ -65,23 +65,11 @@ const ChallengeForm = (props) => {
                 <label htmlFor='other'>Other</label>            
             </div>
             {units === 'time' ? null : renderUnitNameInput()}
-            <label htmlFor='bestRecord'>Best Record</label>
-                    <div className='input-wrapper'>
-                        <select 
-                        name='challenge_best_record' 
-                        id='bestRecord'
-                        value={challenge_best_record} 
-                        onChange={e=>props.handleChange(e)}>
-                        <option value={""} disabled>-</option>
-                        <option value='highest'>Highest</option>  
-                        <option value='lowest'>Lowest</option>  
-                        </select>
-                        {isInputValid('challenge_best_record', 'Please choose one')}            
-                    </div>
             </section>
             <section className='button-section'>
-                {challenge_id ? <button onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
-                <button className='save-button' onClick={e => props.handleSave(e)}>Save</button>
+                {challenge_id ? 
+                <button className='button-delete' onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
+                <button className='button-save' onClick={e => props.handleSave(e)}>Save</button>
             </section>
             </fieldset>
         </form>

@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import FormInvalidInputMessage from './FormInvalidInputMessage'
+import ShimmerGraph from './ShimmerGraph'
 
-describe('FormInvalidInputMessage', () => {
+describe('ShimmerGraph', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div')
         ReactDOM.render(
-            <FormInvalidInputMessage />, 
+            <ShimmerGraph/>,
             div
         )
         ReactDOM.unmountComponentAtNode(div)

@@ -4,6 +4,7 @@ import Modal from '../_Common/Modal'
 import {Redirect} from 'react-router-dom'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
 import MODAL_MESSAGES from '../_Common/Modal'
+import ShimmerList from '../_Common/ShimmerList'
 
 class ChallengesListContainer extends Component{
     state = {
@@ -50,11 +51,19 @@ class ChallengesListContainer extends Component{
         </main>
         )
     }
+
+    renderShimmerList(){
+        return(
+        <main>
+            <ShimmerList listLength={5}/>
+        </main>
+        )
+    }
     
     render(){
         return(
             <>
-                {this.state.isLoaded ? this.renderPage() : <h1>Loading...</h1>}
+                {this.state.isLoaded ? this.renderPage() : this.renderShimmerList()}
                 {this.state.modalMessage.length > 0 ? this.renderModal() : null}
                 {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl} /> : null}
             </>

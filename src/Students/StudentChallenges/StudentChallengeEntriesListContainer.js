@@ -1,12 +1,15 @@
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
+import StudentChallengeEntriesGraph from './StudentChallengeEntriesGraph'
 import StudentName from '../../_Common/StudentName'
 import ListMainWrapper from '../../_Common/ListMainWrapper'
-import StudentChallengeEntriesGraph from './StudentChallengeEntriesGraph'
-import {HTTP_METHODS} from '../../Utilities/HttpMethods'
 import Modal from '../../_Common/Modal'
+import ShimmerGraph from '../../_Common/ShimmerGraph'
+import {HTTP_METHODS} from '../../Utilities/HttpMethods'
 import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
 import {GET_MM_DD_YYYY_DATE, CONVERT_TIME} from '../../Utilities/UtilityFunctions'
+
+
 
 class StudentChallengeEntriesListContainer extends Component{
     state = {
@@ -105,7 +108,7 @@ class StudentChallengeEntriesListContainer extends Component{
 
     renderNoResults(){
         return(
-            <h1>No results</h1>
+            <div className= 'student-challenge-entries-no-records'>No Records Found</div>
         )
     }
 
@@ -134,7 +137,7 @@ class StudentChallengeEntriesListContainer extends Component{
         return(
             <>
             {this.renderHeader()}
-            {this.state.isLoaded ? this.renderPage() : <h1>Loading...</h1>}
+            {this.state.isLoaded ? this.renderPage() : <ShimmerGraph/> }
             {this.state.modalMessage.length > 0 ? this.renderModal() : null}
             {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl} /> : null}
             </>

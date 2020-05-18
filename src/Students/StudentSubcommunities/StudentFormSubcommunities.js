@@ -9,7 +9,7 @@ const StudentFormSubcommunities = (props) => {
             return(
             <React.Fragment key={community.community_id}>
                 <h3 className='student-form-subcommunities-community'>{community.community_name}</h3>
-                <section className='inputs-section student-subcommunities-form'>
+                <section className='student-form-subcommunities-section'>
                     {renderSubcommunities(community.subcommunities)}
                 </section>     
             </React.Fragment>

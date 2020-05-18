@@ -5,6 +5,7 @@ import {GET_INVALID_INPUTS} from '../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
 import Modal from '../_Common/Modal'
+import ShimmerForm from '../_Common/ShimmerForm'
 import "react-datepicker/dist/react-datepicker.css";
 
 class ChallengeFormContainer extends Component{
@@ -141,7 +142,7 @@ class ChallengeFormContainer extends Component{
             <>
             {this.state.modalMessage.length > 0 ? this.renderModal() : null}
             {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl}/> : null}
-            {this.state.isLoaded ? this.renderForm() : <h1>Loading</h1>}
+            {this.state.isLoaded ? this.renderForm() : <ShimmerForm inputNumber={1}/>}
             </>
         )
     }
