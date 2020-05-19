@@ -153,19 +153,23 @@ form{
   padding: 10px;
 }
 
-form .button-delete{
+.form-button-section .button-delete{
   background-color: white;
   color: red;
   text-shadow: 0px 0px 0px red;
 }
 
-form .button-section{
-  display: flex; 
+.form-button-section{
+  display: flex;
   justify-content: space-between;
   margin-top: 25px;
+  max-width: 600px;
+  margin: 0px auto;
+  border-radius: 5px;
+  padding: 10px;
 }
 
-form .button-section>button{
+.form-button-section>button{
   font-size: 18px;
   padding: 5px;
   border-radius: 5px;
@@ -175,12 +179,12 @@ form .button-section>button{
   height: 35px;
 }
 
-form .button-section>button:hover{
+.form-button-section>button:hover{
   cursor: pointer; 
   box-shadow: var(--box-shadow-hover)
 }
 
-form .button-section>.button-save{
+.form-button-section>.button-save{
   margin-left: auto; 
   background-color: var(--primary-color); 
   color: white; 

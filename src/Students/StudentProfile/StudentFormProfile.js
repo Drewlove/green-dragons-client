@@ -65,7 +65,7 @@ const StudentFormProfile = (props) => {
                 </section>
             </fieldset>
         </form>
-        <section className='button-section'>
+        <section className='form-button-section'>
                     {student_id ? 
                     <button className='button-delete' onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
                     <button className='button-save' onClick={e => props.handleSave(e)}>Save</button>
