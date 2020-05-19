@@ -358,7 +358,8 @@ header{
 }
 
 .home-page-header{
-  text-align: center; 
+  text-align: center;
+  margin-top: 20px;
 }
 
 .home-page-main{
