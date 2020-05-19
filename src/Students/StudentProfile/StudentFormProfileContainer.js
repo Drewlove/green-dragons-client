@@ -71,7 +71,8 @@ class StudentFormProfileContainer extends Component{
     handleSave(e){
         e.preventDefault()
         this.validateAllInputs()
-        document.activeElement.classList.add('color-transparent')
+        // document.activeElement.classList.add('color-transparent')
+        document.getElementsByTagName('form')[0].classList.add('display-none')
         return this.isFormValid() ? this.saveStudentRecord(): this.setState({modalMessage:MODAL_MESSAGES.saveFailInputsInvalid})
     }
 

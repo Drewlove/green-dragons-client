@@ -31,10 +31,6 @@ a, button:focus{
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-.color-transparent{
-  color: transparent; 
-}
-
 .communities-list-container{
   display: flex;
   flex-direction: column;
