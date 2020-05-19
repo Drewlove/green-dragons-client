@@ -75,6 +75,7 @@ class StudentFormProfileContainer extends Component{
     }
 
     async saveStudentRecord(){
+        document.activeElement.blur() 
         const saveResponse = await HTTP_METHODS.submitData(this.state.student, this.getEndpointSuffix(), this.isPatchOrPost()) 
         saveResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.saveSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.saveFail})
     }
