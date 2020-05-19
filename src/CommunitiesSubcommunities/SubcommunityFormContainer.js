@@ -26,6 +26,10 @@ class SubcommunityFormContainer extends Component{
         return this.props.match.params.rowId === "0" ? this.getCommunities() : this.getData()
     }
 
+    componentDidUpdate(prevProps){
+        return prevProps.match.params.rowId !== this.props.match.params.rowId ? this.resetForm() : null
+    }
+
     async getCommunities(){
         const communities = await this.getAllRowsFromEndpoint('communities')
         this.setState({communities}, this.setState({isLoaded: true}))
@@ -65,16 +69,12 @@ class SubcommunityFormContainer extends Component{
         )
     }
 
-    componentDidUpdate(prevProps){
-        return prevProps.match.params.rowId !== this.props.match.params.rowId ? this.resetForm() : null
-    }
-
     resetForm(){
-        const community = {
-            community_id: null,
+        const subcommunity = {
+            community_id: '',
             community_name: '',
          }
-        this.setState({community})
+        this.setState({subcommunity})
         this.setState({invalidInputs: []})
     }
 
