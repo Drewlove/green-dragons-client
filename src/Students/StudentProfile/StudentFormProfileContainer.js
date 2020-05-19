@@ -71,11 +71,11 @@ class StudentFormProfileContainer extends Component{
     handleSave(e){
         e.preventDefault()
         this.validateAllInputs()
+        document.activeElement.classList.add('color-transparent')
         return this.isFormValid() ? this.saveStudentRecord(): this.setState({modalMessage:MODAL_MESSAGES.saveFailInputsInvalid})
     }
 
     async saveStudentRecord(){
-        document.activeElement.blur() 
         const saveResponse = await HTTP_METHODS.submitData(this.state.student, this.getEndpointSuffix(), this.isPatchOrPost()) 
         saveResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.saveSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.saveFail})
     }

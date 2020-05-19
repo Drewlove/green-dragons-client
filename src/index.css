@@ -31,6 +31,10 @@ a, button:focus{
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+.color-transparent{
+  color: transparent; 
+}
+
 .communities-list-container{
   display: flex;
   flex-direction: column;
@@ -189,7 +193,6 @@ form .button-section>.button-save{
   margin-left: auto; 
   background-color: var(--primary-color); 
   color: white; 
-  box-shadow: var(--box-shadow);
   text-shadow: 0px 0px 0px white; 
 }
 
@@ -337,7 +340,6 @@ form .student-form-subcommunities-section{
   align-items: center;
   grid-row-gap: 10px;
 }
-
 
 form .student-form-subcommunities-label{
   text-align: left; 
