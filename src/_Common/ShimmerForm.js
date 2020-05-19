@@ -8,14 +8,14 @@ const ShimmerForm = (props)=> {
 
         for(let i = 0; i < props.inputNumber; i++){
             inputs.push(
-                <>
+                <React.fragment key={i}>
                 <label className='shimmer-label'>
                     <ShimmerItem/>
                 </label>
                 <div className='shimmer-input-wrapper'>
                     <ShimmerItem/>
                 </div>
-                </>
+                </React.fragment>
             )
         }
         return inputs

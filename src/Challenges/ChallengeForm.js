@@ -2,7 +2,7 @@ import React from 'react'
 import FormInvalidInputWarning from '../_Common/FormInvalidInputWarning'
 
 const ChallengeForm = (props) => {
-    const {challenge_id, challenge_name, challenge_description, challenge_best_record, units} = props.challenge
+    const {challenge_id, challenge_name, challenge_description, units} = props.challenge
     
     const isInputValid = (inputName, message) => {
         return props.invalidInputs.indexOf(inputName) >= 0 ? 

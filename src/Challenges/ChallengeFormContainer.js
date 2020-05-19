@@ -62,7 +62,6 @@ class ChallengeFormContainer extends Component{
             challenge_id: null,
             challenge_name: '',
             challenge_description: '',
-            challenge_best_record: '',
             units: '',
          }
         this.setState({challenge})
@@ -127,9 +126,6 @@ class ChallengeFormContainer extends Component{
             },
             challenge_description: {
                 minLength: 1,
-            },
-            challenge_best_record: {
-                minLength: 1
             },
             units: {
                 minLength: 1,

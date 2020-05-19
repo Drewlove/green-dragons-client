@@ -6,7 +6,6 @@ const challenge = {
     challenge_id: 1,
     challenge_name: 'challenge',
     challenge_description: 'Can you challenge?',
-    challenge_best_record: 'highest',
     units: 'time'
 }
 
