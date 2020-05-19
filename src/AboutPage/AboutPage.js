@@ -5,10 +5,8 @@ const AboutPage = () => {
         <>
         <h1 className='home-page-header'>Green Dragons App</h1>
         <main className='home-page-main'>
-            <h2>Who is it for?</h2>
-            <p>The administrative staff at <a className='home-page-link' href='https://www.greendragonsinc.com/'>Green Dragons Inc.</a></p>
+            <p>This app is a prototype made for the administrative staff of <a className='home-page-link' href='https://www.greendragonsinc.com/'>Green Dragons Inc.</a></p>
             <br></br>
-            <h2>What does it do?</h2>
             <p>The app consolidates student information and other dynamic pieces of the Green Dragons Program.</p>
             <br></br>
             <p>Admin can create, edit, and delete communities, subcommunities, challenges, students, and the following student information:</p>            
