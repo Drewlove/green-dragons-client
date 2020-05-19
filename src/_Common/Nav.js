@@ -38,9 +38,9 @@ class Nav extends Component{
                 </button>
                 <section className='nav-links-wrapper'>
                     <NavLink onClick={e => this.handleNavClick(e)} to='/about'>About</NavLink>
+                    <NavLink onClick={e => this.handleNavClick(e)} to='/students'>Students</NavLink>
                     <NavLink onClick={e => this.handleNavClick(e)} to='/challenges'>Challenges</NavLink>
                     <NavLink onClick={e => this.handleNavClick(e)} to='/communities'>Communities</NavLink>
-                    <NavLink onClick={e => this.handleNavClick(e)} to='/students'>Students</NavLink>
                     <button className='nav-new-button' onClick={() => this.toggleModalDisplay()}>New</button>
                     {this.state.displayModal ? 
                     <Modal toggleModalDisplay={() => this.toggleModalDisplay()}>
