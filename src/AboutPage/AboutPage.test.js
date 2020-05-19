@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import HomePage from './HomePage'
+import AboutPage from './AboutPage'
 
-describe('HomePage', () => {
+describe('AboutPage', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div')
         ReactDOM.render(
-            <HomePage/>,
+            <AboutPage/>,
             div
         )
         ReactDOM.unmountComponentAtNode(div)
