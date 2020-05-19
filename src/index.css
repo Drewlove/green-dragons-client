@@ -362,14 +362,24 @@ header{
 }
 
 .home-page-main{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 750px;
+  margin: 10px auto;
+  font-size: 18px;
+  padding: 20px;
+}
+
+.home-page-main>p{
+  margin-top: 10px; 
+}
+
+.home-page-link{
+  color: green;
+  text-decoration: underline;
 }
 
 .home-page-list{
   margin-left: 100px;
-  padding: 0px;
+  padding: 10px;
 }
 
 .home-page-main{

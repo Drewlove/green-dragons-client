@@ -4,7 +4,7 @@ import Nav from './_Common/Nav'
 import ChallengesRouting from './Challenges/ChallengesRouting'
 import CommunitiesRouting from './Communities/CommunitiesRouting'
 import StudentsRouting from './Students/StudentsRouting/StudentsRouting'
-import HomePage from './_Common/HomePage'
+import HomePage from './HomePage/HomePage'
 
 class App extends Component{
 
