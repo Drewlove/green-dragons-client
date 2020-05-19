@@ -450,7 +450,23 @@ h1, h2, h3{
 }
 
 .modal-content-close-button{
-  float: right; 
+  font-weight: bold;
+  float: right;
+  border: none;
+  background-color: white;
+  font-size: 21px;
+  color: red;
+  margin-top: -10px;
+  margin-right: -10px;
+}
+
+.modal-content-close-button:hover{
+  cursor: pointer; 
+}
+
+.modal-content>p{
+  text-align: center;
+  margin-top: 50px;
 }
 
 nav{
