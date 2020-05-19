@@ -21,7 +21,7 @@ const StudentFormProfile = (props) => {
 
     return(
         <main>
-        <form className='student-form-profile'>
+        <form className='student-form-profile' onSubmit={ e => e.preventDefault()}>
             <fieldset>
                 <legend>
                     <h2>Student</h2>
