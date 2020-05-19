@@ -21,7 +21,7 @@ const StudentFormProfile = (props) => {
 
     return(
         <main>
-        <form className='student-form-profile'>
+        <form className='student-form-profile' onSubmit={e => props.handleSave(e)}>
             <fieldset>
                 <legend>
                     <h2>Student</h2>
