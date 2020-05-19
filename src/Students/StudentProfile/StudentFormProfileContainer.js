@@ -42,6 +42,7 @@ class StudentFormProfileContainer extends Component{
     }
 
     toggleModalDisplay(){
+        document.getElementsByTagName('form')[0].classList.remove('display-none')
         return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
         this.setState({redirectUrl: `/students`}) : this.setState({modalMessage: ''})
     }
