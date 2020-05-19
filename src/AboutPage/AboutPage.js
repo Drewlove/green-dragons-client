@@ -3,7 +3,7 @@ import React from 'react'
 const AboutPage = () => {
     return(
         <>
-        <h1 className='home-page-header'>Green Dragons App</h1>
+        <h2 className='home-page-header'>Green Dragons App</h2>
         <main className='home-page-main'>
             <p>This app is a prototype made for the administrative staff of <a className='home-page-link' href='https://www.greendragonsinc.com/'>Green Dragons Inc.</a></p>
             <br></br>
