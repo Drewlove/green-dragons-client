@@ -57,7 +57,7 @@ const StudentChallengeEntryForm = (props) => {
                 id='record'
                 type='number' 
                 name='minutes'
-                value={minutes}
+                value={Number(minutes).toString()}
                 onChange={e => props.handleTimeChange('minutes', e.target.value)}
                 onBlur={e => handleTimeBlur(e)}
                 />
@@ -70,7 +70,7 @@ const StudentChallengeEntryForm = (props) => {
                 max='59'
                 type='number' 
                 name='seconds'
-                value={seconds === 0 ? "" : seconds} 
+                value={Number(seconds).toString()} 
                 onChange={e => validateSeconds(e)}
                 onBlur={(e) => handleTimeBlur(e)}
                 />
