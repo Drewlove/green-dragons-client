@@ -4,7 +4,7 @@ import StudentFormProfile from './StudentFormProfile'
 import Modal from '../../_Common/Modal'
 import ModalDeleteConfirm from '../../_Common/ModalDeleteConfirm'
 import ShimmerForm from '../../_Common/ShimmerForm'
-import {GET_UTCDATE_WITH_TIMEZONE_OFFSET, HIDE_FORM, SHOW_FORM} from '../../Utilities/UtilityFunctions'
+import {GET_UTCDATE_WITH_TIMEZONE_OFFSET, HIDE_FORM, SHOW_FORM, SCROLL_TO_TOP} from '../../Utilities/UtilityFunctions'
 import {GET_INVALID_INPUTS} from '../../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../../Utilities/HttpMethods'
@@ -46,8 +46,7 @@ class StudentFormProfileContainer extends Component{
 
     renderModal(){
         HIDE_FORM()
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+        SCROLL_TO_TOP()
         return(
             <Modal closeModal={()=> this.closeModal()}>
                 <p>{this.state.modalMessage}</p>

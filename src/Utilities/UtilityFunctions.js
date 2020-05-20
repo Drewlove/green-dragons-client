@@ -40,3 +40,8 @@ export const SHOW_FORM = () => {
   const formElement = document.getElementsByTagName('form')[0]
   formElement.classList.remove('display-none')
 }
+
+export const SCROLL_TO_TOP = () => {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
