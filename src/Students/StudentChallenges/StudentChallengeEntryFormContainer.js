@@ -150,7 +150,7 @@ class StudentChallengeEntryFormContainer extends Component{
     }
 
     handleTimeChange(name, value){
-        const prevTime = this.getPrevTime()
+        const prevTime = this.getPrevTime(name, value)
         const prevMin = Math.floor(prevTime / 60)
         const prevSec = prevTime % 60
         const newTime = this.getNewTime(value)

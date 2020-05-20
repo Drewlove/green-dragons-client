@@ -57,9 +57,9 @@ const StudentChallengeEntryForm = (props) => {
                 id='record'
                 type='number' 
                 name='minutes'
-                value={minutes === 0 ? "" : minutes} 
+                value={minutes}
                 onChange={e => props.handleTimeChange('minutes', e.target.value)}
-                onBlur={(e) => handleTimeBlur(e)}
+                onBlur={e => handleTimeBlur(e)}
                 />
             </div>
             <label htmlFor='record'>Sec</label>

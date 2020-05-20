@@ -269,7 +269,6 @@ form .label-textarea{
 }
 
 form legend{
-  position: sticky;
   background-color: white;
   top: 90px;
   color: green;
