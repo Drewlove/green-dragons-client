@@ -78,7 +78,7 @@ class StudentFormSubcommunitiesContainer extends Component{
 
     handleChange(e){
         //allows onChange handler for checkbox to function properly
-        document.getElementsByTagName('header')[0].focus()
+        e.target.nextSibling.focus()
 
         const isChecked = e.target.checked
         const subcommunityId = parseInt(e.target.value)
