@@ -4,7 +4,7 @@ const Modal = (props) => {
     return(
     <section className='modal-section'>
         <div className='modal-content'>
-            <button  onClick={()=>props.closeModal()} className='modal-content-close-button'>
+            <button  onClick={(e)=>props.toggleModalDisplay(e)} className='modal-content-close-button'>
                 X
             </button>
             {props.children}

@@ -72,7 +72,7 @@ class StudentChallengeEntryFormContainer extends Component{
         this.setState({modalMessage})
     }
 
-    closeModal(){
+    toggleModalDisplay(){
         const {student_id, challenge_id} = this.state.challengeEntry
         return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
         this.setState({redirectUrl: `/students/${student_id}/challenges/${challenge_id}`}) : this.setState({modalMessage: ''})
@@ -80,7 +80,7 @@ class StudentChallengeEntryFormContainer extends Component{
 
     renderModal(){
         return(
-            <Modal closeModal={()=> this.closeModal()}>
+            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
                 <p>{this.state.modalMessage}</p>
             </Modal>
         )

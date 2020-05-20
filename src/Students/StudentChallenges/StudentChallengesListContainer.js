@@ -46,13 +46,13 @@ class StudentChallengesListContainer extends Component{
         }, {})
     }
 
-    closeModal(){
+    toggleModalDisplay(){
         this.setState({redirectUrl: '/'})
     }
 
     renderModal(){
         return(
-            <Modal closeModal={()=> this.closeModal()}>
+            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
                 <p>{this.state.modalMessage}</p>
             </Modal>
         )

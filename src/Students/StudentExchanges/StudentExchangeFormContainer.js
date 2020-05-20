@@ -65,14 +65,14 @@ class StudentExchangeFormContainer extends Component{
         this.setState({modalMessage})
     }
 
-    closeModal(){
+    toggleModalDisplay(){
         return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
         this.setState({redirectUrl: `/students/${this.state.exchange.student_id}/exchanges`}) : this.setState({modalMessage: ''})
     }
 
     renderModal(){
         return(
-            <Modal closeModal={()=> this.closeModal()}>
+            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
                 <p>{this.state.modalMessage}</p>
             </Modal>
         )

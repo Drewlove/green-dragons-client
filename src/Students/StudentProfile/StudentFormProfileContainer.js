@@ -38,7 +38,7 @@ class StudentFormProfileContainer extends Component{
         this.setState({student}, () => this.setState({isLoaded: true})) 
     }
 
-    closeModal(){
+    toggleModalDisplay(){
         SHOW_FORM()
         return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
         this.setState({redirectUrl: `/students`}) : this.setState({modalMessage: ''})
@@ -48,7 +48,7 @@ class StudentFormProfileContainer extends Component{
         HIDE_FORM()
         SCROLL_TO_TOP()
         return(
-            <Modal closeModal={()=> this.closeModal()}>
+            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
                 <p>{this.state.modalMessage}</p>
                 {this.state.modalMessage === MODAL_MESSAGES.deleteConfirm ? 
                 <ModalDeleteConfirm cancelDelete = {e => this.cancelDelete(e)} deleteRecord = {e => this.deleteRecord(e)}/> : null}
