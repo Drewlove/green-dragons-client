@@ -767,9 +767,9 @@ nav .active{
   visibility: hidden; 
 }
 
-/* remove hover effects on touch devices */
+/* remove list item hover effects on on touch devices */
 @media not all and (pointer: coarse) {
-  li:hover {
+  li>*:hover {
     color: none; 
     box-shadow: none; 
   }
