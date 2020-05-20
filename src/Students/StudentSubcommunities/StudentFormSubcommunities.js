@@ -31,8 +31,7 @@ const StudentFormSubcommunities = (props) => {
                         className='student-form-subcommunities-input' 
                         type='checkbox' 
                         value={subcommunity.subcommunity_id} 
-                        onChange={e => ignoreOnChange(e)}
-                        onClick={e => props.handleChange(e)}
+                        onChange={e => props.handleChange(e)}
                         checked={isChecked(subcommunity.subcommunity_id)}
                     />
                     <label className='student-form-subcommunities-label'>
