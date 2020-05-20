@@ -713,9 +713,9 @@ nav .active{
 }
 
 .students-list-main-item:hover{
-  color: green;
+  /* color: green;
   border: 1px solid green;
-  box-shadow: var(--box-shadow-hover);
+  box-shadow: var(--box-shadow-hover); */
 }
 
 .students-list-item-links-wrapper{
