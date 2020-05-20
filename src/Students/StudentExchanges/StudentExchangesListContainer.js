@@ -42,13 +42,13 @@ class ExchangesListContainer extends Component{
         return listData
     }
 
-    toggleModalDisplay(){
+    closeModal(){
         this.setState({redirectUrl: '/'})
     }
 
     renderModal(){
         return(
-            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
+            <Modal closeModal={()=> this.closeModal()}>
                 <p>{this.state.modalMessage}</p>
             </Modal>
         )

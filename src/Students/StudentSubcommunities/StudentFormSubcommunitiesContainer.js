@@ -63,14 +63,14 @@ class StudentFormSubcommunitiesContainer extends Component{
         this.setState({modalMessage})
     }
 
-    toggleModalDisplay(){
+    closeModal(){
         return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
         this.setState({redirectUrl: '/students/'}) : this.setState({modalMessage: ''})
     }
 
     renderModal(){
         return(
-            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
+            <Modal closeModal={()=> this.closeModal()}>
                 <p>{this.state.modalMessage}</p>
             </Modal>
         )

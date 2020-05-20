@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 const ModalContentLinkswrapper = (props) => {
 
     const handleClick = () => {
-        props.toggleModalDisplay()
+        props.closeModal()
     }
 
     return (

@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import {Redirect, withRouter } from 'react-router-dom'
 import StudentFormProfile from './StudentFormProfile'
 import Modal from '../../_Common/Modal'
+import ModalDeleteConfirm from '../../_Common/ModalDeleteConfirm'
 import ShimmerForm from '../../_Common/ShimmerForm'
-import {GET_UTCDATE_WITH_TIMEZONE_OFFSET, TOGGLE_HIDE_FORM} from '../../Utilities/UtilityFunctions'
+import {GET_UTCDATE_WITH_TIMEZONE_OFFSET, HIDE_FORM, SHOW_FORM} from '../../Utilities/UtilityFunctions'
 import {GET_INVALID_INPUTS} from '../../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../../Utilities/HttpMethods'
@@ -37,23 +38,31 @@ class StudentFormProfileContainer extends Component{
         this.setState({student}, () => this.setState({isLoaded: true})) 
     }
 
-    setModalMessage(modalMessage){
-        this.setState({modalMessage})
-    }
-
-    toggleModalDisplay(){
-        TOGGLE_HIDE_FORM()
-        this.setState({modalMessage: ''})
+    closeModal(){
+        SHOW_FORM()
         return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
         this.setState({redirectUrl: `/students`}) : this.setState({modalMessage: ''})
     }
 
     renderModal(){
+        HIDE_FORM()
         return(
-            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
+            <Modal closeModal={()=> this.closeModal()}>
                 <p>{this.state.modalMessage}</p>
+                {this.state.modalMessage === MODAL_MESSAGES.deleteConfirm ? 
+                <ModalDeleteConfirm cancelDelete = {e => this.cancelDelete(e)} deleteRecord = {e => this.deleteRecord(e)}/> : null}
             </Modal>
         )
+    }
+
+    cancelDelete(e){
+        SHOW_FORM()
+        this.setState({modalMessage : ''})
+    }
+
+    async deleteRecord(){
+        const deleteResponse = await HTTP_METHODS.deleteData(`students/${this.props.match.params.rowId}`)
+        deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
     }
 
     componentDidUpdate(prevProps){
@@ -73,7 +82,6 @@ class StudentFormProfileContainer extends Component{
     handleSave(e){
         e.preventDefault()
         this.validateAllInputs()
-        TOGGLE_HIDE_FORM()
         return this.isFormValid() ? this.saveStudentRecord(): this.setState({modalMessage:MODAL_MESSAGES.saveFailInputsInvalid})
     }
 
@@ -104,8 +112,8 @@ class StudentFormProfileContainer extends Component{
 
     async handleDelete(e){
         e.preventDefault()
-        const deleteResponse = await HTTP_METHODS.deleteData(`students/${this.props.match.params.rowId}`)
-        deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
+        this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
+        HIDE_FORM()
     }
 
     handleChange(e){

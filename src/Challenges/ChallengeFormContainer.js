@@ -41,27 +41,17 @@ class ChallengeFormContainer extends Component{
         this.setState({modalMessage})
     }
 
-    toggleModalDisplay(){
-        TOGGLE_HIDE_FORM()
+    closeModal(){
         return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
         this.setState({redirectUrl: `/challenges`}) : this.setState({modalMessage: ''})
     }
 
     renderModal(){
         return(
-            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
+            <Modal closeModal={()=> this.closeModal()}>
                 <p>{this.state.modalMessage}</p>
                 {this.state.modalMessage === MODAL_MESSAGES.deleteConfirm ? this.renderModalButtons() : null}
             </Modal>
-        )
-    }
-
-    renderModalButtons(){
-        return(
-            <section className='button-section'>
-                <button className='button-delete'>Delete</button>
-                <button className='button-cancel'>Cancel</button>
-            </section>
         )
     }
 
@@ -76,14 +66,13 @@ class ChallengeFormContainer extends Component{
             challenge_description: '',
             units: '',
          }
-        this.setState({challenge})
-        this.setState({invalidInputs: []})
+         this.setState({challenge})
+         this.setState({invalidInputs: []})
     }
 
     handleSave(e){
         e.preventDefault()
         this.validateAllInputs()
-        TOGGLE_HIDE_FORM()
         return this.isFormValid() ? this.saveRecord(): this.setState({modalMessage:MODAL_MESSAGES.saveFailInputsInvalid})
     }
 
@@ -115,8 +104,8 @@ class ChallengeFormContainer extends Component{
     async handleDelete(e){
         e.preventDefault()
         this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
-        //const deleteResponse = await HTTP_METHODS.deleteData(`challenges/${this.props.match.params.rowId}`)
-        //deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
+        const deleteResponse = await HTTP_METHODS.deleteData(`challenges/${this.props.match.params.rowId}`)
+        deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
     }
 
     handleChange(e){
