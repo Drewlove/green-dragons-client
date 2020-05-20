@@ -3,7 +3,7 @@ import StudentName from '../../_Common/StudentName'
 const StudentFormSubcommunities = (props) => {
 
     const handleCheckboxChange = (e) => {
-        e.target.blur()
+        e.currentTarget.blur()
         props.handleChange(e)
     }
 
