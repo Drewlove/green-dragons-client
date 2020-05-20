@@ -4,7 +4,6 @@
   font-family: 'Julius Sans One', sans-serif;
 }
 
-
 :root{
   --primary-color: green;
   --box-shadow: 0px 0px 5px 0 #a9a9a9;
@@ -157,7 +156,6 @@ form{
 .button-section .button-delete{
   background-color: white;
   color: red;
-  text-shadow: 0px 0px 0px red;
   box-shadow: none; 
 }
 
@@ -190,7 +188,6 @@ form{
   margin-left: auto; 
   background-color: var(--primary-color); 
   color: white; 
-  text-shadow: 0px 0px 0px white; 
 }
 
 form fieldset{
@@ -202,7 +199,6 @@ form fieldset{
 
 fieldset>h1, fieldset>h2, fieldset>h3{
   color: black; 
-  text-shadow: 0px 0px 0px black; 
 }
 
 form .input-wrapper{
@@ -264,7 +260,6 @@ form .invalid-input-warning{
 form label{
   text-align: right;
   font-weight: 900;
-  text-shadow: 0px 0px 0px green;
   color: green;
   font-size: 16px;
 }
@@ -279,7 +274,6 @@ form legend{
   top: 90px;
   color: green;
   margin: 0 auto;
-  text-shadow: 1px 1px 1px green;
 }
 
 form select:focus{
@@ -315,7 +309,6 @@ form .student-form-subcommunities-community{
   margin-top: 20px;
   margin-bottom: 5px;
   color: green;
-  text-shadow: 0px 0px 0px green;
 }
 
 form .student-form-subcommunities-input{
@@ -348,7 +341,6 @@ form textarea{
 }
 
 h1, h2, h3{
-  text-shadow: 1px 1px 1px green;
   color: Green; 
 }
 
@@ -399,7 +391,6 @@ header{
   margin: 10px auto;
   box-shadow: var(--box-shadow);
   border-radius: 5px;
-  text-shadow: 0px 0px 0px black;
   font-weight: bold;
 }
 
@@ -554,7 +545,6 @@ nav .active{
   text-align: center;
   background-color: green;
   color: white;
-  text-shadow: 1px 1px 1px white;
   width: 80px;
   height: 30px;
   border-radius: 5px;
@@ -572,12 +562,10 @@ nav .active{
   display: block;
   padding: 5px;
   font-weight: bold;
-  text-shadow: 0px 0px 0px black;
 }
 
 .nav-new-button-modal-content-link:hover{
   color: green; 
-  text-shadow: 0px 0px 0px green; 
 }
 
 .nav-new-button-modal-content-link.indent{
@@ -609,7 +597,6 @@ nav .active{
 
 .negative-amount{
   color: red;
-  text-shadow: 0px 0px 0px red;
 }
 
 .shimmer-animate {
@@ -655,7 +642,6 @@ nav .active{
   font-size: 18px;
   padding: 5px;
   color: green;
-  text-shadow: 0px 0px 0px green;
   border-radius: 5px;
   background-color:white;
   margin: 5px; 
@@ -663,13 +649,11 @@ nav .active{
 
 .student-challenge-entries-button:hover{
   cursor: pointer;
-  text-shadow: 0px 0px 0px white;
   background-color: green;
   color: white;
 }
 
 .student-challenge-entries-button.button-focused{
-  text-shadow: 0px 0px 0px white;
   background-color: green;
   color: white;
 }
@@ -688,12 +672,10 @@ nav .active{
   font-size: 32px;
   text-align: center;
   margin-top: 25px;
-  text-shadow: 0px 0px 1px black;
 }
 
 .student-exchange-list-balance{
   color: black; 
-  text-shadow: 0px 0px 0px black; 
 }
 
 .students-list-main-item{
@@ -752,7 +734,6 @@ nav .active{
 .students-list-item-name>p{
   text-overflow: ellipsis;
   overflow: hidden;
-  text-shadow: 0px 0px 0px black;
   font-weight: bold;
   font-size: 15px; 
 }
@@ -767,13 +748,36 @@ nav .active{
   visibility: hidden; 
 }
 
-/* remove list item hover effects on on touch devices */
-@media not all and (pointer: coarse) {
-  li>*:hover {
-    color: none; 
-    box-shadow: none; 
+/* remove list item hover effects on on mobile devices */
+@media only screen and (max-width: 450px) { 
+
+  .list-main-item:hover {
+    box-shadow: var(--box-shadow); 
+    border: none; 
+  }
+  
+  .list-main-item>a:hover{
+    color: black; 
+  }
+
+  .communities-list-item-link-wrapper:hover{    
+    box-shadow: var(--box-shadow); 
+    border: none;  
+  }
+
+  .communities-list-item-link-wrapper>a:hover{
+    color: black; 
+  }
+
+  .students-list-main-item:hover{
+    color: black; 
+    box-shadow: var(--box-shadow);
+    border: none; 
   }
 }
+  
+
+
 
 @media only screen and (max-width: 320px) {
   form input, textarea, select{
