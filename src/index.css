@@ -171,7 +171,7 @@ form{
   padding: 10px;
 }
 
-.button-section>button, input{
+.button-section>button, .button-section>input{
   font-size: 18px;
   padding: 5px;
   border-radius: 5px;
