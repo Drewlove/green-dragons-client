@@ -438,7 +438,7 @@ header{
 
 .modal-content{
   background-color: white;
-  margin: 150px auto;
+  margin: 75px auto;
   max-width: 500px;
   width: 75%;
   height: auto;
@@ -552,10 +552,6 @@ nav .active{
   font-size: 21px;
   font-weight: bold;
   color: white;
-}
-
-.nav-links-wrapper .modal-section>.modal-content{
-  margin-top: 75px; 
 }
 
 .nav-new-button{
