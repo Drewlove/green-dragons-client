@@ -56,7 +56,7 @@ const StudentFormSubcommunities = (props) => {
                 </legend>
                     {renderCommunities()}   
                 <section className='button-section'>
-                    <button className='button-save'>Save</button>
+                    <button className='button-primary'>Save</button>
                 </section>
             </fieldset>
             </form>

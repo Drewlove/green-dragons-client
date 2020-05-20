@@ -51,7 +51,17 @@ class ChallengeFormContainer extends Component{
         return(
             <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
                 <p>{this.state.modalMessage}</p>
+                {this.state.modalMessage === MODAL_MESSAGES.deleteConfirm ? this.renderModalButtons() : null}
             </Modal>
+        )
+    }
+
+    renderModalButtons(){
+        return(
+            <section className='button-section'>
+                <button className='button-delete'>Delete</button>
+                <button className='button-cancel'>Cancel</button>
+            </section>
         )
     }
 
@@ -104,8 +114,9 @@ class ChallengeFormContainer extends Component{
 
     async handleDelete(e){
         e.preventDefault()
-        const deleteResponse = await HTTP_METHODS.deleteData(`challenges/${this.props.match.params.rowId}`)
-        deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
+        this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
+        //const deleteResponse = await HTTP_METHODS.deleteData(`challenges/${this.props.match.params.rowId}`)
+        //deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
     }
 
     handleChange(e){

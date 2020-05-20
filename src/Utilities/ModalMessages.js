@@ -1,4 +1,5 @@
 export const MODAL_MESSAGES = {
+    deleteConfirm: 'Do you want to delete this record?',
     deleteSuccessful: "Record deleted.", 
     deleteFail: 'Failed to delete record',
     saveSuccessful: "Record saved.", 
