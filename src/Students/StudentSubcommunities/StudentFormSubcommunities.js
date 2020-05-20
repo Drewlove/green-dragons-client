@@ -2,6 +2,11 @@ import React from 'react'
 import StudentName from '../../_Common/StudentName'
 const StudentFormSubcommunities = (props) => {
 
+    const handleCheckboxChange = (e) => {
+        e.target.blur()
+        props.handleChange(e)
+    }
+
     const {mergedCommunities} = props
         const renderCommunities = () => {
         return Object.keys(mergedCommunities).map(key => {
@@ -27,8 +32,7 @@ const StudentFormSubcommunities = (props) => {
                         className='student-form-subcommunities-input' 
                         type='checkbox' 
                         value={subcommunity.subcommunity_id} 
-                        onClick={e =>props.handleChange(e)}
-                        onChange={e =>props.handleChange(e)}
+                        onChange={e =>handleCheckboxChange(e)}
                         checked={isChecked(subcommunity.subcommunity_id)}
                     />
 
