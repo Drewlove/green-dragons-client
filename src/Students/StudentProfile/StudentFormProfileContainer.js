@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import {Redirect, withRouter } from 'react-router-dom'
 import StudentFormProfile from './StudentFormProfile'
-import {GET_UTCDATE_WITH_TIMEZONE_OFFSET} from '../../Utilities/UtilityFunctions'
+import Modal from '../../_Common/Modal'
+import ShimmerForm from '../../_Common/ShimmerForm'
+import {GET_UTCDATE_WITH_TIMEZONE_OFFSET, TOGGLE_HIDE_FORM} from '../../Utilities/UtilityFunctions'
 import {GET_INVALID_INPUTS} from '../../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../../Utilities/HttpMethods'
-import Modal from '../../_Common/Modal'
-import ShimmerForm from '../../_Common/ShimmerForm'
 import "react-datepicker/dist/react-datepicker.css";
 
 class StudentFormProfileContainer extends Component{
@@ -42,7 +42,8 @@ class StudentFormProfileContainer extends Component{
     }
 
     toggleModalDisplay(){
-        document.getElementsByTagName('form')[0].classList.remove('display-none')
+        TOGGLE_HIDE_FORM()
+        this.setState({modalMessage: ''})
         return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
         this.setState({redirectUrl: `/students`}) : this.setState({modalMessage: ''})
     }
@@ -72,8 +73,7 @@ class StudentFormProfileContainer extends Component{
     handleSave(e){
         e.preventDefault()
         this.validateAllInputs()
-        // document.activeElement.classList.add('color-transparent')
-        document.getElementsByTagName('form')[0].classList.add('display-none')
+        TOGGLE_HIDE_FORM()
         return this.isFormValid() ? this.saveStudentRecord(): this.setState({modalMessage:MODAL_MESSAGES.saveFailInputsInvalid})
     }
 

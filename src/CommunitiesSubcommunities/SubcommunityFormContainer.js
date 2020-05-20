@@ -73,6 +73,7 @@ class SubcommunityFormContainer extends Component{
         const subcommunity = {
             community_id: '',
             community_name: '',
+            subcommunity_name: '',
          }
         this.setState({subcommunity})
         this.setState({invalidInputs: []})

@@ -31,6 +31,12 @@ export const GET_UTCDATE_WITH_TIMEZONE_OFFSET = (originalDateString) => {
     return seconds < 10 ? `${minutes}m 0${seconds}s`: `${minutes}m ${seconds}s`
 }
 
+export const TOGGLE_HIDE_FORM = () => {
+  const formElement = document.getElementsByTagName('form')[0]
+  const formElementClassNames = formElement.className.split(' ')
+  return formElementClassNames.indexOf('display-none') >= 0 ? formElement.classList.remove('display-none') : formElement.classList.add('display-none')
+}
+
 
 //   export const MERGE_PARENT_CHILD_ARRAYS = (parentArray, childArray, parentId) => {
 //     const parentObj = parentArray.reduce((obj, item) => {

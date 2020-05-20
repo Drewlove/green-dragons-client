@@ -34,7 +34,7 @@ const ChallengeForm = (props) => {
         <form className='challenge-types-form'>
             <fieldset>
             <legend>
-                <h2>Challenge Type</h2>
+                <h2>Challenge</h2>
             </legend>
             <section className='inputs-section'>           
             <label htmlFor='name'>Name</label>

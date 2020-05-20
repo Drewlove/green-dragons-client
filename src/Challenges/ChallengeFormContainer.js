@@ -4,6 +4,7 @@ import ChallengeForm from './ChallengeForm'
 import {GET_INVALID_INPUTS} from '../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
+import {TOGGLE_HIDE_FORM} from '../Utilities/UtilityFunctions'
 import Modal from '../_Common/Modal'
 import ShimmerForm from '../_Common/ShimmerForm'
 import "react-datepicker/dist/react-datepicker.css";
@@ -41,6 +42,7 @@ class ChallengeFormContainer extends Component{
     }
 
     toggleModalDisplay(){
+        TOGGLE_HIDE_FORM()
         return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
         this.setState({redirectUrl: `/challenges`}) : this.setState({modalMessage: ''})
     }
@@ -71,6 +73,7 @@ class ChallengeFormContainer extends Component{
     handleSave(e){
         e.preventDefault()
         this.validateAllInputs()
+        TOGGLE_HIDE_FORM()
         return this.isFormValid() ? this.saveRecord(): this.setState({modalMessage:MODAL_MESSAGES.saveFailInputsInvalid})
     }
 
