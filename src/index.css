@@ -709,9 +709,9 @@ nav .active{
 }
 
 .students-list-main-item:hover{
-  /* color: green;
+  color: green;
   border: 1px solid green;
-  box-shadow: var(--box-shadow-hover); */
+  box-shadow: var(--box-shadow-hover);
 }
 
 .students-list-item-links-wrapper{
@@ -765,6 +765,14 @@ nav .active{
 
 .visibility-hidden{
   visibility: hidden; 
+}
+
+/* remove hover effects on touch devices */
+@media not all and (pointer: coarse) {
+  li:hover {
+    color: none; 
+    box-shadow: none; 
+  }
 }
 
 @media only screen and (max-width: 320px) {
