@@ -2,10 +2,6 @@ import React from 'react'
 import StudentName from '../../_Common/StudentName'
 const StudentFormSubcommunities = (props) => {
 
-    const ignoreOnChange = () => {
-        return
-    }
-
     const {mergedCommunities} = props
         const renderCommunities = () => {
         return Object.keys(mergedCommunities).map(key => {
