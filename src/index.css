@@ -355,7 +355,7 @@ h1, h2, h3{
 header{
   text-align: center;
   position: sticky;
-  top: 60px;
+  top: 55px;
   margin-top: 20px;
   background-color: white;
 }
@@ -429,11 +429,7 @@ header{
   padding: 0px;
   margin: 20px 10px;
   list-style: none;
-  min-width: 350px;
-}
-
-.list-main-wrapper li{
-  font-size: 21px; 
+  min-width: 300px;
 }
 
 .modal-content{
@@ -758,7 +754,7 @@ nav .active{
   overflow: hidden;
   text-shadow: 0px 0px 0px black;
   font-weight: bold;
-  font-size: 16px; 
+  font-size: 15px; 
 }
 
 .student-name-shimmer{
@@ -770,6 +766,13 @@ nav .active{
 .visibility-hidden{
   visibility: hidden; 
 }
+
+@media only screen and (max-width: 320px) {
+  form input, textarea, select{
+    width: 150px; 
+  }
+}
+
 
 @media only screen and (min-width: 600px) {
   form input, textarea, select{
