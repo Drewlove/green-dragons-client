@@ -4,7 +4,6 @@ import ChallengeForm from './ChallengeForm'
 import {GET_INVALID_INPUTS} from '../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
-import {TOGGLE_HIDE_FORM} from '../Utilities/UtilityFunctions'
 import Modal from '../_Common/Modal'
 import ShimmerForm from '../_Common/ShimmerForm'
 import "react-datepicker/dist/react-datepicker.css";

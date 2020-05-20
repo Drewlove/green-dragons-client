@@ -46,6 +46,7 @@ class StudentFormProfileContainer extends Component{
 
     renderModal(){
         HIDE_FORM()
+        document.body.scrollTop = 0;
         return(
             <Modal closeModal={()=> this.closeModal()}>
                 <p>{this.state.modalMessage}</p>
