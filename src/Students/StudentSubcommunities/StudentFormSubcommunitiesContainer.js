@@ -77,12 +77,9 @@ class StudentFormSubcommunitiesContainer extends Component{
     }
 
     handleChange(e){
-        //allows onChange handler for checkbox to function properly
-        e.target.nextSibling.focus()
-
         const isChecked = e.target.checked
         const subcommunityId = parseInt(e.target.value)
-        isChecked ? this.addSubcommunity(subcommunityId) : this.removeSubcommunity(subcommunityId)
+        return isChecked ? this.addSubcommunity(subcommunityId) : this.removeSubcommunity(subcommunityId)
     }
 
     addSubcommunity(id){
