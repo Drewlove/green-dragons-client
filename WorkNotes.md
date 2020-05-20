@@ -5,6 +5,8 @@ review Thinkful guidelines for project
 
 Forms
 *All forms, toggle displaying and hiding form after form is submitted (see studentFormProfileContainer)
+*Use the scroll to top function as well 
+*change delete button to type='button'
 
 *What to do with delete button?
 **If you hit return as a mobile user, should not delete

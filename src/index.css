@@ -673,6 +673,10 @@ nav .active{
   margin-top: 25px;
 }
 
+.student-form-challenge-entry textarea{
+  height: 50px; 
+}
+
 .student-exchange-list-balance{
   color: black; 
 }
@@ -827,6 +831,11 @@ nav .active{
     width: 65%;
     height: 400px;
   }
+
+  .student-form-challenge-entry textarea{
+    height: 100px; 
+  }
+  
 
   .student-challenge-entries-graph{
     width: 65vw;
