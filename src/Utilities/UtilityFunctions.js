@@ -24,7 +24,7 @@ export const GET_UTCDATE_WITH_TIMEZONE_OFFSET = (originalDateString) => {
     const month = (monthArray.indexOf(monthAbbreviation)+1)
     return `${month}/${day}/${year}`
   }
-
+  
   export const CONVERT_TIME = time => {
     const minutes = Math.floor(time/60)
     const seconds = time%60

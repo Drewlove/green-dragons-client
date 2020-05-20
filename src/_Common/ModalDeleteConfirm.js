@@ -9,7 +9,6 @@ const ModalDeleteConfirm = (props) => {
     const handleDelete = (e) => {
         props.deleteRecord(e)
     }
-
         return(
             <section className='button-section'>
                 <button className='button-delete' onClick={e => handleDelete()}>Delete</button>
