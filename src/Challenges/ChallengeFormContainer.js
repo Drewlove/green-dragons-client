@@ -5,6 +5,7 @@ import {GET_INVALID_INPUTS} from '../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
 import Modal from '../_Common/Modal'
+import ModalDeleteConfirm from '../_Common/ModalDeleteConfirm'
 import {HIDE_FORM, SHOW_FORM, SCROLL_TO_TOP} from '../Utilities/UtilityFunctions'
 import ShimmerForm from '../_Common/ShimmerForm'
 import "react-datepicker/dist/react-datepicker.css";
@@ -32,29 +33,9 @@ class ChallengeFormContainer extends Component{
         const response = await HTTP_METHODS.getData(endpoint)
         response.ok ? this.updateForm(response.data) : this.setState({modalMessage: MODAL_MESSAGES.getFail})
     }  
-    
+
     updateForm(data){
         this.setState({challenge: data}, () => this.setState({isLoaded: true})) 
-    }
-
-    setModalMessage(modalMessage){
-        this.setState({modalMessage})
-    }
-
-    toggleModalDisplay(){
-        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
-        this.setState({redirectUrl: `/challenges`}) : this.setState({modalMessage: ''})
-    }
-
-    renderModal(){
-        HIDE_FORM()
-        SCROLL_TO_TOP()
-        return(
-            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
-                <p>{this.state.modalMessage}</p>
-                {this.state.modalMessage === MODAL_MESSAGES.deleteConfirm ? this.renderModalButtons() : null}
-            </Modal>
-        )
     }
 
     componentDidUpdate(prevProps){
@@ -70,6 +51,44 @@ class ChallengeFormContainer extends Component{
          }
          this.setState({challenge})
          this.setState({invalidInputs: []})
+    }
+
+    setModalMessage(modalMessage){
+        this.setState({modalMessage})
+    }
+
+    renderModal(){
+        HIDE_FORM()
+        SCROLL_TO_TOP()
+        return(
+            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
+                <p>{this.state.modalMessage}</p>
+                {this.state.modalMessage === MODAL_MESSAGES.deleteConfirm ? 
+                <ModalDeleteConfirm cancelDelete = {e => this.cancelDelete(e)} deleteRecord = {e => this.deleteRecord(e)}/> : null}
+            </Modal>
+        )
+    }
+
+    toggleModalDisplay(){
+        SHOW_FORM()
+        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
+        this.setState({redirectUrl: `/challenges`}) : this.setState({modalMessage: ''})
+    }
+
+    async handleDelete(e){
+        e.preventDefault()
+        this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
+        HIDE_FORM()
+    }
+
+    cancelDelete(e){
+        SHOW_FORM()
+        this.setState({modalMessage : ''})
+    }
+
+    async deleteRecord(){
+        const deleteResponse = await HTTP_METHODS.deleteData(`challenges/${this.props.match.params.rowId}`)
+        deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
     }
 
     handleSave(e){
@@ -101,18 +120,6 @@ class ChallengeFormContainer extends Component{
 
     isFormValid(){
         return this.state.invalidInputs.length > 0 ? false : true 
-    }
-
-    async handleDelete(e){
-        e.preventDefault()
-        this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
-        HIDE_FORM()
-
-
-        // e.preventDefault()
-        // this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
-        // const deleteResponse = await HTTP_METHODS.deleteData(`challenges/${this.props.match.params.rowId}`)
-        // deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
     }
 
     handleChange(e){
