@@ -5,7 +5,9 @@ import {GET_INVALID_INPUTS} from '../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
 import Modal from '../_Common/Modal'
+import ModalDeleteConfirm from '../_Common/ModalDeleteConfirm'
 import ShimmerForm from '../_Common/ShimmerForm'
+import {HIDE_FORM, SHOW_FORM, SCROLL_TO_TOP} from '../Utilities/UtilityFunctions'
 import "react-datepicker/dist/react-datepicker.css";
 
 class SubcommunityFormContainer extends Component{
@@ -52,23 +54,6 @@ class SubcommunityFormContainer extends Component{
         return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.getFail})
     }  
 
-    setModalMessage(modalMessage){
-        this.setState({modalMessage})
-    }
-
-    toggleModalDisplay(){
-        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
-        this.setState({redirectUrl: `/communities`}) : this.setState({modalMessage: ''})
-    }
-
-    renderModal(){
-        return(
-            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
-                <p>{this.state.modalMessage}</p>
-            </Modal>
-        )
-    }
-
     resetForm(){
         const subcommunity = {
             community_id: '',
@@ -79,10 +64,32 @@ class SubcommunityFormContainer extends Component{
         this.setState({invalidInputs: []})
     }
 
+    renderModal(){
+        HIDE_FORM()
+        SCROLL_TO_TOP()
+        return(
+            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
+                <p>{this.state.modalMessage}</p>
+                {this.state.modalMessage === MODAL_MESSAGES.deleteConfirm ? 
+                <ModalDeleteConfirm cancelDelete = {e => this.cancelDelete(e)} deleteRecord = {e => this.deleteRecord(e)}/> : null}
+            </Modal>
+        )
+    }
+
+    toggleModalDisplay(){
+        SHOW_FORM()
+        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
+        this.setState({redirectUrl: `/communities`}) : this.setState({modalMessage: ''})
+    }
+
     handleSave(e){
         e.preventDefault()
         this.validateAllInputs()
         return this.isFormValid() ? this.saveRecord(): this.setState({modalMessage:MODAL_MESSAGES.saveFailInputsInvalid})
+    }
+
+    isFormValid(){
+        return this.state.invalidInputs.length > 0 ? false : true 
     }
 
     async saveRecord(){
@@ -106,23 +113,6 @@ class SubcommunityFormContainer extends Component{
         }
     }
 
-    isFormValid(){
-        return this.state.invalidInputs.length > 0 ? false : true 
-    }
-
-    async handleDelete(e){
-        e.preventDefault()
-        const deleteResponse = await HTTP_METHODS.deleteData(`subcommunities/${this.props.match.params.rowId}`)
-        deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
-    }
-
-    handleChange(e){
-        const {name, value} = e.target
-        const subcommunity = {...this.state.subcommunity, [name]: value}
-        this.setState({subcommunity})
-        return this.state.invalidInputs.indexOf(e.target.name) >= 0 ? this.updateInvalidInputs(name, value) : null
-    }
-
     updateInvalidInputs(inputName, inputValue){
         const inputReqs = this.getInputReqs(inputName)
         const inputActual = {name: inputName, value: inputValue}
@@ -140,6 +130,29 @@ class SubcommunityFormContainer extends Component{
             }
         }   
         return inputRequirements[inputName]
+    }
+
+    handleDelete(e){
+        e.preventDefault()
+        this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
+        HIDE_FORM()
+    }
+
+    cancelDelete(e){
+        SHOW_FORM()
+        this.setState({modalMessage : ''})
+    }
+
+    async deleteRecord(){
+        const deleteResponse = await HTTP_METHODS.deleteData(`subcommunities/${this.props.match.params.rowId}`)
+        deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
+    }
+
+    handleChange(e){
+        const {name, value} = e.target
+        const subcommunity = {...this.state.subcommunity, [name]: value}
+        this.setState({subcommunity})
+        return this.state.invalidInputs.indexOf(e.target.name) >= 0 ? this.updateInvalidInputs(name, value) : null
     }
 
     renderForm(){
