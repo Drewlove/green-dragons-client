@@ -1,13 +1,14 @@
 import React, {Component} from 'react'
 import {Redirect, withRouter} from 'react-router-dom'
 import StudentChallengeEntryForm from './StudentChallengeEntryForm'
-import {GET_UTCDATE_WITH_TIMEZONE_OFFSET} from '../../Utilities/UtilityFunctions'
+import Modal from '../../_Common/Modal'
+import ModalDeleteConfirm from '../../_Common/ModalDeleteConfirm'
+import ShimmerForm from '../../_Common/ShimmerForm'
+import {GET_UTCDATE_WITH_TIMEZONE_OFFSET, HIDE_FORM, SHOW_FORM, SCROLL_TO_TOP} from '../../Utilities/UtilityFunctions'
 import {GET_INVALID_INPUTS} from '../../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../../Utilities/HttpMethods'
-import Modal from '../../_Common/Modal'
-import ShimmerForm from '../../_Common/ShimmerForm'
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css'
 
 class StudentChallengeEntryFormContainer extends Component{
     state = {
@@ -35,6 +36,19 @@ class StudentChallengeEntryFormContainer extends Component{
        if(this.props.match.params.challengeEntryId !== prevProps.match.params.challengeEntryId){
            this.resetForm()
        } 
+    }
+
+    resetForm(){
+        const challengeEntry = {
+            challenge_entry_id: '',
+            challenge_id: '',
+            student_id: '',
+            record: '',
+            entry_date: null,
+            notes: '',
+         }
+        this.setState({challengeEntry})
+        this.setState({invalidInputs: []})
     }
 
     async getAllData(){
@@ -68,41 +82,33 @@ class StudentChallengeEntryFormContainer extends Component{
         return challengeEntry
     }
 
-    setModalMessage(modalMessage){
-        this.setState({modalMessage})
-    }
-
-    toggleModalDisplay(){
-        const {student_id, challenge_id} = this.state.challengeEntry
-        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
-        this.setState({redirectUrl: `/students/${student_id}/challenges/${challenge_id}`}) : this.setState({modalMessage: ''})
-    }
-
     renderModal(){
+        HIDE_FORM()
+        SCROLL_TO_TOP()
         return(
             <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
                 <p>{this.state.modalMessage}</p>
+                {this.state.modalMessage === MODAL_MESSAGES.deleteConfirm ? 
+                <ModalDeleteConfirm cancelDelete = {e => this.cancelDelete(e)} deleteRecord = {e => this.deleteRecord(e)}/> : null}
             </Modal>
         )
     }
 
-    resetForm(){
-        const challengeEntry = {
-            challenge_entry_id: '',
-            challenge_id: '',
-            student_id: '',
-            record: '',
-            entry_date: null,
-            notes: '',
-         }
-        this.setState({challengeEntry})
-        this.setState({invalidInputs: []})
+    toggleModalDisplay(){
+        SHOW_FORM()
+        const {student_id, challenge_id} = this.state.challengeEntry
+        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
+        this.setState({redirectUrl: `/students/${student_id}/challenges/${challenge_id}`}) : this.setState({modalMessage: ''})
     }
 
     handleSave(e){
         e.preventDefault()
         this.validateAllInputs()
         return this.isFormValid() ? this.saveRecord(): this.setState({modalMessage:MODAL_MESSAGES.saveFailInputsInvalid})
+    }
+
+    isFormValid(){
+        return this.state.invalidInputs.length > 0 ? false : true 
     }
 
     async saveRecord(){
@@ -126,12 +132,46 @@ class StudentChallengeEntryFormContainer extends Component{
         }
     }
 
-    isFormValid(){
-        return this.state.invalidInputs.length > 0 ? false : true 
+    updateInvalidInputs(inputName, inputValue){
+        const inputReqs = this.getInputReqs(inputName)
+        const inputActual = {name: inputName, value: inputValue}
+        const invalidInputs = GET_INVALID_INPUTS(inputActual, inputReqs, this.state.invalidInputs)
+        this.setState({invalidInputs})
     }
 
-    async handleDelete(e){
+    getInputReqs(inputName){
+        const inputRequirements = {
+            challenge_id: {
+                minNumber: 1,
+            },
+            student_id: {
+                minNumber: 1,
+            },
+            entry_date:{
+                dataType: 'object'
+            }, 
+            record:{
+                minNumber: 1
+            }, 
+            notes: {
+                required: false 
+            }
+        }   
+        return inputRequirements[inputName]
+    }
+
+    handleDelete(e){
         e.preventDefault()
+        this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
+        HIDE_FORM()
+    }
+
+    cancelDelete(e){
+        SHOW_FORM()
+        this.setState({modalMessage : ''})
+    }
+
+    async deleteRecord(){
         const deleteResponse = await HTTP_METHODS.deleteData(`challenge-entries/${this.props.match.params.challengeEntryId}`)
         deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
     }
@@ -171,34 +211,6 @@ class StudentChallengeEntryFormContainer extends Component{
         const newRecord = prevTime + timeChange
         const challengeEntry = {...this.state.challengeEntry, record: newRecord}
         this.setState({challengeEntry}, () => this.updateInvalidInputs('record', this.state.challengeEntry.record))
-    }
-
-    updateInvalidInputs(inputName, inputValue){
-        const inputReqs = this.getInputReqs(inputName)
-        const inputActual = {name: inputName, value: inputValue}
-        const invalidInputs = GET_INVALID_INPUTS(inputActual, inputReqs, this.state.invalidInputs)
-        this.setState({invalidInputs})
-    }
-
-    getInputReqs(inputName){
-        const inputRequirements = {
-            challenge_id: {
-                minNumber: 1,
-            },
-            student_id: {
-                minNumber: 1,
-            },
-            entry_date:{
-                dataType: 'object'
-            }, 
-            record:{
-                minNumber: 1
-            }, 
-            notes: {
-                required: false 
-            }
-        }   
-        return inputRequirements[inputName]
     }
 
     renderForm(){
