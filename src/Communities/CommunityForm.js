@@ -1,5 +1,6 @@
 import React from 'react'
 import FormInvalidInputWarning  from '../_Common/FormInvalidInputWarning'
+import FormSaveDeleteButtons from '../_Common/FormSaveDeleteButtons'
 
 const CommunityForm = (props) => {
     const {community_id, community_name} = props.community
@@ -33,11 +34,10 @@ const CommunityForm = (props) => {
                         {isInputValid('community_name', 'Two letters, one capital letter')}
                     </div>
                 </section>
-                <section className='button-section'>
-                {community_id ? 
-                <button className='button-delete' onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
-                <button className='button-primary' onClick={e => props.handleSave(e)}>Save</button>
-                </section>
+                <FormSaveDeleteButtons 
+                recordId = {community_id} 
+                handleDelete={e => props.handleDelete(e)} 
+                handleSave={e=> props.handleSave(e)}/>
             </fieldset>
         </form>
     </main>

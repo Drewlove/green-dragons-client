@@ -53,10 +53,6 @@ class ChallengeFormContainer extends Component{
          this.setState({invalidInputs: []})
     }
 
-    setModalMessage(modalMessage){
-        this.setState({modalMessage})
-    }
-
     renderModal(){
         HIDE_FORM()
         SCROLL_TO_TOP()
@@ -74,8 +70,8 @@ class ChallengeFormContainer extends Component{
         return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
         this.setState({redirectUrl: `/challenges`}) : this.setState({modalMessage: ''})
     }
-
-    async handleDelete(e){
+    
+    handleDelete(e){
         e.preventDefault()
         this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
         HIDE_FORM()

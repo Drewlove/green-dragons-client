@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import {Redirect, withRouter } from 'react-router-dom'
 import CommunityForm from './CommunityForm'
+import Modal from '../_Common/Modal'
+import ModalDeleteConfirm from '../_Common/ModalDeleteConfirm'
+import ShimmerForm from '../_Common/ShimmerForm'
 import {GET_INVALID_INPUTS} from '../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
-import Modal from '../_Common/Modal'
-import ShimmerForm from '../_Common/ShimmerForm'
+import {HIDE_FORM, SHOW_FORM, SCROLL_TO_TOP} from '../Utilities/UtilityFunctions'
 import "react-datepicker/dist/react-datepicker.css";
 
 class ChallengeFormContainer extends Component{
@@ -34,23 +36,6 @@ class ChallengeFormContainer extends Component{
         this.setState({community: data}, () => this.setState({isLoaded: true})) 
     }
 
-    setModalMessage(modalMessage){
-        this.setState({modalMessage})
-    }
-
-    toggleModalDisplay(){
-        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
-        this.setState({redirectUrl: `/communities`}) : this.setState({modalMessage: ''})
-    }
-
-    renderModal(){
-        return(
-            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
-                <p>{this.state.modalMessage}</p>
-            </Modal>
-        )
-    }
-
     componentDidUpdate(prevProps){
         return prevProps.match.params.rowId !== this.props.match.params.rowId ? this.resetForm() : null
     }
@@ -62,6 +47,40 @@ class ChallengeFormContainer extends Component{
          }
         this.setState({community})
         this.setState({invalidInputs: []})
+    }
+
+    renderModal(){
+        HIDE_FORM()
+        SCROLL_TO_TOP()
+        return(
+            <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
+                <p>{this.state.modalMessage}</p>
+                {this.state.modalMessage === MODAL_MESSAGES.deleteConfirm ? 
+                <ModalDeleteConfirm cancelDelete = {e => this.cancelDelete(e)} deleteRecord = {e => this.deleteRecord(e)}/> : null}
+            </Modal>
+        )
+    }
+
+    toggleModalDisplay(){
+        SHOW_FORM()
+        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
+        this.setState({redirectUrl: `/communities`}) : this.setState({modalMessage: ''})
+    }
+  
+    handleDelete(e){
+        e.preventDefault()
+        this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
+        HIDE_FORM()
+    }
+
+    cancelDelete(e){
+        SHOW_FORM()
+        this.setState({modalMessage : ''})
+    }
+
+    async deleteRecord(){
+        const deleteResponse = await HTTP_METHODS.deleteData(`communities/${this.props.match.params.rowId}`)
+        deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
     }
 
     handleSave(e){
@@ -93,12 +112,6 @@ class ChallengeFormContainer extends Component{
 
     isFormValid(){
         return this.state.invalidInputs.length > 0 ? false : true 
-    }
-
-    async handleDelete(e){
-        e.preventDefault()
-        const deleteResponse = await HTTP_METHODS.deleteData(`communities/${this.props.match.params.rowId}`)
-        deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
     }
 
     handleChange(e){
