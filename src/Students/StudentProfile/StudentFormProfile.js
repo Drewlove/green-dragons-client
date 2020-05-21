@@ -1,5 +1,6 @@
 import React from 'react'
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker';
+import FormSaveDeleteButtons from '../../_Common/FormSaveDeleteButtons'
 import FormInvalidInputWarning  from '../../_Common/FormInvalidInputWarning'
 
 const StudentFormProfile = (props) => {
@@ -63,11 +64,10 @@ const StudentFormProfile = (props) => {
                         {isInputValid('birth_date')}
                     </div>
                 </section>
-                <section className='button-section'>
-                    {student_id ? 
-                    <button className='button-delete' type = 'button' onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
-                    <button className='button-primary' onClick={e => props.handleSave(e)}>Save</button>
-                </section>
+                <FormSaveDeleteButtons 
+                recordId = {student_id} 
+                handleDelete={e => props.handleDelete(e)} 
+                handleSave={e=> props.handleSave(e)}/>
             </fieldset>
         </form>
     </main>

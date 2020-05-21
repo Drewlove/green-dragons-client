@@ -67,10 +67,10 @@ const ChallengeForm = (props) => {
             {units === 'time' ? null : renderUnitNameInput()}
             </section>
             <section className='button-section'>
-                {challenge_id ? 
-                <button className='button-delete' onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
-                <button className='button-primary' onClick={e => props.handleSave(e)}>Save</button>
-            </section>
+                    {challenge_id ? 
+                    <button className='button-delete' type = 'button' onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
+                    <button className='button-primary' onClick={e => props.handleSave(e)}>Save</button>
+                </section>
             </fieldset>
         </form>
     </main>

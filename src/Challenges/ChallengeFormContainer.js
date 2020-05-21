@@ -106,8 +106,13 @@ class ChallengeFormContainer extends Component{
     async handleDelete(e){
         e.preventDefault()
         this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
-        const deleteResponse = await HTTP_METHODS.deleteData(`challenges/${this.props.match.params.rowId}`)
-        deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
+        HIDE_FORM()
+
+
+        // e.preventDefault()
+        // this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
+        // const deleteResponse = await HTTP_METHODS.deleteData(`challenges/${this.props.match.params.rowId}`)
+        // deleteResponse.ok ? this.setState({modalMessage: MODAL_MESSAGES.deleteSuccessful}) : this.setState({modalMessage: MODAL_MESSAGES.deleteFail})
     }
 
     handleChange(e){
