@@ -29,7 +29,7 @@ class StudentChallengeEntryFormContainer extends Component{
     } 
 
     async componentDidMount(){
-        return this.props.match.params.challengeEntryId === "0" ? this.getStudentsAndChallenges() : this.getAllData()
+        return this.props.match.params.challengeEntryId === "0" ? this.getStudents() : this.getAllData()
     }
 
     componentDidUpdate(prevProps){
@@ -54,7 +54,7 @@ class StudentChallengeEntryFormContainer extends Component{
     async getAllData(){
         const students =  await this.getData('students')
         const challenges = await this.getData('challenges')
-        const challengeEntryRaw = await this.getData(`challenge-entries/${this.props.match.params.challengeEntryId}`)
+        const challengeEntryRaw = await this.getData(`challenge-entries/${this.props.match.params.challengeEntryId}`) 
         const challengeEntry = this.updateChallengeEntry(challengeEntryRaw)
         this.setState({
             students, 
@@ -97,7 +97,7 @@ class StudentChallengeEntryFormContainer extends Component{
     toggleModalDisplay(){
         SHOW_FORM()
         const {student_id, challenge_id} = this.state.challengeEntry
-        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
+        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful || this.state.modalMessage === MODAL_MESSAGES.getFail?
         this.setState({redirectUrl: `/students/${student_id}/challenges/${challenge_id}`}) : this.setState({modalMessage: ''})
     }
 

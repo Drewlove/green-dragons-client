@@ -61,17 +61,3 @@ const deleteData = async function(endpointSuffix){
         return error 
     }
 }
-
-
-
-// e.preventDefault()
-// let modalMessage
-// const urlSuffix = `${this.tableName}/${this.currentRowId}`
-// try {
-//     const result = await HTTP_METHODS.deleteData(urlSuffix)
-//     result.ok ? modalMessage = MODAL_MESSAGES.deleteSuccessful : modalMessage = MODAL_MESSAGES.deleteFail
-//     return this.setState({modalMessage})
-// } catch{
-//     modalMessage = MODAL_MESSAGES.deleteFail
-//     this.setState({modalMessage})   
-// }
