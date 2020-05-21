@@ -5,6 +5,7 @@ import {GET_INVALID_INPUTS} from '../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
 import Modal from '../_Common/Modal'
+import {HIDE_FORM, SHOW_FORM, SCROLL_TO_TOP} from '../Utilities/UtilityFunctions'
 import ShimmerForm from '../_Common/ShimmerForm'
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -46,6 +47,8 @@ class ChallengeFormContainer extends Component{
     }
 
     renderModal(){
+        HIDE_FORM()
+        SCROLL_TO_TOP()
         return(
             <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
                 <p>{this.state.modalMessage}</p>
