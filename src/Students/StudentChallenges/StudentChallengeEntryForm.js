@@ -1,6 +1,7 @@
 import React from 'react'
-import DatePicker from "react-datepicker";
+import FormSaveDeleteButtons from '../../_Common/FormSaveDeleteButtons'
 import FormInvalidInputWarning  from '../../_Common/FormInvalidInputWarning'
+import DatePicker from 'react-datepicker'
 
 const StudentChallengeEntryForm = (props) => {
 
@@ -147,11 +148,10 @@ const StudentChallengeEntryForm = (props) => {
                         onChange={e=>props.handleChange(e)}/>
                     </div>
                 </section>
-                <section className='button-section'>
-                    {challenge_entry_id ? 
-                    <button className='button-delete' onClick={(e) => props.handleDelete(e)}>Delete</button> : null}
-                    <button className='button-primary' onClick={e => props.handleSave(e)}>Save</button>
-                </section>
+                <FormSaveDeleteButtons 
+                recordId = {challenge_entry_id} 
+                handleDelete={e => props.handleDelete(e)} 
+                handleSave={e=> props.handleSave(e)}/>
             </fieldset>
         </form>
     </main>
