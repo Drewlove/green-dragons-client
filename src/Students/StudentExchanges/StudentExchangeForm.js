@@ -28,7 +28,6 @@ const StudentExchangeForm = (props) => {
         })
     }
 
-
     const isAmountNegative = () =>{
         return amount < 0 ? "negative-amount" : ""
     }
