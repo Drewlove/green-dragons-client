@@ -758,8 +758,21 @@ nav .active{
   visibility: hidden; 
 }
 
-/* remove list item hover effects on on mobile devices */
-@media only screen and (max-width: 450px) { 
+/* remove hover effects on on small screen devices */
+@media only screen and (max-width: 450px) {
+  
+  .communities-list-item-link-wrapper:hover{    
+    box-shadow: var(--box-shadow); 
+    border: none;  
+  }
+
+  .communities-list-item-link-wrapper>a:hover{
+    color: black; 
+  }
+
+  .communities-list-item-button:hover{
+    color: black; 
+  }
 
   .list-main-item:hover {
     box-shadow: var(--box-shadow); 
@@ -770,23 +783,12 @@ nav .active{
     color: black; 
   }
 
-  .communities-list-item-link-wrapper:hover{    
-    box-shadow: var(--box-shadow); 
-    border: none;  
-  }
-
-  .communities-list-item-link-wrapper>a:hover{
-    color: black; 
-  }
-
   .students-list-main-item:hover{
     color: black; 
     box-shadow: var(--box-shadow);
     border: none; 
   }
 }
-  
-
 
 
 @media only screen and (max-width: 320px) {

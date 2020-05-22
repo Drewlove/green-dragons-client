@@ -7,7 +7,8 @@ class CommunitiesListItem extends Component{
         toggleViewSubcommunities: false,
     }
 
-    handleClick(){
+    handleClick(e){
+        console.log(e.target)
         const toggleViewSubcommunities = !this.state.toggleViewSubcommunities
         this.setState({toggleViewSubcommunities})
     }
@@ -17,7 +18,7 @@ class CommunitiesListItem extends Component{
         return(
             <li className={`communities-list-item ${this.state.toggleViewSubcommunities ? 'view-subcommunities' :''}`}>
                 <div className='communities-list-item-community-wrapper'>
-                    <button onClick={() => this.handleClick()} className='communities-list-item-button'>&#10148;</button>
+                    <button onClick={(e) => this.handleClick(e)} className='communities-list-item-button'>&#10148;</button>
                     <div className='communities-list-item-link-wrapper'>
                         <Link className='communities-list-item-link' to={`/communities/${community_id}`}>{community_name}</Link>
                     </div>
