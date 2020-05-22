@@ -1,14 +1,13 @@
 import React, {Component} from 'react'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
 import SubcommunitiesListItem from './SubcommunitiesListItem'
-import {ELEMENT_DISPLAY_NONE} from '../Utilities/UtilityFunctions'
-import ShimmerList from '../_Common/ShimmerList'
+import NoResultsMessage from '../_Common/NoResultsMessage'
 
 class SubcommunitiesListContainer extends Component{
     state = {
         subcommunities: [], 
         isLoaded: false, 
-        message:  ''
+        errorMessage:  ''
     }
 
     componentDidMount(){
@@ -17,7 +16,7 @@ class SubcommunitiesListContainer extends Component{
 
     async getAllRowsFromEndpoint(endpoint){
         const response = await HTTP_METHODS.getData(endpoint)
-        response.ok ? this.updateState(response.data) : this.handleError(response)
+        response.ok ? this.updateState(response.data) : this.updateError()
     }
 
     updateState(response){
@@ -25,13 +24,22 @@ class SubcommunitiesListContainer extends Component{
         this.setState({subcommunities}, () => this.setState({isLoaded: true})) 
     }
 
-    handleError(response){
-        ELEMENT_DISPLAY_NONE('main')
-        this.setState({modalMessage: response.error})  
+    updateError(){
+        this.setState({errorMessage: 'Error'}, () => this.setState({isLoaded: true}))
+    }
+
+    renderPage(){
+        return this.state.errorMessage.length > 0 ? this.renderError() : this.renderSubcommunities()
+    }
+
+    renderError(){
+        return(
+        <h2>{this.state.errorMessage}</h2>
+        )
     }
 
     renderSubcommunities(){
-        return this.state.subcommunities.length > 0 ? this.renderList() : this.renderEmptyList()
+        return this.state.subcommunities.length > 0 ? this.renderList() : <NoResultsMessage recordName='subcommunities'/>
     }
 
     renderList(){
@@ -42,16 +50,10 @@ class SubcommunitiesListContainer extends Component{
         })
     }
 
-    renderEmptyList(){
-        return(
-            <p>No subcommunities</p>
-        )
-    }
-
     render(){
         return(
             <ul className='communities-list-item-subcommunities-list'>
-                {this.state.isLoaded ? this.renderSubcommunities() : <ShimmerList listLength={5} /> }
+                {this.state.isLoaded ? this.renderPage() : null }
         </ul>
         )
     }
