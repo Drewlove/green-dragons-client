@@ -22,12 +22,12 @@ class ChallengesListContainer extends Component{
     async fetchChallenges(){
         const endpointSuffix = `challenges`
         const response = await HTTP_METHODS.getData(endpointSuffix)
-        response.ok ? this.updateState(response.data) : this.handleError()
+        response.ok ? this.updateState(response.data) : this.handleError(response)
     }
 
-    handleError(){
+    handleError(response){
         ELEMENT_DISPLAY_NONE('main')
-        this.setState({modalMessage: MODAL_MESSAGES.fetchFail})  
+        this.setState({modalMessage: response.error})  
     }
 
     updateState(response){

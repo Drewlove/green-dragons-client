@@ -18,7 +18,7 @@ const getData = async function(endpointSuffix){
         error: '',
         data: {}
     }
-    
+
     try{
         const response = await fetch(url, options)
         return response.ok ? result = {...result, ok: true, data: await response.json()} : result = {...result, ok: false, error: `${response.statusText}`}
