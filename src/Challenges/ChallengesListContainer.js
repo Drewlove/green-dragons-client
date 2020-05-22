@@ -25,16 +25,15 @@ class ChallengesListContainer extends Component{
         response.ok ? this.updateState(response.data) : this.handleError(response)
     }
 
-    handleError(response){
-        ELEMENT_DISPLAY_NONE('main')
-        this.setState({modalMessage: response.error})  
-    }
-
     updateState(response){
         const challenges = response
         this.setState({challenges}, () => this.setState({isLoaded: true})) 
     }
 
+    handleError(response){
+        ELEMENT_DISPLAY_NONE('main')
+        this.setState({modalMessage: response.error})  
+    }
 
     toggleModalDisplay(){
         this.setState({redirectUrl: '/'})
