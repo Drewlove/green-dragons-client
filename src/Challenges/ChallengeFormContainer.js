@@ -73,9 +73,7 @@ class ChallengeFormContainer extends Component{
 
     toggleModalDisplay(){
         ELEMENT_DISPLAY('main')
-        return this.setState({redirectUrl: `/challenges`})
-        // return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
-        // this.setState({redirectUrl: `/challenges`}) : this.setState({modalMessage: ''})
+        return this.state.modalMessage === MODAL_MESSAGES.deleteConfirm ? this.setState({modalMessage: ''}) : this.setState({redirectUrl: `/challenges`})
     }
     
     handleDelete(e){
@@ -85,6 +83,7 @@ class ChallengeFormContainer extends Component{
     }
 
     cancelDelete(e){
+        console.log('cancel')
         ELEMENT_DISPLAY('main')
         this.setState({modalMessage : ''})
     }
