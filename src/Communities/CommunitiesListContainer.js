@@ -3,8 +3,9 @@ import CommunitiesListItem from './CommunitiesListItem'
 import Modal from '../_Common/Modal'
 import {Redirect} from 'react-router-dom'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
-import MODAL_MESSAGES from '../_Common/Modal'
+import {ELEMENT_DISPLAY_NONE} from '../Utilities/UtilityFunctions'
 import ShimmerList from '../_Common/ShimmerList'
+import NoResultsMessage from '../_Common/NoResultsMessage'
 
 class CommunitiesListContainer extends Component{
     state = {
@@ -20,9 +21,17 @@ class CommunitiesListContainer extends Component{
 
     async getAllRowsFromEndpoint(endpoint){
         const response = await HTTP_METHODS.getData(endpoint)
-        return response.ok ? 
-        this.setState({communities: response.data}, () => this.setState({isLoaded: true}))
-        : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
+        return response.ok ? this.updateState(response.data) : this.handleError(response)
+    }
+
+    updateState(response){
+        const communities = response
+        this.setState({communities}, () => this.setState({isLoaded: true})) 
+    }
+
+    handleError(response){
+        ELEMENT_DISPLAY_NONE('ul')
+        this.setState({modalMessage: response.error})  
     }
 
     toggleModalDisplay(){
@@ -41,7 +50,7 @@ class CommunitiesListContainer extends Component{
         return(
         <main>
             <ul className='list-main-wrapper'>
-            {this.renderCommunities()}
+            {this.state.communities.length > 0 ? this.renderCommunities : this.renderNoResults()}
             </ul>
         </main>
         )
@@ -53,6 +62,12 @@ class CommunitiesListContainer extends Component{
                 <CommunitiesListItem key={community.community_id} community={community}/>
             )
         })
+    }
+
+    renderNoResults(){
+        return (
+            <NoResultsMessage recordName='communities' />
+        )
     }
     
     render(){

@@ -601,6 +601,10 @@ nav .active{
   color: red;
 }
 
+.no-reults-message{
+  text-align: center; 
+}
+
 .shimmer-animate {
   animation : shimmer 2s infinite;
   background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
