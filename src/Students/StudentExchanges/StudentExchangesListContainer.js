@@ -4,8 +4,7 @@ import StudentName from '../../_Common/StudentName'
 import ListMainWrapper from '../../_Common/ListMainWrapper'
 import {HTTP_METHODS} from '../../Utilities/HttpMethods'
 import Modal from '../../_Common/Modal'
-import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
-import {GET_MM_DD_YYYY_DATE} from '../../Utilities/UtilityFunctions'
+import {GET_MM_DD_YYYY_DATE, ELEMENT_DISPLAY_NONE} from '../../Utilities/UtilityFunctions'
 import ShimmerList from '../../_Common/ShimmerList'
 
 class ExchangesListContainer extends Component{
@@ -23,13 +22,17 @@ class ExchangesListContainer extends Component{
     async fetchAllRows(){
         const endpointSuffix = `exchanges/students/${this.props.match.params.rowId}`
         const response = await HTTP_METHODS.getData(endpointSuffix)
-        response.ok ? 
-        this.updateExchanges(response.data)
-        : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
+        response.ok ? this.updateState(response.data) : this.handleError(response)
     }
 
-    updateExchanges(data){
-        this.setState({exchanges: data}, () => this.setState({isLoaded: true}))
+    updateState(response){
+        const exchanges = response
+        this.setState({exchanges}, () => this.setState({isLoaded: true})) 
+    }
+
+    handleError(response){
+        ELEMENT_DISPLAY_NONE('main')
+        this.setState({modalMessage: response.error})  
     }
 
     getListData(){
@@ -43,7 +46,7 @@ class ExchangesListContainer extends Component{
     }
 
     toggleModalDisplay(){
-        this.setState({redirectUrl: '/'})
+        this.setState({redirectUrl: '/students'})
     }
 
     renderModal(){
@@ -85,11 +88,19 @@ class ExchangesListContainer extends Component{
         </>
         )
     }
+
+    renderShimmerList(){
+        return(
+            <main>
+                <ShimmerList listLength={5} />
+            </main>
+        )
+    }
     
     render(){
         return(
             <>
-                {this.state.isLoaded ? this.renderPage() : <ShimmerList listLength={5} />}
+                {this.state.isLoaded ? this.renderPage() : this.renderShimmerList() }
                 {this.state.modalMessage.length > 0 ? this.renderModal() : null}
                 {this.state.redirectUrl.length > 0 ? <Redirect to={this.state.redirectUrl} /> : null}
             </>

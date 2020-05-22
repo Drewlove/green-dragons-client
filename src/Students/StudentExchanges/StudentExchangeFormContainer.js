@@ -36,24 +36,24 @@ class StudentExchangeFormContainer extends Component{
 
 
     async getStudents(){
-        const students = await this.getAllRowsFromEndpoint('students')
+        const students = await this.getData('students')
         this.setState({students}, () => this.setState({isLoaded: true}))
     }
 
     async getStudentsAndExchange(){
-        const students = await this.getAllRowsFromEndpoint('students')
-        const exchangeRaw = await this.getRowFromEndpoint('exchanges')
+        const students = await this.getData(`students/${this.props.match.params.exchangeRowId}`)
+        const exchangeRaw = await this.getData('exchanges')
         const exchange = this.reformatDate(exchangeRaw)
         this.setState({students})
         this.setState({exchange}, () => this.setState({isLoaded: true}))
     }
 
-    async getAllRowsFromEndpoint(endpoint){
-        const response = await HTTP_METHODS.getData(endpoint)
-        return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
-    }
+    // async getAllRowsFromEndpoint(endpoint){
+    //     const response = await HTTP_METHODS.getData(endpoint)
+    //     return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
+    // }
 
-    async getRowFromEndpoint(endpoint){
+    async getData(endpoint){
         const response = await HTTP_METHODS.getData(`${endpoint}/${this.props.match.params.exchangeRowId}`)
         return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
     }   
