@@ -74,7 +74,7 @@ class StudentChallengeEntryFormContainer extends Component{
 
     async getData(endpoint){
         const response = await HTTP_METHODS.getData(endpoint)
-        return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+        return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
     }  
     
     updateChallengeEntry(data){
@@ -97,7 +97,7 @@ class StudentChallengeEntryFormContainer extends Component{
     toggleModalDisplay(){
         SHOW_FORM()
         const {student_id, challenge_id} = this.state.challengeEntry
-        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful || this.state.modalMessage === MODAL_MESSAGES.getFail?
+        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful || this.state.modalMessage === MODAL_MESSAGES.fetchFail?
         this.setState({redirectUrl: `/students/${student_id}/challenges/${challenge_id}`}) : this.setState({modalMessage: ''})
     }
 

@@ -25,7 +25,7 @@ class ExchangesListContainer extends Component{
         const response = await HTTP_METHODS.getData(endpointSuffix)
         response.ok ? 
         this.updateExchanges(response.data)
-        : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+        : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
     }
 
     updateExchanges(data){

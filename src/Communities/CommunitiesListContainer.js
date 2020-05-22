@@ -22,7 +22,7 @@ class CommunitiesListContainer extends Component{
         const response = await HTTP_METHODS.getData(endpoint)
         return response.ok ? 
         this.setState({communities: response.data}, () => this.setState({isLoaded: true}))
-        : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+        : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
     }
 
     toggleModalDisplay(){

@@ -46,12 +46,12 @@ class SubcommunityFormContainer extends Component{
 
     async getAllRowsFromEndpoint(endpoint){
         const response = await HTTP_METHODS.getData(endpoint)
-        return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+        return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
     }
 
     async getRowFromEndpoint(endpoint){
         const response = await HTTP_METHODS.getData(`${endpoint}/${this.props.match.params.rowId}`)
-        return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+        return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
     }  
 
     resetForm(){

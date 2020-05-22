@@ -22,7 +22,7 @@ class StudentsListContainer extends Component{
         const endpointSuffix = `students`
         const response = await HTTP_METHODS.getData(endpointSuffix)
         response.ok ? this.setState({students: response.data}, () => this.setState({isLoaded: true})) 
-        : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+        : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
     }
 
     toggleModalDisplay(){

@@ -30,7 +30,7 @@ class StudentFormProfileContainer extends Component{
     async getStudent(){
         const endpoint = `students/${this.props.match.params.rowId}`
         const response = await HTTP_METHODS.getData(endpoint)
-        response.ok ? this.updateStudent(response.data) : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+        response.ok ? this.updateStudent(response.data) : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
     }  
     
     updateStudent(data){

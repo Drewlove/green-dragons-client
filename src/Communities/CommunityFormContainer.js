@@ -29,7 +29,7 @@ class ChallengeFormContainer extends Component{
     async getRowFromTable(){
         const endpoint = `communities/${this.props.match.params.rowId}`
         const response = await HTTP_METHODS.getData(endpoint)
-        response.ok ? this.updateForm(response.data) : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+        response.ok ? this.updateForm(response.data) : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
     }  
     
     updateForm(data){

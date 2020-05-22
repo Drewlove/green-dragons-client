@@ -19,7 +19,7 @@ class SubcommunitiesListContainer extends Component{
         const response = await HTTP_METHODS.getData(endpoint)
         return response.ok ? 
         this.setState({subcommunities: response.data}, () => this.setState({isLoaded: true}))
-        : this.setState({message: MODAL_MESSAGES.getFail})
+        : this.setState({message: MODAL_MESSAGES.fetchFail})
     }
 
     renderSubcommunities(){

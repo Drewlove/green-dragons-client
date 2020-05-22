@@ -25,17 +25,23 @@ class ChallengeFormContainer extends Component{
     } 
 
     async componentDidMount(){
-        return this.props.match.params.rowId === "0" ? this.setState({isLoaded: true}) : this.getRowFromTable()
+        return this.props.match.params.rowId === '0' ? this.setState({isLoaded: true}) : this.getRowFromTable()
     }
 
     async getRowFromTable(){
         const endpoint = `challenges/${this.props.match.params.rowId}`
         const response = await HTTP_METHODS.getData(endpoint)
-        response.ok ? this.updateForm(response.data) : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+        response.ok ? this.updateForm(response.data) : this.handleError()
     }  
 
     updateForm(data){
-        this.setState({challenge: data}, () => this.setState({isLoaded: true})) 
+        const challenge = data
+        this.setState({challenge}, () => this.setState({isLoaded: true})) 
+    }
+
+    handleError(){
+        HIDE_FORM()
+        this.setState({modalMessage: MODAL_MESSAGES.fetchFail})  
     }
 
     componentDidUpdate(prevProps){

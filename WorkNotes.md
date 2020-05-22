@@ -1,6 +1,9 @@
 ***ACTUAL NEXT STEPS***
 review Thinkful guidelines for project
 
+HIDE_FORM and SHOW_FORM change to HIDE_MAIN SHOW_MAIN
+better --> HIDE_ELEMENT('main') SHOW_ELEMENT('main')
+
 ERROR HANDLING ON FAILED FETCH, POST\PATCH, DELETE
 *I think you need to change the HttpMethods utility funtions
 for each method, just return the result, do NOT use a try\catch block within the httpMethod utility func

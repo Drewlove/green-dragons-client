@@ -4,7 +4,7 @@ import Modal from '../_Common/Modal'
 import {Redirect} from 'react-router-dom'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
 import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
-import {SHOW_FORM, HIDE_FORM} from '../Utilities/UtilityFunctions'
+import {ELEMENT_DISPLAY_NONE} from '../Utilities/UtilityFunctions'
 import ShimmerList from '../_Common/ShimmerList'
 
 class ChallengesListContainer extends Component{
@@ -20,14 +20,14 @@ class ChallengesListContainer extends Component{
     }
 
     async fetchChallenges(){
-        const endpointSuffix = `challenge`
+        const endpointSuffix = `challenges`
         const response = await HTTP_METHODS.getData(endpointSuffix)
         response.ok ? this.updateState(response.data) : this.handleError()
     }
 
     handleError(){
-        HIDE_FORM()
-        this.setState({modalMessage: MODAL_MESSAGES.getFail})  
+        ELEMENT_DISPLAY_NONE('main')
+        this.setState({modalMessage: MODAL_MESSAGES.fetchFail})  
     }
 
     updateState(response){

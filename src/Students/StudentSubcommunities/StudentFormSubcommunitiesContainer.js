@@ -44,7 +44,7 @@ class StudentFormSubcommunitiesContainer extends Component{
 
     async getData(endpoint){
         const response = await HTTP_METHODS.getData(endpoint)
-        return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+        return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
     }  
 
     castArrToObj(arr, id){

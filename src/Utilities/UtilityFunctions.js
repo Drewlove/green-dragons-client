@@ -31,6 +31,21 @@ export const GET_UTCDATE_WITH_TIMEZONE_OFFSET = (originalDateString) => {
     return seconds < 10 ? `${minutes}m 0${seconds}s`: `${minutes}m ${seconds}s`
 }
 
+export const ELEMENT_DISPLAY = (element) => {
+  const firstElement = document.getElementsByTagName(element)[0]
+  firstElement.classList.remove('display-none')
+}
+
+export const ELEMENT_DISPLAY_NONE = (element) => {
+  const firstElement = document.getElementsByTagName(element)[0] 
+  firstElement.classList.add('display-none')
+}
+
+export const SCROLL_TO_TOP = () => {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
 export const HIDE_FORM = () => {
   const mainElement = document.getElementsByTagName('main')[0] 
   mainElement.classList.add('display-none')
@@ -41,7 +56,3 @@ export const SHOW_FORM = () => {
   mainElement.classList.remove('display-none')
 }
 
-export const SCROLL_TO_TOP = () => {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}

@@ -5,5 +5,5 @@ export const MODAL_MESSAGES = {
     saveSuccessful: "Record saved.", 
     saveFail: "Failed to save record.",
     saveFailInputsInvalid: 'Please fill in all required fields correctly',
-    getFail: "Failed to retrieve record."
+    fetchFail: "Failed to retrieve record."
 }

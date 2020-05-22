@@ -37,7 +37,7 @@ class StudentChallengeEntriesListContainer extends Component{
         const response = await HTTP_METHODS.getData(endpointSuffix)
         return response.ok ? 
         response.data
-        : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+        : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
     }
     
     async reformatListItems(list){
