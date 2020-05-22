@@ -53,8 +53,17 @@ class StudentChallengeEntryFormContainer extends Component{
 
     async getAllData(){
         const students =  await this.getData('students')
-        const challenges = await this.getData('challenges')
-        const challengeEntryRaw = await this.getData(`challenge-entries/${this.props.match.params.challengeEntryId}`) 
+        const challenges = await this.getData('challenge')
+        const challengeEntryRaw = await this.getData(`challenge-entrie/${this.props.match.params.challengeEntryId}`) 
+        students == null || challenges == null || challengeEntryRaw == null ? 
+        this.handleError() : this.updateState(students, challenges, challengeEntryRaw)
+    }
+
+    handleError(){
+        this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
+    }
+
+    updateState(students, challenges, challengeEntryRaw){
         const challengeEntry = this.updateChallengeEntry(challengeEntryRaw)
         this.setState({
             students, 
@@ -65,11 +74,10 @@ class StudentChallengeEntryFormContainer extends Component{
 
     async getStudentsAndChallenges(){
         const students =  await this.getData('students')
-        const challenges = await this.getData('challenges')    
-        this.setState({
-            students, 
-            challenges, 
-        }, () => this.setState({isLoaded: true}))
+        const challenges = await this.getData('challenges')  
+        
+        students == null || challenges == null ? 
+        this.handleError() : this.setState({students, challenges}, () => this.setState({isLoaded: true}))
     }
 
     async getData(endpoint){
@@ -97,8 +105,13 @@ class StudentChallengeEntryFormContainer extends Component{
     toggleModalDisplay(){
         SHOW_FORM()
         const {student_id, challenge_id} = this.state.challengeEntry
-        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful || this.state.modalMessage === MODAL_MESSAGES.fetchFail?
-        this.setState({redirectUrl: `/students/${student_id}/challenges/${challenge_id}`}) : this.setState({modalMessage: ''})
+        if(this.state.modalMessage === MODAL_MESSAGES.fetchFail){
+            this.setState({redirectUrl: `/students`})
+        } else if (this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful){
+            this.setState({redirectUrl: `/students/${student_id}/challenges/${challenge_id}`})  
+        } else {
+            this.setState({modalMessage: ''})
+        }
     }
 
     handleSave(e){
