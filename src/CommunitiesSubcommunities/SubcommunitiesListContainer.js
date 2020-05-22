@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
-import MODAL_MESSAGES from '../_Common/Modal'
 import SubcommunitiesListItem from './SubcommunitiesListItem'
+import {ELEMENT_DISPLAY_NONE} from '../Utilities/UtilityFunctions'
 import ShimmerList from '../_Common/ShimmerList'
 
 class SubcommunitiesListContainer extends Component{
@@ -17,9 +17,17 @@ class SubcommunitiesListContainer extends Component{
 
     async getAllRowsFromEndpoint(endpoint){
         const response = await HTTP_METHODS.getData(endpoint)
-        return response.ok ? 
-        this.setState({subcommunities: response.data}, () => this.setState({isLoaded: true}))
-        : this.setState({message: MODAL_MESSAGES.fetchFail})
+        response.ok ? this.updateState(response.data) : this.handleError(response)
+    }
+
+    updateState(response){
+        const subcommunities = response
+        this.setState({subcommunities}, () => this.setState({isLoaded: true})) 
+    }
+
+    handleError(response){
+        ELEMENT_DISPLAY_NONE('main')
+        this.setState({modalMessage: response.error})  
     }
 
     renderSubcommunities(){

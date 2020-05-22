@@ -50,7 +50,7 @@ class CommunitiesListContainer extends Component{
         return(
         <main>
             <ul className='list-main-wrapper'>
-            {this.state.communities.length > 0 ? this.renderCommunities : this.renderNoResults()}
+            {this.state.communities.length > 0 ? this.renderCommunities() : this.renderNoResults()}
             </ul>
         </main>
         )
