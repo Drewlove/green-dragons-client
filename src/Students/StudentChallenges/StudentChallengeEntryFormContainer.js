@@ -29,7 +29,7 @@ class StudentChallengeEntryFormContainer extends Component{
     } 
 
     async componentDidMount(){
-        return this.props.match.params.challengeEntryId === "0" ? this.getStudents() : this.getAllData()
+        return this.props.match.params.challengeEntryId === "0" ? this.getStudentsAndChallenges() : this.getAllData()
     }
 
     componentDidUpdate(prevProps){

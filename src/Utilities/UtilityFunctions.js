@@ -32,13 +32,13 @@ export const GET_UTCDATE_WITH_TIMEZONE_OFFSET = (originalDateString) => {
 }
 
 export const HIDE_FORM = () => {
-  const formElement = document.getElementsByTagName('form')[0] 
-  formElement.classList.add('display-none')
+  const mainElement = document.getElementsByTagName('main')[0] 
+  mainElement.classList.add('display-none')
 }
 
 export const SHOW_FORM = () => {
-  const formElement = document.getElementsByTagName('form')[0]
-  formElement.classList.remove('display-none')
+  const mainElement = document.getElementsByTagName('main')[0]
+  mainElement.classList.remove('display-none')
 }
 
 export const SCROLL_TO_TOP = () => {

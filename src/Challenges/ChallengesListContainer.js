@@ -3,7 +3,8 @@ import ListMainWrapper from '../_Common/ListMainWrapper'
 import Modal from '../_Common/Modal'
 import {Redirect} from 'react-router-dom'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
-import MODAL_MESSAGES from '../_Common/Modal'
+import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
+import {SHOW_FORM, HIDE_FORM} from '../Utilities/UtilityFunctions'
 import ShimmerList from '../_Common/ShimmerList'
 
 class ChallengesListContainer extends Component{
@@ -19,12 +20,21 @@ class ChallengesListContainer extends Component{
     }
 
     async fetchChallenges(){
-        const endpointSuffix = `challenges`
+        const endpointSuffix = `challenge`
         const response = await HTTP_METHODS.getData(endpointSuffix)
-        response.ok ? 
-        this.setState({challenges: response.data}, () => this.setState({isLoaded: true})) 
-        : this.setState({modalMessage: MODAL_MESSAGES.getFail})
+        response.ok ? this.updateState(response.data) : this.handleError()
     }
+
+    handleError(){
+        HIDE_FORM()
+        this.setState({modalMessage: MODAL_MESSAGES.getFail})  
+    }
+
+    updateState(response){
+        const challenges = response
+        this.setState({challenges}, () => this.setState({isLoaded: true})) 
+    }
+
 
     toggleModalDisplay(){
         this.setState({redirectUrl: '/'})
@@ -39,6 +49,7 @@ class ChallengesListContainer extends Component{
     }
 
     renderPage(){
+        console.log(this.state.challenges)
         return(
         <main>
             <ListMainWrapper 

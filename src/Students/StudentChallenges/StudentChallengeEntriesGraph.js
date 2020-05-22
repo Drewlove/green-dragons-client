@@ -53,7 +53,7 @@ class ChallengeHistoryGraph extends Component {
             yAxes: [
               {
                 ticks: {
-                  stepsSize: 1, 
+                  precision: 0,
                   callback: function (value) {
                     const { units } = this.chart.config.props.challengeType;
                     return units === "seconds" ? CONVERT_TIME(value) : value;

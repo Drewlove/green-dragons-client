@@ -1,21 +1,5 @@
 ***ACTUAL NEXT STEPS***
-organize css
 review Thinkful guidelines for project
-
-FORMS: Student Exchanges form still needs the changes listed below
-Save Button
-*All forms, toggle displaying and hiding form after form is submitted (see studentFormProfileContainer)
-*Use the scroll to top function as well 
-Delete Button
-*Add delete confirmation
-*change delete button to type='button'
-
-TICK MARKS IN JS CHART
-stepSize: 1
-
-
-
-
 
 ERROR HANDLING ON FAILED FETCH, POST\PATCH, DELETE
 *I think you need to change the HttpMethods utility funtions
