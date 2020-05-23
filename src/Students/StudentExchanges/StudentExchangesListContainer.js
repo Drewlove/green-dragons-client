@@ -4,6 +4,7 @@ import StudentName from '../../_Common/StudentName'
 import ListMainWrapper from '../../_Common/ListMainWrapper'
 import {HTTP_METHODS} from '../../Utilities/HttpMethods'
 import Modal from '../../_Common/Modal'
+import NoResultsMessage from '../../_Common/NoResultsMessage'
 import {GET_MM_DD_YYYY_DATE, ELEMENT_DISPLAY_NONE} from '../../Utilities/UtilityFunctions'
 import ShimmerList from '../../_Common/ShimmerList'
 
@@ -75,6 +76,7 @@ class ExchangesListContainer extends Component{
             <header>
                 <StudentName studentId={this.props.match.params.rowId} />
                 <h2 className='student-exchange-list-balance'>Balance: <span className={this.isAmountNegative()}>${this.getBalance()}</span></h2>
+                {this.state.exchanges.length === 0 ? this.renderNoResults() : null}
             </header>
             <main>
                 <ListMainWrapper 
@@ -87,6 +89,10 @@ class ExchangesListContainer extends Component{
             </main>
         </>
         )
+    }
+
+    renderNoResults(){
+        return <NoResultsMessage recordName ='transactions' />
     }
 
     renderShimmerList(){
