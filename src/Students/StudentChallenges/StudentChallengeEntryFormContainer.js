@@ -53,8 +53,8 @@ class StudentChallengeEntryFormContainer extends Component{
 
     async getAllData(){
         const students =  await this.getData('students')
-        const challenges = await this.getData('challenge')
-        const challengeEntryRaw = await this.getData(`challenge-entrie/${this.props.match.params.challengeEntryId}`) 
+        const challenges = await this.getData('challenges')
+        const challengeEntryRaw = await this.getData(`challenge-entries/${this.props.match.params.challengeEntryId}`) 
         students == null || challenges == null || challengeEntryRaw == null ? 
         this.handleError() : this.updateState(students, challenges, challengeEntryRaw)
     }

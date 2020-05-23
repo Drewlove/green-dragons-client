@@ -3,7 +3,6 @@ import ListMainWrapper from '../_Common/ListMainWrapper'
 import Modal from '../_Common/Modal'
 import {Redirect} from 'react-router-dom'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
-import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
 import {ELEMENT_DISPLAY_NONE} from '../Utilities/UtilityFunctions'
 import ShimmerList from '../_Common/ShimmerList'
 

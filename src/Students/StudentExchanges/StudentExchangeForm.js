@@ -32,11 +32,6 @@ const StudentExchangeForm = (props) => {
         return amount < 0 ? "negative-amount" : ""
     }
 
-    const formatAmount = (amount) => {
-        console.log(amount)
-        return amount
-    }
-
     return(
     <main>
         <form className='student-exchange-form'>
