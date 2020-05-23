@@ -7,7 +7,7 @@ import ShimmerForm from '../_Common/ShimmerForm'
 import {GET_INVALID_INPUTS} from '../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
-import {HIDE_FORM, SHOW_FORM, SCROLL_TO_TOP} from '../Utilities/UtilityFunctions'
+import {ELEMENT_DISPLAY, ELEMENT_DISPLAY_NONE, SCROLL_TO_TOP} from '../Utilities/UtilityFunctions'
 import "react-datepicker/dist/react-datepicker.css";
 
 class ChallengeFormContainer extends Component{
@@ -50,7 +50,7 @@ class ChallengeFormContainer extends Component{
     }
 
     renderModal(){
-        HIDE_FORM()
+        ELEMENT_DISPLAY_NONE('main')
         SCROLL_TO_TOP()
         return(
             <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
@@ -62,19 +62,20 @@ class ChallengeFormContainer extends Component{
     }
 
     toggleModalDisplay(){
-        SHOW_FORM()
-        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
-        this.setState({redirectUrl: `/communities`}) : this.setState({modalMessage: ''})
+        ELEMENT_DISPLAY('main')
+        const redirectModalMessages = [MODAL_MESSAGES.fetchFail, MODAL_MESSAGES.deleteSuccessful, MODAL_MESSAGES.saveSuccessful]
+        const doesPageRedirect = redirectModalMessages.indexOf(this.state.modalMessage) >= 0  
+        return doesPageRedirect ? this.setState({redirectUrl: '/communities'}) : this.setState({modalMessage: ''})
     }
   
     handleDelete(e){
         e.preventDefault()
         this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
-        HIDE_FORM()
+        ELEMENT_DISPLAY('main')
     }
 
     cancelDelete(e){
-        SHOW_FORM()
+        ELEMENT_DISPLAY('main')
         this.setState({modalMessage : ''})
     }
 
