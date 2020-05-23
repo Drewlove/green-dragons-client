@@ -32,6 +32,11 @@ const StudentExchangeForm = (props) => {
         return amount < 0 ? "negative-amount" : ""
     }
 
+    const formatAmount = (amount) => {
+        console.log(amount)
+        return amount
+    }
+
     return(
     <main>
         <form className='student-exchange-form'>
@@ -56,10 +61,10 @@ const StudentExchangeForm = (props) => {
                     <div className='input-wrapper'>
                     <input 
                         id='amount'
-                        type='number' 
+                        type='text' 
                         className={isAmountNegative()}
                         name='amount'
-                        value={amount} 
+                        value={amount}
                         onChange={e => props.handleChange(e)}
                         onBlur={(e) => handleBlur(e)}
                         />

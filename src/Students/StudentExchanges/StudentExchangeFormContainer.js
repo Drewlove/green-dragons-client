@@ -25,15 +25,12 @@ class StudentExchangeFormContainer extends Component{
     } 
 
     async componentDidMount(){
-        return this.props.match.params.exchangeRowId === '0' ? 
-        this.getStudents() 
-        : this.getStudentsAndExchange()
+        return this.props.match.params.exchangeRowId === '0' ? this.getStudents() : this.getStudentsAndExchange()
     }
 
     componentDidUpdate(prevProps){
         return prevProps.match.params.exchangeRowId !== this.props.match.params.exchangeRowId ? this.resetForm() : null
     }
-
 
     async getStudents(){
         const students = await this.getData('students')
@@ -41,20 +38,22 @@ class StudentExchangeFormContainer extends Component{
     }
 
     async getStudentsAndExchange(){
-        const students = await this.getData(`students/${this.props.match.params.exchangeRowId}`)
-        const exchangeRaw = await this.getData('exchanges')
-        const exchange = this.reformatDate(exchangeRaw)
-        this.setState({students})
-        this.setState({exchange}, () => this.setState({isLoaded: true}))
+        const students = await this.getData('students')
+        const exchangeRaw = await this.getData(`exchanges/${this.props.match.params.exchangeRowId}`)
+        students == null || exchangeRaw == null ? this.handleError() : this.updateState(students, exchangeRaw)
     }
 
-    // async getAllRowsFromEndpoint(endpoint){
-    //     const response = await HTTP_METHODS.getData(endpoint)
-    //     return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
-    // }
+    handleError(){
+        this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
+    }
+
+    updateState(students, exchangeRaw){
+        const exchange = this.reformatDate(exchangeRaw)
+        this.setState({students, exchange}, () => this.setState({isLoaded: true}))
+    }
 
     async getData(endpoint){
-        const response = await HTTP_METHODS.getData(`${endpoint}/${this.props.match.params.exchangeRowId}`)
+        const response = await HTTP_METHODS.getData(endpoint)
         return response.ok ? response.data : this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
     }   
     
@@ -77,8 +76,6 @@ class StudentExchangeFormContainer extends Component{
     renderModal(){
         HIDE_FORM()
         SCROLL_TO_TOP()
-        console.log(this.state.modalMessage)
-        console.log(MODAL_MESSAGES.deleteConfirm)
         return(
             <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
                 <p>{this.state.modalMessage}</p>
@@ -88,11 +85,24 @@ class StudentExchangeFormContainer extends Component{
         )
     }
 
+    //If modal appears due to failure to load, and user clicks on close modal, redirect to specific student's list of exchanges
     toggleModalDisplay(){
         SHOW_FORM()
-        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
-        this.setState({redirectUrl: `/students/${this.state.exchange.student_id}/exchanges`}) : this.setState({modalMessage: ''})
+        // const {student_id, challenge_id} = this.state.challengeEntry
+        if(this.state.modalMessage === MODAL_MESSAGES.fetchFail){
+            this.setState({redirectUrl: `/students`})
+        } else if (this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful){
+            this.setState({redirectUrl: `/students/${this.state.exchange.student_id}/exchanges`})  
+        } else {
+            this.setState({modalMessage: ''})
+        }
     }
+
+
+    //     SHOW_FORM()
+    //     return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
+    //     this.setState({redirectUrl: `/students/${this.state.exchange.student_id}/exchanges`}) : this.setState({modalMessage: ''})
+    // }
 
 
     handleSave(e){
@@ -189,6 +199,7 @@ class StudentExchangeFormContainer extends Component{
             invalidInputs={this.state.invalidInputs}
             updateInvalidInputs={(name, value)=> this.updateInvalidInputs(name, value)}
             handleChange = {e=> this.handleChange(e)}
+            handleAmountChange = {e => this.handleAmountChange(e)}
             handleDateChange = {e=> this.handleDateChange(e)}
             handleSave = {e => this.handleSave(e)}
             handleDelete = {e => this.handleDelete(e)}
