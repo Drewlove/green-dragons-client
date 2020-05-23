@@ -41,7 +41,6 @@ class StudentFormSubcommunitiesContainer extends Component{
     }
 
     updateState(communities, subcommunities, rawStudentSubcommunities){
-        //inspect these functions, rename to be more clear
         const studentSubcommunitiesObj = this.castArrToObj(rawStudentSubcommunities, 'subcommunity_id')
         const studentSubcommunitiesArr = this.getArrOfIDs(rawStudentSubcommunities, 'subcommunity_id')
 
