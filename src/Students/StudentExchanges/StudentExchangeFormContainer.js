@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Redirect, withRouter } from 'react-router-dom'
 import StudentExchangeForm from './StudentExchangeForm'
-import {GET_UTCDATE_WITH_TIMEZONE_OFFSET, HIDE_FORM, SHOW_FORM, SCROLL_TO_TOP} from '../../Utilities/UtilityFunctions'
+import {GET_UTCDATE_WITH_TIMEZONE_OFFSET, ELEMENT_DISPLAY, ELEMENT_DISPLAY_NONE, SCROLL_TO_TOP} from '../../Utilities/UtilityFunctions'
 import {GET_INVALID_INPUTS} from '../../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../../Utilities/HttpMethods'
@@ -74,7 +74,7 @@ class StudentExchangeFormContainer extends Component{
     }
 
     renderModal(){
-        HIDE_FORM()
+        ELEMENT_DISPLAY_NONE('main')
         SCROLL_TO_TOP()
         return(
             <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
@@ -85,10 +85,8 @@ class StudentExchangeFormContainer extends Component{
         )
     }
 
-    //If modal appears due to failure to load, and user clicks on close modal, redirect to specific student's list of exchanges
     toggleModalDisplay(){
-        SHOW_FORM()
-        // const {student_id, challenge_id} = this.state.challengeEntry
+        ELEMENT_DISPLAY('main')
         if(this.state.modalMessage === MODAL_MESSAGES.fetchFail){
             this.setState({redirectUrl: `/students`})
         } else if (this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful){
@@ -97,13 +95,6 @@ class StudentExchangeFormContainer extends Component{
             this.setState({modalMessage: ''})
         }
     }
-
-
-    //     SHOW_FORM()
-    //     return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
-    //     this.setState({redirectUrl: `/students/${this.state.exchange.student_id}/exchanges`}) : this.setState({modalMessage: ''})
-    // }
-
 
     handleSave(e){
         e.preventDefault()
@@ -165,11 +156,11 @@ class StudentExchangeFormContainer extends Component{
     handleDelete(e){
         e.preventDefault()
         this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
-        HIDE_FORM()
+        ELEMENT_DISPLAY_NONE('main')
     }
 
     cancelDelete(e){
-        SHOW_FORM()
+        ELEMENT_DISPLAY('main')
         this.setState({modalMessage : ''})
     }
 

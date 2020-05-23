@@ -102,17 +102,12 @@ class StudentChallengeEntryFormContainer extends Component{
         )
     }
 
-    //fetch fails have to redirect to a non-state dependent url
-    // This is only relevant for student challenge entry forms and student exchange forms, which should redirect to student
-    //successful delete and saves redirect to a state dependent url 
-
-    //rework studentExchangeForm, fetchFail should redirect to students
     toggleModalDisplay(){
         ELEMENT_DISPLAY('main')
-        if(MODAL_MESSAGES.deleteSuccessful || MODAL_MESSAGES.saveSuccessful){
-            console.log('toggle')
+        const {modalMessage} = this.state
+        if(modalMessage === MODAL_MESSAGES.deleteSuccessful || modalMessage === MODAL_MESSAGES.saveSuccessful){
             this.setState({redirectUrl: `/students/${this.state.challengeEntry.student_id}/challenges/${this.state.challengeEntry.challenge_id}`})
-        } else if (MODAL_MESSAGES.fetchFail){
+        } else if (modalMessage === MODAL_MESSAGES.fetchFail){
             this.setState({redirectUrl: '/students'})
         } else {
             this.setState({modalMessage: ''})
