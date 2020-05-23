@@ -47,13 +47,17 @@ class CommunitiesListContainer extends Component{
     }
 
     renderPage(){
+        return this.state.communities.length > 0 ? this.renderList() : this.renderNoResults()
+    }
+
+    renderList(){
         return(
-        <main>
-            <ul className='list-main-wrapper'>
-            {this.state.communities.length > 0 ? this.renderCommunities() : this.renderNoResults()}
-            </ul>
-        </main>
-        )
+            <main>
+                <ul className='list-main-wrapper'>
+                {this.renderCommunities()}
+                </ul>
+            </main>
+            )
     }
 
     renderCommunities(){
@@ -66,7 +70,9 @@ class CommunitiesListContainer extends Component{
 
     renderNoResults(){
         return (
-            <NoResultsMessage recordName='communities' />
+            <header>
+                <NoResultsMessage recordName='communities' />
+            </header>
         )
     }
     
