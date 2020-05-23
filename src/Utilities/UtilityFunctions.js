@@ -46,13 +46,4 @@ export const SCROLL_TO_TOP = () => {
   document.documentElement.scrollTop = 0;
 }
 
-export const HIDE_FORM = () => {
-  const mainElement = document.getElementsByTagName('main')[0] 
-  mainElement.classList.add('display-none')
-}
-
-export const SHOW_FORM = () => {
-  const mainElement = document.getElementsByTagName('main')[0]
-  mainElement.classList.remove('display-none')
-}
 
