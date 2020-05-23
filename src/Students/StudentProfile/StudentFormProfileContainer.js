@@ -24,7 +24,7 @@ class StudentFormProfileContainer extends Component{
     } 
 
     async componentDidMount(){
-        return this.props.match.params.rowId === "0" ? this.setState({isLoaded: true}) : this.getStudent()
+        return this.props.match.params.rowId === '0' ? this.setState({isLoaded: true}) : this.getStudent()
     }
 
     async getStudent(){
@@ -40,8 +40,9 @@ class StudentFormProfileContainer extends Component{
 
     toggleModalDisplay(){
         SHOW_FORM()
-        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
-        this.setState({redirectUrl: `/students`}) : this.setState({modalMessage: ''})
+        const redirectModalMessages = [MODAL_MESSAGES.fetchFail, MODAL_MESSAGES.deleteSuccessful, MODAL_MESSAGES.saveSuccessful]
+        const doesPageRedirect = redirectModalMessages.indexOf(this.state.modalMessage) >= 0  
+        return doesPageRedirect ? this.setState({redirectUrl: '/students'}) : this.setState({modalMessage: ''})
     }
 
     renderModal(){
