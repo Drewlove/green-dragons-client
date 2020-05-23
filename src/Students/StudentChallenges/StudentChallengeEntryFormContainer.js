@@ -4,7 +4,7 @@ import StudentChallengeEntryForm from './StudentChallengeEntryForm'
 import Modal from '../../_Common/Modal'
 import ModalDeleteConfirm from '../../_Common/ModalDeleteConfirm'
 import ShimmerForm from '../../_Common/ShimmerForm'
-import {GET_UTCDATE_WITH_TIMEZONE_OFFSET, HIDE_FORM, SHOW_FORM, SCROLL_TO_TOP} from '../../Utilities/UtilityFunctions'
+import {GET_UTCDATE_WITH_TIMEZONE_OFFSET, ELEMENT_DISPLAY_NONE, ELEMENT_DISPLAY, SCROLL_TO_TOP} from '../../Utilities/UtilityFunctions'
 import {GET_INVALID_INPUTS} from '../../Utilities/FormValidation'
 import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../../Utilities/HttpMethods'
@@ -91,7 +91,7 @@ class StudentChallengeEntryFormContainer extends Component{
     }
 
     renderModal(){
-        HIDE_FORM()
+        ELEMENT_DISPLAY_NONE('main')
         SCROLL_TO_TOP()
         return(
             <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
@@ -102,13 +102,18 @@ class StudentChallengeEntryFormContainer extends Component{
         )
     }
 
+    //fetch fails have to redirect to a non-state dependent url
+    // This is only relevant for student challenge entry forms and student exchange forms, which should redirect to student
+    //successful delete and saves redirect to a state dependent url 
+
+    //rework studentExchangeForm, fetchFail should redirect to students
     toggleModalDisplay(){
-        SHOW_FORM()
-        const {student_id, challenge_id} = this.state.challengeEntry
-        if(this.state.modalMessage === MODAL_MESSAGES.fetchFail){
-            this.setState({redirectUrl: `/students`})
-        } else if (this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful){
-            this.setState({redirectUrl: `/students/${student_id}/challenges/${challenge_id}`})  
+        ELEMENT_DISPLAY('main')
+        if(MODAL_MESSAGES.deleteSuccessful || MODAL_MESSAGES.saveSuccessful){
+            console.log('toggle')
+            this.setState({redirectUrl: `/students/${this.state.challengeEntry.student_id}/challenges/${this.state.challengeEntry.challenge_id}`})
+        } else if (MODAL_MESSAGES.fetchFail){
+            this.setState({redirectUrl: '/students'})
         } else {
             this.setState({modalMessage: ''})
         }
@@ -176,11 +181,11 @@ class StudentChallengeEntryFormContainer extends Component{
     handleDelete(e){
         e.preventDefault()
         this.setState({modalMessage: MODAL_MESSAGES.deleteConfirm})
-        HIDE_FORM()
+        ELEMENT_DISPLAY_NONE('main')
     }
 
     cancelDelete(e){
-        SHOW_FORM()
+        ELEMENT_DISPLAY('main')
         this.setState({modalMessage : ''})
     }
 
