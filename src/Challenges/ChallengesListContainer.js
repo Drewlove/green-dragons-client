@@ -48,13 +48,10 @@ class ChallengesListContainer extends Component{
     }
 
     renderPage(){
-        console.log('render page')
-        console.log(this.state.challenges.length)
         return this.state.challenges.length > 0 ? this.renderList() : this.renderNoResults()
     }
 
     renderList(){
-        console.log('renderlist')
         return(
             <main>
                 <ListMainWrapper 
@@ -69,9 +66,10 @@ class ChallengesListContainer extends Component{
     }
 
     renderNoResults(){
-        console.log('no results')
         return(
-            <NoResultsMessage recordName='challenges'/>
+            <header>
+                <NoResultsMessage recordName='challenges'/>
+            </header>
         )
     }
 
