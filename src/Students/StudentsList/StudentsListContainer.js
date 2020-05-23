@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom'
 import ShimmerList from '../../_Common/ShimmerList'
 import StudentsListItem from './StudentsListItem'
 import {ELEMENT_DISPLAY_NONE} from '../../Utilities/UtilityFunctions'
+import NoResultsMessage from '../../_Common/NoResultsMessage'
 import Modal from '../../_Common/Modal'
 import {HTTP_METHODS} from '../../Utilities/HttpMethods'
 
@@ -50,10 +51,18 @@ class StudentsListContainer extends Component{
         return(
             <main>
                 <ul className='list-main-wrapper'>
-                    {this.renderStudentsList()}
+                    {this.state.students.length === 0 ? this.renderNoResults() : this.renderStudentsList()}
                 </ul>
             </main>
         )
+    }
+
+    renderNoResults(){
+        return(
+            <header>
+                <NoResultsMessage recordName='students'/>
+            </header>
+        ) 
     }
 
     renderStudentsList(){
