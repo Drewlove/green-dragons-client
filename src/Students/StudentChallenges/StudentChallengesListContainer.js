@@ -5,6 +5,7 @@ import ListMainWrapper from '../../_Common/ListMainWrapper'
 import {HTTP_METHODS} from '../../Utilities/HttpMethods'
 import Modal from '../../_Common/Modal'
 import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
+import NoResultsMessage from '../../_Common/NoResultsMessage'
 import ShimmerList from '../../_Common/ShimmerList'
 
 class StudentChallengesListContainer extends Component{
@@ -61,11 +62,9 @@ class StudentChallengesListContainer extends Component{
     renderPage(){
         return(
         <>
-        <header>
-            <StudentName studentId={this.props.match.params.rowId}/>
-        </header>
+         {this.renderHeader()}
         <main>
-            <ListMainWrapper 
+        <ListMainWrapper 
             rootPath={`/students/${this.props.match.params.rowId}/challenges`}
             tableName='challenge'
             listData={this.state.challenges}
@@ -74,6 +73,15 @@ class StudentChallengesListContainer extends Component{
             />
         </main>
         </>
+        )
+    }
+
+    renderHeader(){
+        return(
+        <header>
+            <StudentName studentId={this.props.match.params.rowId}/>
+            {this.state.challenges.length === 0 ? <NoResultsMessage recordName='challenges' class=''/> : null }
+        </header>
         )
     }
     
