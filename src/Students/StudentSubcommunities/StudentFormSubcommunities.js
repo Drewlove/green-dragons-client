@@ -1,16 +1,18 @@
 import React from 'react'
 import StudentName from '../../_Common/StudentName'
+import NoResultsMessage from '../../_Common/NoResultsMessage'
 const StudentFormSubcommunities = (props) => {
 
     const {mergedCommunities} = props
         const renderCommunities = () => {
         return Object.keys(mergedCommunities).map(key => {
             const community = mergedCommunities[key]
+
             return(
             <React.Fragment key={community.community_id}>
                 <h3 className='student-form-subcommunities-community'>{community.community_name}</h3>
                 <section className='student-form-subcommunities-section'>
-                    {renderSubcommunities(community.subcommunities)}
+                {community.subcommunities.length > 0 ? renderSubcommunities(community.subcommunities) : renderNoResults()}
                 </section>     
             </React.Fragment>
             )      
@@ -36,6 +38,10 @@ const StudentFormSubcommunities = (props) => {
                 </React.Fragment>
             )
         })
+    }
+
+    const renderNoResults = () => {
+        return <NoResultsMessage recordName='subcommunities' />
     }
 
     const isChecked = (subcommunityId) => {

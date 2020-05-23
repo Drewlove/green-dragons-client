@@ -330,6 +330,12 @@ form .student-form-subcommunities-section{
   grid-row-gap: 10px;
 }
 
+
+form .student-form-subcommunities-section .no-results-message{
+  text-align: left;
+  width: 250px;
+}
+
 form .student-form-subcommunities-label{
   text-align: left; 
   color: black; 
@@ -601,7 +607,7 @@ nav .active{
   color: red;
 }
 
-.no-reults-message{
+.no-results-message{
   text-align: center; 
 }
 

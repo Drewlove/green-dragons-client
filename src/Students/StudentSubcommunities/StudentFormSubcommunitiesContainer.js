@@ -4,6 +4,7 @@ import StudentFormSubcommunities from './StudentFormSubcommunities'
 import {MODAL_MESSAGES} from '../../Utilities/ModalMessages'
 import {HTTP_METHODS} from '../../Utilities/HttpMethods'
 import ShimmerForm from '../../_Common/ShimmerForm'
+import {ELEMENT_DISPLAY, ELEMENT_DISPLAY_NONE, SCROLL_TO_TOP} from '../../Utilities/UtilityFunctions'
 import Modal from '../../_Common/Modal'
 
 class StudentFormSubcommunitiesContainer extends Component{
@@ -32,6 +33,15 @@ class StudentFormSubcommunitiesContainer extends Component{
         const communities =  await this.getData('communities')
         const subcommunities =  await this.getData('subcommunities')
         const rawStudentSubcommunities =  await this.getData(`student-subcommunities/students/${this.props.match.params.rowId}`)
+        return communities == null || subcommunities == null || rawStudentSubcommunities == null ? this.handleError() : this.updateState(communities, subcommunities, rawStudentSubcommunities)
+    }
+
+    handleError(){
+        this.setState({modalMessage: MODAL_MESSAGES.fetchFail})
+    }
+
+    updateState(communities, subcommunities, rawStudentSubcommunities){
+        //inspect these functions, rename to be more clear
         const studentSubcommunitiesObj = this.castArrToObj(rawStudentSubcommunities, 'subcommunity_id')
         const studentSubcommunitiesArr = this.getIDsFromArr(rawStudentSubcommunities, 'subcommunity_id')
         this.setState({
@@ -54,21 +64,25 @@ class StudentFormSubcommunitiesContainer extends Component{
         }, {})
     }
 
+    //createArrWithIDkeys
     getIDsFromArr(arr, id){
         return arr.map(key => key[id])
     }
-    
 
     setModalMessage(modalMessage){
         this.setState({modalMessage})
     }
 
     toggleModalDisplay(){
-        return this.state.modalMessage === MODAL_MESSAGES.deleteSuccessful || this.state.modalMessage === MODAL_MESSAGES.saveSuccessful ?
-        this.setState({redirectUrl: '/students/'}) : this.setState({modalMessage: ''})
+        ELEMENT_DISPLAY('main')
+        const redirectModalMessages = [MODAL_MESSAGES.fetchFail, MODAL_MESSAGES.deleteSuccessful, MODAL_MESSAGES.saveSuccessful]
+        const doesPageRedirect = redirectModalMessages.indexOf(this.state.modalMessage) >= 0  
+        return doesPageRedirect ? this.setState({redirectUrl: '/students'}) : this.setState({modalMessage: ''})
     }
 
     renderModal(){
+        ELEMENT_DISPLAY_NONE('main')
+        SCROLL_TO_TOP()
         return(
             <Modal toggleModalDisplay={()=> this.toggleModalDisplay()}>
                 <p>{this.state.modalMessage}</p>
