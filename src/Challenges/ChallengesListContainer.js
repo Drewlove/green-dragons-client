@@ -4,6 +4,7 @@ import Modal from '../_Common/Modal'
 import {Redirect} from 'react-router-dom'
 import {HTTP_METHODS} from '../Utilities/HttpMethods'
 import {ELEMENT_DISPLAY_NONE} from '../Utilities/UtilityFunctions'
+import NoResultsMessage from '../_Common/NoResultsMessage'
 import ShimmerList from '../_Common/ShimmerList'
 
 class ChallengesListContainer extends Component{
@@ -47,17 +48,30 @@ class ChallengesListContainer extends Component{
     }
 
     renderPage(){
-        console.log(this.state.challenges)
+        console.log('render page')
+        console.log(this.state.challenges.length)
+        return this.state.challenges.length > 0 ? this.renderList() : this.renderNoResults()
+    }
+
+    renderList(){
+        console.log('renderlist')
         return(
-        <main>
-            <ListMainWrapper 
-            rootPath='/challenges'
-            tableName='challenge'
-            listData={this.state.challenges}
-            propertiesToDisplay={['challenge_name']} 
-            listClassName='challenges-list'
-            />
-        </main>
+            <main>
+                <ListMainWrapper 
+                rootPath='/challenges'
+                tableName='challenge'
+                listData={this.state.challenges}
+                propertiesToDisplay={['challenge_name']} 
+                listClassName='challenges-list'
+                />
+            </main>
+        )
+    }
+
+    renderNoResults(){
+        console.log('no results')
+        return(
+            <NoResultsMessage recordName='challenges'/>
         )
     }
 
