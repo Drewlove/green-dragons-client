@@ -42,19 +42,19 @@ Request are made to the root url of: https://warm-ocean-22527.herokuapp.com/api/
 
 **HTTP Request:** GET                    
 **URL:** https://warm-ocean-22527.herokuapp.com/api/students/1                     
-**RESULT:** returns an individual row from the student table with the student_id of 1             
+**RESULT:** returns an individual row from the student table with the student_id equal to 1             
 
 **HTTP Request:** PATCH                    
 **URL:** https://warm-ocean-22527.herokuapp.com/api/students/1                     
-**RESULT:** updates an individual row from the student table with the student_id of 1             
+**RESULT:** updates an individual row from the student table with the student_id equal to 1             
 
 **HTTP Request:** POST                    
-**URL:** https://warm-ocean-22527.herokuapp.com/api/students/             
+**URL:** https://warm-ocean-22527.herokuapp.com/api/students            
 **RESULT:** creates a new row in the student table             
 
 **HTTP Request:** DELETE       
 **URL:** https://warm-ocean-22527.herokuapp.com/api/students/1                    
-**RESULT:** deletes an individual row from the student table with the student_id of 1             
+**RESULT:** deletes an individual row from the student table with the student_id equal to 1             
 
 
 ### HTTP Request Examples, Rows with Foreign Keys and Parent\Child Relationships
@@ -76,7 +76,7 @@ GET requests can be made to retrieve row(s) that match foreign key(s).
 
 **HTTP Request:** GET    
 **URL:** https://warm-ocean-22527.herokuapp.com/api/challenge-entries/students/2/challenges/1    
-**RESULT:** Retrieves all challenge entries that have a student_id of 2 and a challenge_id of 1
+**RESULT:** Retrieves all challenge entries that have a student_id equal to 2 and a challenge_id equal to 1
 
 
 ## Technology 
