@@ -56,7 +56,7 @@ const StudentExchangeForm = (props) => {
                     <div className='input-wrapper'>
                     <input 
                         id='amount'
-                        type='text' 
+                        type='number' 
                         className={isAmountNegative()}
                         name='amount'
                         value={amount}
