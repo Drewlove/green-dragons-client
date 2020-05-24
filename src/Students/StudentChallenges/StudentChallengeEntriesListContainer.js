@@ -54,7 +54,7 @@ class StudentChallengeEntriesListContainer extends Component{
         return list.map(key => {
             return {
                 ...key, 
-                record: challengeType.units === 'seconds' ? CONVERT_TIME(key.record) : `${key.record} ${challengeType.units}`
+                record: challengeType.units === 'time' ? CONVERT_TIME(key.record) : `${key.record} ${challengeType.units}`
             }
         })
     }

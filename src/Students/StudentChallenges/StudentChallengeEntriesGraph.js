@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Redirect, withRouter } from "react-router-dom";
-import { CONVERT_TIME } from "../../Utilities/UtilityFunctions";
-import Chart from "chart.js";
+import React, { Component } from 'react';
+import { Redirect, withRouter } from 'react-router-dom';
+import { CONVERT_TIME } from '../../Utilities/UtilityFunctions';
+import Chart from 'chart.js';
 
 class ChallengeHistoryGraph extends Component {
   state = {
     chart: null,
-    redirectUrl: "",
+    redirectUrl: '',
   };
 
   chartRef = React.createRef();
@@ -17,18 +17,18 @@ class ChallengeHistoryGraph extends Component {
   }
 
   renderChart() {
-    const myChartRef = this.chartRef.current.getContext("2d");
+    const myChartRef = this.chartRef.current.getContext('2d');
     if (myChartRef) {
       return new Chart(myChartRef, {
         props: this.getProps(),
-        type: "line",
+        type: 'line',
         data: {
           IDs: this.getIDs(),
           labels: this.getLabels(),
           datasets: [
             {
               data: this.getData(),
-              pointBackgroundColor: "#0b800d",
+              pointBackgroundColor: '#0b800d',
               fill: false,
             },
           ],
@@ -42,8 +42,8 @@ class ChallengeHistoryGraph extends Component {
           hover: {
             onHover: function (e) {
               var point = this.getElementAtEvent(e);
-              if (point.length) e.target.style.cursor = "pointer";
-              else e.target.style.cursor = "default";
+              if (point.length) e.target.style.cursor = 'pointer';
+              else e.target.style.cursor = 'default';
             },
           },
           title: {
@@ -56,7 +56,7 @@ class ChallengeHistoryGraph extends Component {
                   precision: 0,
                   callback: function (value) {
                     const { units } = this.chart.config.props.challengeType;
-                    return units === "seconds" ? CONVERT_TIME(value) : value;
+                    return units === 'time' ? CONVERT_TIME(value) : value;
                   },
                 },
               },
@@ -68,7 +68,7 @@ class ChallengeHistoryGraph extends Component {
                 const {
                   units,
                 } = this._chart.chart.chart.config.props.challengeType;
-                return units === "seconds"
+                return units === 'time'
                   ? CONVERT_TIME(tooltipItem.yLabel)
                   : `${tooltipItem.yLabel} ${units}`;
               },
@@ -107,7 +107,7 @@ class ChallengeHistoryGraph extends Component {
   }
 
   setRedirect(chartElement){
-    var index = chartElement["_index"];
+    var index = chartElement['_index'];
     const challengeEntryId = this.state.chart.data.IDs[index];
     const redirectUrl = `/students/${this.props.match.params.rowId}/challenge-entries/${challengeEntryId}`;
     this.setState({ redirectUrl });
@@ -120,7 +120,7 @@ class ChallengeHistoryGraph extends Component {
           <Redirect to={this.state.redirectUrl} />
         ) : null}
 
-        <div className="student-challenge-entries-graph">
+        <div className='student-challenge-entries-graph'>
           <canvas ref={this.chartRef} onClick={(e) => this.handleClick(e)} />
         </div>
       </>

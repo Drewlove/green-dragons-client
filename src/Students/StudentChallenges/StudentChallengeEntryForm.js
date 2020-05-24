@@ -43,7 +43,7 @@ const StudentChallengeEntryForm = (props) => {
     const renderUnitsInput = () => {
         const selectedChallengeID = parseInt(props.challengeEntry.challenge_id)
         const selectedChallenge = lists.challenge.filter(key => key.challenge_id === selectedChallengeID)[0]
-        return  selectedChallenge.units === 'seconds' ? renderTimeUnitsInput() : renderDefaultUnitsInput(selectedChallenge) 
+        return  selectedChallenge.units === 'time' ? renderTimeUnitsInput() : renderDefaultUnitsInput(selectedChallenge) 
     }
 
     const renderTimeUnitsInput = () => {
