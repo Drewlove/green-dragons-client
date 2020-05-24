@@ -24,7 +24,6 @@ Admin can create, edit, and delete communities, subcommunities, challenges, stud
 
 
 
-
 ## API Documentation
 API Repo: https://github.com/Drewlove/green-dragons-api
 
