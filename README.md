@@ -1,8 +1,8 @@
 
 # Name: Green Dragons App 
-Live Link: https://green-dragons-client-master.now.sh/
-Client Repo: https://github.com/Drewlove/green-dragons-client
-API Repo: https://github.com/Drewlove/green-dragons-api
+* **Live Link:** https://green-dragons-client-master.now.sh/
+* **Client Repo:** https://github.com/Drewlove/green-dragons-client
+* **API Repo:** https://github.com/Drewlove/green-dragons-api
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -20,17 +20,7 @@ Admin can create, edit, and delete communities, subcommunities, challenges, stud
 ## API Documentation
 API Repo: https://github.com/Drewlove/green-dragons-api
 
-### API has the following tables: 
-student
-challenge
-community
-subcommunity
-exchange
-challenge_entry
-student_subcommunity
-
-
-### HTTP Requests
+### Tables and HTTP Requests
 Request are made to the root url of: https://warm-ocean-22527.herokuapp.com/api/*ENDPOINT*
 
 *ENDPOINT* is the pluralized form of each table
@@ -46,25 +36,25 @@ Request are made to the root url of: https://warm-ocean-22527.herokuapp.com/api/
 | student_subcommunity | student-subcommunities |
 
 ### HTTP Request Examples
-HTTP Request: GET
-URL: https://warm-ocean-22527.herokuapp.com/api/students 
-RESULT: returns a list of all students from the student table
+**HTTP Request:** GET <br />       
+**URL:** https://warm-ocean-22527.herokuapp.com/api/students                     
+**RESULT:** returns a list of all students from the student table             
 
-HTTP Request: GET
-URL: https://warm-ocean-22527.herokuapp.com/api/students/1 
-RESULT: returns an individual row from the student table with the student_id of 1
+**HTTP Request:** GET                    
+**URL:** https://warm-ocean-22527.herokuapp.com/api/students/1                     
+**RESULT:** returns an individual row from the student table with the student_id of 1             
 
-HTTP Request: PATCH
-URL: https://warm-ocean-22527.herokuapp.com/api/students/1 
-RESULT: updates an individual row from the student table with the student_id of 1
+**HTTP Request:** PATCH                    
+**URL:** https://warm-ocean-22527.herokuapp.com/api/students/1                     
+**RESULT:** updates an individual row from the student table with the student_id of 1             
 
-HTTP Request: POST
-URL: https://warm-ocean-22527.herokuapp.com/api/students/
-RESULT: creates a new row in the student table
+**HTTP Request:** POST                    
+**URL:** https://warm-ocean-22527.herokuapp.com/api/students/             
+**RESULT:** creates a new row in the student table             
 
-HTTP Request: DELETE
-URL: https://warm-ocean-22527.herokuapp.com/api/students/1
-RESULT: deletes an individual row from the student table with the student_id of 1
+**HTTP Request:** DELETE       
+**URL:** https://warm-ocean-22527.herokuapp.com/api/students/1                    
+**RESULT:** deletes an individual row from the student table with the student_id of 1             
 
 
 ### HTTP Request Examples, Rows with Foreign Keys and Parent\Child Relationships
@@ -80,13 +70,13 @@ The tables below have one or more foreign keys.
 
 GET requests can be made to retrieve row(s) that match foreign key(s). 
 
-HTTP Request: GET
-URL: https://warm-ocean-22527.herokuapp.com/api/subcommunities/communities/1
-RESULT: retrieves all subcommunities that have a foreign key community_id equal to 1
+**HTTP Request:** GET    
+**URL:** https://warm-ocean-22527.herokuapp.com/api/subcommunities/communities/1     
+**RESULT:** retrieves all subcommunities that have a foreign key community_id equal to 1
 
-HTTP Request: GET
-URL: https://warm-ocean-22527.herokuapp.com/api/challenge-entries/students/2/challenges/1
-RESULT: Retrieves all challenge entries that have a student_id of 2 and a challenge_id of 1
+**HTTP Request:** GET    
+**URL:** https://warm-ocean-22527.herokuapp.com/api/challenge-entries/students/2/challenges/1    
+**RESULT:** Retrieves all challenge entries that have a student_id of 2 and a challenge_id of 1
 
 
 ## Technology 
