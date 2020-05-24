@@ -19,6 +19,10 @@ Admin can create, edit, and delete communities, subcommunities, challenges, stud
 
 ![Challenge Entries Graph](/src/ReadMePictures/Challenge-Entries-Graph.png?raw=true "Challenge Entries Graph")
 
+![Challenge Entries Graph](./src/ReadMePictures/Challenge-Entries-Graph.png?raw=true "Challenge Entries Graph")
+
+
+
 
 
 ## API Documentation
