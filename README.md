@@ -17,6 +17,10 @@ Admin can create, edit, and delete communities, subcommunities, challenges, stud
 * Transactions
 * Challenge Entries
 
+![Challenge Entries Graph](/src/ReadMePictures/Challenge-Entries-Graph.png?raw=true "Challenge Entries Graph")
+
+
+
 ## API Documentation
 API Repo: https://github.com/Drewlove/green-dragons-api
 
@@ -77,7 +81,6 @@ GET requests can be made to retrieve row(s) that match foreign key(s).
 **HTTP Request:** GET    
 **URL:** https://warm-ocean-22527.herokuapp.com/api/challenge-entries/students/2/challenges/1    
 **RESULT:** Retrieves all challenge entries that have a student_id equal to 2 and a challenge_id equal to 1
-
 
 ## Technology 
 
