@@ -73,7 +73,9 @@ class ChallengeFormContainer extends Component{
 
     toggleModalDisplay(){
         ELEMENT_DISPLAY('main')
-        return this.state.modalMessage === MODAL_MESSAGES.deleteConfirm ? this.setState({modalMessage: ''}) : this.setState({redirectUrl: `/challenges`})
+        const redirectModalMessages = [MODAL_MESSAGES.fetchFail, MODAL_MESSAGES.deleteSuccessful, MODAL_MESSAGES.saveSuccessful]
+        const doesPageRedirect = redirectModalMessages.indexOf(this.state.modalMessage) >= 0  
+        return doesPageRedirect ? this.setState({redirectUrl: '/challenges'}) : this.setState({modalMessage: ''})
     }
     
     handleDelete(e){
