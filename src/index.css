@@ -394,6 +394,15 @@ header .no-results-message{
   font-size: 18px; 
 }
 
+.landing-page-image{
+  padding: 10px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 250px;
+  border-radius: 250px;
+  box-shadow: 25px 25px 25px lightgrey;
+}
+
 .list-main-item{
   display: flex;
   height: 60px;

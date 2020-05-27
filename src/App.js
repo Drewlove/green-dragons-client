@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom'
 import Nav from './_Common/Nav'
+import LandingPage from './LandingPage/LandingPage'
 import ChallengesRouting from './Challenges/ChallengesRouting'
 import CommunitiesRouting from './Communities/CommunitiesRouting'
 import StudentsRouting from './Students/StudentsRouting/StudentsRouting'
@@ -12,7 +13,7 @@ class App extends Component{
     return (
       <>
         <Nav />
-        <Route exact path='/' render={() => <header><h1>Green Dragons App</h1></header>} />
+        <Route exact path='/' component={LandingPage}/>
         <Route path='/about' component={AboutPage} />
         <Route path='/challenges' component={ChallengesRouting} />
         <Route path='/communities' component={CommunitiesRouting} />
