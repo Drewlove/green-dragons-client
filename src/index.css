@@ -399,8 +399,8 @@ header .no-results-message{
   margin: 0 auto;
   display: block;
   border-radius: 250px;
-  border-radius: 250px;
-  box-shadow: 25px 25px 25px lightgrey;
+  box-shadow: 25px 25px 25px #d3d3d3;
+  width: 300px;
 }
 
 .list-main-item{
@@ -825,6 +825,10 @@ nav .active{
   }
 
   form .invalid-input-warning{
+    width: auto; 
+  }
+
+  .landing-page-image{
     width: auto; 
   }
 
