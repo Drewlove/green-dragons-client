@@ -37,6 +37,7 @@ class Nav extends Component{
                     <div className='nav-hamburger bottom'></div>
                 </button>
                 <section className='nav-links-wrapper'>
+                    <NavLink onClick={e => this.handleNavClick(e)} to='/'exact >Home</NavLink>
                     <NavLink onClick={e => this.handleNavClick(e)} to='/about'>About</NavLink>
                     <NavLink onClick={e => this.handleNavClick(e)} to='/students'>Students</NavLink>
                     <NavLink onClick={e => this.handleNavClick(e)} to='/challenges'>Challenges</NavLink>
