@@ -1,6 +1,6 @@
 
 # Name: Green Dragons App 
-* **Live Link:** https://green-dragons-client-master.now.sh/
+* **Live Link:** https://green-dragons-app.now.sh/
 * **Client Repo:** https://github.com/Drewlove/green-dragons-client
 * **API Repo:** https://github.com/Drewlove/green-dragons-api
 
