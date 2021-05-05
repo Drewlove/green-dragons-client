@@ -13,7 +13,6 @@ const getData = async function (endpointSuffix) {
     method: "GET",
     headers: config.HEADERS,
   };
-  console.log(options);
 
   let result = {
     ok: false,
